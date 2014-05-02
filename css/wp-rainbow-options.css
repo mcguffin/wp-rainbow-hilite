@@ -1,0 +1,15 @@
+.wp-rainbow-language-item {
+	display:inline-block;
+	width:12em;
+	padding:0.25em 0.25em 0.25em 1em;
+	background:#dddddd;
+	margin:0.125em;
+}
+
+
+.wprainbow-set-theme .sample {
+	display:none;
+}
+.wprainbow-set-theme.sample-code .sample {
+	display:block;
+}
