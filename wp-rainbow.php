@@ -62,7 +62,7 @@ class WPRainbow {
 			$available_languages = $this->get_available_languages();
 			array_unshift( $languages , 'generic' );
 			foreach ( $languages as $lang ) {
-				$script_url = apply_filters('wp_rainbow_language_module_url' , plugins_url( "/js/dev/language/{$lang}.js" , __FILE__ ) , $lang );
+				$script_url = apply_filters('wprainbow_language_module_url' , plugins_url( "/js/dev/language/{$lang}.js" , __FILE__ ) , $lang );
 				$deps = array( 'rainbow-core' );
 				if ( $lang != 'generic' )
 					$deps[] = 'rainbow-lang-generic';
@@ -75,7 +75,7 @@ class WPRainbow {
 		wp_register_script( 'wp-rainbow' , null , $all_deps , '1.0' , true );
 		
 		$theme = get_option( 'wprainbow_theme' );
-		$theme_url = apply_filters('wp_rainbow_theme_url' , plugins_url( "/css/themes/{$theme}.css" , __FILE__ ) , $theme );
+		$theme_url = apply_filters('wprainbow_theme_url' , plugins_url( "/css/themes/{$theme}.css" , __FILE__ ) , $theme );
 		wp_register_style( 'wp-rainbow-css' , $theme_url );
 	}
 	
