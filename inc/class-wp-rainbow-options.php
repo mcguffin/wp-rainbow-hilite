@@ -127,12 +127,20 @@ class Foo {
 	}
 
 	function sanitize_langs( $langs ) {	
-		// check if not empty
-		return $langs;
+		$langs = array_map( 'trim' , $langs);
+		$available_langs = wprainbow_get_available_languages();
+		$sanitized_langs = array();
+		foreach ( $langs as $i => $lang )
+			if ( array_key_exists( $lang , $available_langs ) )
+				$sanitized_langs[] = $lang;
+		return $sanitized_langs;
 	}
 	function sanitize_theme( $theme ) {
 		// check existance
-		return $theme;
+		$available_themes = wprainbow_get_available_themes();
+		if ( array_key_exists( $thmee , $available_themes ) )
+			return $theme;
+		return key($available_themes);
 	}
 }
 

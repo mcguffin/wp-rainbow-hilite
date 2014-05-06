@@ -24,7 +24,7 @@ class WPRainbowEditor {
 	
 	// extending mce
 	function mce_add_button( $buttons ) {
-		$buttons[] = "wprainbow";
+		array_splice($buttons,1,0,"wprainbow");
 		return $buttons;
 	}
 	function mce_add_code_plugin( $plugins_array ) {
@@ -57,7 +57,7 @@ class WPRainbowEditor {
 <script type='text/javascript'>
 var wprainbow = {
     'l10n': {
-    	'code_style': "<?php _e('Code Style' , 'rainbow' ) ?>"
+    	'code_style': "<?php _e('Code Language' , 'rainbow' ) ?>"
     },
     'languages' : <?php echo json_encode( $langs ) ?>
 };
