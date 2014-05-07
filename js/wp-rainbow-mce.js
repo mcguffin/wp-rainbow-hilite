@@ -1,3 +1,4 @@
+
 tinymce.PluginManager.add( 'wprainbow' , function( editor ){
 
 	function setState( button, node ) {

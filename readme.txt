@@ -12,7 +12,8 @@ Adds [rainbow.js](http://craig.is/making/rainbows) to your Blog.
 
 == Description ==
 
-- Works out of the box.
+Includes [rainbow.js](http://craig.is/making/rainbows) a syntax highlighting script written by [Craig Campbell](http://craig.is/).
+Line numbering through [rainbow.linenumbers](https://github.com/Sjeiti/rainbow.linenumbers) by [Ron Valstar](http://www.sjeiti.com/).
 
 Latest files on [GitHub](https://github.com/mcguffin/wp-rainbow).
 
@@ -62,3 +63,11 @@ Initial Release
 The plugin offers some filters to allow themes and other plugins to hook in.
 
 See [GitHub-Repo](https://github.com/mcguffin/wp-rainbow) for details.
+
+== To Do ==
+
+Fix async error issue
+
+Line numbering:
+https://github.com/Blender3D/rainbow.linenumbers.js
+

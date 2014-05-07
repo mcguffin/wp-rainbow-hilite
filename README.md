@@ -1,6 +1,7 @@
 # WordPress Rainbow #
 
-Syntax coloring with [rainbow.js](http://craig.is/making/rainbows).
+Includes [rainbow.js](http://craig.is/making/rainbows) a syntax highlighting script written by [Craig Campbell](http://craig.is/).
+Line numbering through [rainbow.linenumbers](https://github.com/Sjeiti/rainbow.linenumbers) by [Ron Valstar](http://www.sjeiti.com/).
 
 ## Plugin API ##
 
