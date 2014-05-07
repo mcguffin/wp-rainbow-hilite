@@ -64,7 +64,7 @@ Example:
 #### `wprainbow_language_module_url` ####
 
 Filter URL of the theme css. Use this together with `wprainbow_available_themes`.
-whenn adding your own theme.
+when adding your own theme.
 
 Example:
 ```
@@ -79,4 +79,3 @@ Example:
 
 ## ToDo ##
 - move build.sh to root, minify own backend js
-- mce: modal dialog for editing language and line numbering
