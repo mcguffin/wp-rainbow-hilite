@@ -69,7 +69,7 @@ var wprainbow = {
     	'starting_line': "<?php _e('Starting Line' , 'rainbow' ) ?>"
     },
     'languages' : <?php echo json_encode( $langs ) ?>,
-    'use_linenumbers' : <?php echo get_option('wprainbow_line_numbers') ? 'true' : 'false' ?>
+    'enable_line_numbering' : <?php echo get_option('wprainbow_line_numbers') ? 'true' : 'false' ?>
 };
 </script>
 <!-- TinyMCE Shortcode Plugin -->

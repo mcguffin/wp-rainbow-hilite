@@ -99,19 +99,19 @@ tinymce.PluginManager.add( 'wprainbow' , function( editor ){
 	});
 	
 	
-	
-	editor.addButton('wprainbow_codecontrol', {
-		tooltip: wprainbow.l10n.code_properties,
-		onclick: openControlPanel,
-		onPostRender: function() {
-			var button = this;
-			editor.on( 'nodechange', function( event ) {
-				setCodeState( button, event.element );
-			});
+	if ( wprainbow.enable_line_numbering ) {
+		editor.addButton('wprainbow_codecontrol', {
+			tooltip: wprainbow.l10n.code_properties,
+			onclick: openControlPanel,
+			onPostRender: function() {
+				var button = this;
+				editor.on( 'nodechange', function( event ) {
+					setCodeState( button, event.element );
+				});
 			
-		}
-	});
-
+			}
+		});
+	}
 } );
 
 

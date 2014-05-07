@@ -4,7 +4,7 @@
 
 class WPRainbowOptions {
 	private static $_instance = null;
-	private $optionset = 'reading';
+	private $optionset = 'writing';
 	
 	public static function get_instance() {
 		if ( is_null( self::$_instance ) )
@@ -20,11 +20,11 @@ class WPRainbowOptions {
 	function enqueue_style() {
 		global $wp_scripts;
 		wp_enqueue_style( 'wp-rainbow-options' , plugins_url( '/css/wp-rainbow-options.css' , dirname(__FILE__) ));
-		wp_enqueue_script( 'wp-rainbow-options' , plugins_url( '/js/wp-rainbow-options.js' , dirname(__FILE__) ) , array('wp-rainbow') );
+		WPRainbow::get_instance()->enqueue_assets();
+		wp_enqueue_script( 'wp-rainbow-options' , plugins_url( '/js/wp-rainbow-options.js' , dirname(__FILE__) ) );
 		wp_localize_script('wp-rainbow-options' , 'wprainbow_options' , array(
 			'theme_directory_url' => plugins_url( '/css/themes/' , dirname(__FILE__) )
 		) );
-		wp_enqueue_style( 'wp-rainbow-css' );
 	}
 	
 	
@@ -155,7 +155,7 @@ class Foo {
 	function sanitize_theme( $theme ) {
 		// check existance
 		$available_themes = wprainbow_get_available_themes();
-		if ( array_key_exists( $thmee , $available_themes ) )
+		if ( array_key_exists( $theme , $available_themes ) )
 			return $theme;
 		return key($available_themes);
 	}
