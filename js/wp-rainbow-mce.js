@@ -34,10 +34,6 @@ tinymce.PluginManager.add( 'wprainbow' , function( editor ){
 		}
 		
 	});
-	(function($){
-		
-
-	})(jQuery);
 
 } );
 

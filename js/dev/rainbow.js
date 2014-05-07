@@ -89,6 +89,31 @@ window['Rainbow'] = (function() {
         onHighlight;
 
     /**
+     * cross browser get attribute for an element
+     *
+     * @see http://stackoverflow.com/questions/3755227/cross-browser-javascript-getattribute-method
+     *
+     * @param {Node} el
+     * @param {string} attr     attribute you are trying to get
+     * @returns {string|number}
+     */
+    function _attr(el, attr, attrs, i) {
+        var result = (el.getAttribute && el.getAttribute(attr)) || 0;
+
+        if (!result) {
+            attrs = el.attributes;
+
+            for (i = 0; i < attrs.length; ++i) {
+                if (attrs[i].nodeName === attr) {
+                    return attrs[i].nodeValue;
+                }
+            }
+        }
+
+        return result;
+    }
+
+    /**
      * adds a class to a given code block
      *
      * @param {Element} el
@@ -122,7 +147,7 @@ window['Rainbow'] = (function() {
         // this means if for example you have: <pre data-language="php">
         // with a bunch of <code> blocks inside then you do not have
         // to specify the language for each block
-        var language = block.getAttribute('data-language') || block.parentNode.getAttribute('data-language');
+        var language = _attr(block, 'data-language') || _attr(block.parentNode, 'data-language');
 
         // this adds support for specifying language via a css class
         // you can use the Google Code Prettify style: <pre class="lang-php">
@@ -736,6 +761,7 @@ window['Rainbow'] = (function() {
          * @returns void
          */
         color: function() {
+
             // if you want to straight up highlight a string you can pass the string of code,
             // the language, and a callback function
             if (typeof arguments[0] == 'string') {
@@ -754,26 +780,17 @@ window['Rainbow'] = (function() {
         }
     };
 }) ();
+
 /**
  * adds event listener to start highlighting
  */
 (function() {
-	// temporary fixing issue #156: https://github.com/ccampbell/rainbow/issues/156
-	//*
 	document.onreadystatechange = function () {
 		if ( document.readyState === "complete" ) {
 			Rainbow.color();
 		}
 	}
-	/*/
-    if (document.addEventListener) {
-        return document.addEventListener('DOMContentLoaded', Rainbow.color, false);
-    }
-    window.attachEvent('onload', Rainbow.color);
-    //*/
 }) ();
-
-
 
 // When using Google closure compiler in advanced mode some methods
 // get renamed.  This keeps a public reference to these methods so they can

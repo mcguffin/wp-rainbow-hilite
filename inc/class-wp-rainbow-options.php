@@ -31,15 +31,23 @@ class WPRainbowOptions {
 	// Options page
 	function register_settings() {
 		$settings_section = 'wprainbow_settings';
-		register_setting( $this->optionset , 'wprainbow_load_minified' , 'boolval' );
-		register_setting( $this->optionset , 'wprainbow_languages' , array( &$this , 'sanitize_langs' ) );
 		register_setting( $this->optionset , 'wprainbow_theme' , array( &$this , 'sanitize_theme' ) );
+		register_setting( $this->optionset , 'wprainbow_line_numbers' , 'absint' );
+		register_setting( $this->optionset , 'wprainbow_languages' , array( &$this , 'sanitize_langs' ) );
+		register_setting( $this->optionset , 'wprainbow_load_minified' , 'absint' );
 
 		add_settings_section( $settings_section, __( 'Code Highlighting', 'wprainbow' ), array( $this, 'settings_description' ), $this->optionset );
 		add_settings_field(
 			'wprainbow_theme',
 			__( 'Visual Theme', 'rainbow' ),
 			array( $this, 'select_theme' ),
+			$this->optionset,
+			$settings_section
+		);
+		add_settings_field(
+			'wprainbow_line_numbers',
+			__( 'Line Numbers', 'rainbow' ),
+			array( $this, 'line_numbers_checkbox' ),
 			$this->optionset,
 			$settings_section
 		);
@@ -98,6 +106,14 @@ class Foo {
 </pre><?php
 		?></div><?php
 	}
+	public function line_numbers_checkbox() {
+		$enabled = get_option( 'wprainbow_line_numbers' );
+		?><label for="wprainbow_line_numbers"><?php
+			?><input type="checkbox" name="wprainbow_line_numbers" id="wprainbow_line_numbers" value="1" <?php checked($enabled,true,true) ?> /><?php
+			_e( 'Show Line numbers.' , 'rainbow' );
+		?></label><?php
+	}
+
 	public function select_languages() {
 		$langs = wprainbow_get_available_languages();
 		$enabled = (array) get_option( 'wprainbow_languages' );
@@ -115,6 +131,7 @@ class Foo {
 			_e('This will customize the languages listbox in WordPress’ visual editor.','rainbow');
 		?></p><?php
 	}
+	
 	public function load_minified_checkbox() {
 		$enabled = get_option( 'wprainbow_load_minified' );
 		?><label for="wprainbow_load_minified"><?php
@@ -124,8 +141,8 @@ class Foo {
 		?><p class="description"><?php
 			_e('When disabled only active language modules will be loaded. Enabling this option is a good idea if there is no other minification technique around.','rainbow');
 		?></p><?php
-	}
-
+	}	
+	
 	function sanitize_langs( $langs ) {	
 		$langs = array_map( 'trim' , $langs);
 		$available_langs = wprainbow_get_available_languages();
