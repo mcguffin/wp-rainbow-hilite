@@ -1,30 +1,92 @@
 
 tinymce.PluginManager.add( 'wprainbow' , function( editor ){
 
-	function setState( button, node ) {
+	function setLanguageState( button, node ) {
 		var parent_node = editor.dom.getParent( editor.selection.getNode() ,'PRE');
 		button.disabled( ! parent_node );
 		button.value(editor.dom.getAttrib( parent_node, 'data-language' ));
 	}
-
+	function setCodeState( button, node ) {
+		var parent_node = editor.dom.getParent( editor.selection.getNode() ,'PRE');
+		button.disabled( ! parent_node );
+		button.value(editor.dom.getAttrib( parent_node, 'data-language' ));
+	}
+	function setLanguage( lang ) {
+		editor.dom.setAttrib( 
+			editor.dom.getParent( editor.selection.getNode() ,'PRE') , 
+			'data-language' , 
+			lang
+		);
+	}
+	function setLineNumber( line_number ) {
+		editor.dom.setAttrib( 
+			editor.dom.getParent( editor.selection.getNode() ,'PRE') , 
+			'data-line' , 
+			line_number
+		);
+	}
+	function openControlPanel() {
+		var parent_node = editor.dom.getParent( editor.selection.getNode() ,'PRE');
+		var lang_value = editor.dom.getAttrib( parent_node, 'data-language' ),
+			line_value = editor.dom.getAttrib( parent_node, 'data-line' ) || 0,
+			line_enabled = line_value != "-1";
+		editor.windowManager.open({
+			title: 'Anchor',
+			body: [
+					{	
+						type: 'listbox', 
+						name: 'language', 
+						size: 40, 
+						label: wprainbow.l10n.code_language, 
+						values: wprainbow.languages,
+						value: lang_value 
+					},
+					{
+						type:'checkbox',
+						name:'enable_line_numbering',
+						label: wprainbow.l10n.enable_line_numbering, 
+						value: "1",
+						checked: line_enabled,
+					},
+					{
+						type:'textbox',
+						name:'starting_line',
+						label: wprainbow.l10n.starting_line, 
+						value: line_value
+					}
+				],
+			onsubmit: function(e) {
+				// set language
+				setLanguage( e.data.language );
+				console.log();
+				
+				var line = -1;
+				if (e.data.enable_line_numbering) {
+					line = Math.abs(e.data.starting_line);
+					if ( isNaN( line ) )
+						line = 1;
+				}
+				setLineNumber( line )
+				// set or del line number
+			}
+		});
+	}
+	
 	
 	editor.addButton('wprainbow', {
 		type: 'listbox',
-		text: wprainbow.l10n.code_style,
+		text: wprainbow.l10n.code_language,
+		tooltip: wprainbow.l10n.code_language,
 		menu_button : true,
 		classes : 'widget btn fixed-width', 
 		onselect: function(e) {
-			editor.dom.setAttrib( 
-				editor.dom.getParent( editor.selection.getNode() ,'PRE') , 
-				'data-language' , 
-				this.value() 
-			);
+			setLanguage( this.value() );
 		},
 		values: wprainbow.languages,
 		onPostRender: function() {
 			codeSelect = this;
 			editor.on( 'nodechange', function( event ) {
-				setState( codeSelect, event.element );
+				setLanguageState( codeSelect, event.element );
 			});
 			
 			for ( var i in wprainbow.languages ) {
@@ -34,6 +96,20 @@ tinymce.PluginManager.add( 'wprainbow' , function( editor ){
 			}
 		}
 		
+	});
+	
+	
+	
+	editor.addButton('wprainbow_codecontrol', {
+		tooltip: wprainbow.l10n.code_properties,
+		onclick: openControlPanel,
+		onPostRender: function() {
+			var button = this;
+			editor.on( 'nodechange', function( event ) {
+				setCodeState( button, event.element );
+			});
+			
+		}
 	});
 
 } );

@@ -77,3 +77,6 @@ Example:
     add_filter('wprainbow_theme_url' , fancy_theme_url , 10 , 2 );
 ```
 
+## ToDo ##
+- move build.sh to root, minify own backend js
+- mce: modal dialog for editing language and line numbering

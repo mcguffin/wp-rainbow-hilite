@@ -41,6 +41,7 @@ class WPRainbow {
 		if ( ! isset( $allowedposttags['pre'] ) )
 			$allowedposttags['pre'] = array('width','class','id','style','title','role');
 		$allowedposttags['pre'][] = 'data-language';
+		$allowedposttags['pre'][] = 'data-line';
 	}
 	function init() {
 		load_plugin_textdomain( 'rainbow' , false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );

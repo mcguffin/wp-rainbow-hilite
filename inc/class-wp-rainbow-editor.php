@@ -16,14 +16,19 @@ class WPRainbowEditor {
 		add_filter( 'mce_buttons_2' , array(&$this,'mce_add_button'));
 		add_filter( 'mce_external_plugins' , array(&$this,"mce_add_code_plugin") );
 		
-		foreach ( array('post.php','post-new.php') as $hook )
+		foreach ( array('post.php','post-new.php') as $hook ) {
 			add_action( "admin_head-$hook", array(&$this,'mce_localize') );
-		
+			add_action( "load-$hook", array(&$this,'enqueue_editor_css') );
+		}
 		add_filter('mce_css' , array( &$this , 'mce_add_css' ) );
 	}
-	
+	function enqueue_editor_css(){
+		wp_enqueue_style( 'editor-css' , plugins_url( "/css/wp-rainbow-editor.css" , dirname(__FILE__) ) );
+	}
 	// extending mce
 	function mce_add_button( $buttons ) {
+		if ( get_option('wprainbow_line_numbers') )
+			array_splice($buttons,1,0,"wprainbow_codecontrol");
 		array_splice($buttons,1,0,"wprainbow");
 		return $buttons;
 	}
@@ -57,9 +62,14 @@ class WPRainbowEditor {
 <script type='text/javascript'>
 var wprainbow = {
     'l10n': {
-    	'code_style': "<?php _e('Code Language' , 'rainbow' ) ?>"
+    	'code_language': "<?php _e('Code Language' , 'rainbow' ) ?>",
+    	'line_numbers': "<?php _e('Line Numbers' , 'rainbow' ) ?>",
+    	'code_properties': "<?php _e('Code Properties' , 'rainbow' ) ?>",
+    	'enable_line_numbering': "<?php _e('Enable line Numbering' , 'rainbow' ) ?>",
+    	'starting_line': "<?php _e('Starting Line' , 'rainbow' ) ?>"
     },
-    'languages' : <?php echo json_encode( $langs ) ?>
+    'languages' : <?php echo json_encode( $langs ) ?>,
+    'use_linenumbers' : <?php echo get_option('wprainbow_line_numbers') ? 'true' : 'false' ?>
 };
 </script>
 <!-- TinyMCE Shortcode Plugin -->
