@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WordPress Rainbow\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Mon May 12 2014 17:18:50 GMT+0200 (CEST)\n"
-"PO-Revision-Date: Mon May 12 2014 17:21:35 GMT+0200 (CEST)\n"
+"PO-Revision-Date: Tue May 13 2014 18:32:52 GMT+0200 (CEST)\n"
 "Last-Translator: admin <joern@flyingletters.com>\n"
 "Language-Team: \n"
 "Language: German\n"
@@ -22,140 +22,142 @@ msgstr ""
 "X-Loco-Target-Locale: de_DE\n"
 "X-Generator: Loco - https://localise.biz/"
 
-#: /wp-rainbow.php:157
-msgid "C"
-msgstr "C"
-
-#: /wp-rainbow.php:158
-msgid "coffeescript"
-msgstr "coffeescript"
-
-#: /wp-rainbow.php:159
-msgid "C#"
-msgstr "C#"
-
-#: /wp-rainbow.php:160
-msgid "CSS"
-msgstr "CSS"
-
-#: /wp-rainbow.php:161
-msgid "D"
-msgstr "D"
-
-#: /wp-rainbow.php:162
-msgid "Go"
-msgstr "Go"
-
-#: /wp-rainbow.php:163
-msgid "Haskell"
-msgstr "Haskell"
-
-#: /wp-rainbow.php:164
-msgid "HTML"
-msgstr "HTML"
-
-#: /wp-rainbow.php:165
-msgid "Java"
-msgstr "Java"
-
-#: /wp-rainbow.php:166
-msgid "JavaScript"
-msgstr "JavaScript"
-
-#: /wp-rainbow.php:167
+#: wp-rainbow.php:167
 msgid "Lua"
-msgstr ""
+msgstr "Lua"
 
-#: /wp-rainbow.php:168
+#: wp-rainbow.php:168
 msgid "PHP"
-msgstr ""
+msgstr "PHP"
 
-#: /wp-rainbow.php:169
+#: wp-rainbow.php:169
 msgid "Python"
-msgstr ""
+msgstr "Python"
 
-#: /wp-rainbow.php:170
+#: wp-rainbow.php:170
 msgid "R"
-msgstr ""
+msgstr "R"
 
-#: /wp-rainbow.php:171
+#: wp-rainbow.php:171
 msgid "Ruby"
-msgstr ""
+msgstr "Ruby"
 
-#: /wp-rainbow.php:172
+#: wp-rainbow.php:172
 msgid "Scheme"
-msgstr ""
+msgstr "Scheme"
 
-#: /wp-rainbow.php:173
+#: wp-rainbow.php:173
 msgid "Shell script"
-msgstr ""
+msgstr "Shell script"
 
-#: /wp-rainbow.php:174
+#: wp-rainbow.php:174
 msgid "Smalltalk"
-msgstr ""
+msgstr "Smalltalk"
 
-#: /inc/class-wp-rainbow-editor.php:53
-msgid "- None -"
-msgstr "- Keine -"
-
-#: /inc/class-wp-rainbow-editor.php:69
-msgid "Code Language"
-msgstr "Sprache"
-
-#: /inc/class-wp-rainbow-editor.php:70 /inc/class-wp-rainbow-options.php:68
-msgid "Line Numbers"
-msgstr "Zeilennummern"
-
-#: /inc/class-wp-rainbow-editor.php:71
-msgid "Code Properties"
-msgstr "Code Eigenschaften"
-
-#: /inc/class-wp-rainbow-editor.php:72
-msgid "Enable line Numbering"
-msgstr "Zeilennummern anschalten"
-
-#: /inc/class-wp-rainbow-editor.php:73
-msgid "Starting Line"
-msgstr "Erste Zeile"
-
-#: /inc/class-wp-rainbow-options.php:58
+#: inc/class-wp-rainbow-options.php:58
 msgid "Code Highlighting"
-msgstr ""
+msgstr "Syntaxfärbung"
 
-#: /inc/class-wp-rainbow-options.php:61
+#: inc/class-wp-rainbow-options.php:61
 msgid "Visual Theme"
-msgstr ""
+msgstr "Visuelles Theme"
 
-#: /inc/class-wp-rainbow-options.php:75
-msgid "Enable Languages"
-msgstr "Sprachen anschalten"
-
-#: /inc/class-wp-rainbow-options.php:82
-msgid "Load Minified scripts"
-msgstr "Minifizierte Scripte laden"
-
-#: /inc/class-wp-rainbow-options.php:96
+#: inc/class-wp-rainbow-options.php:96
 msgid "Select a visual theme and setup available languages."
-msgstr ""
+msgstr "Wähle ein viesuelles Theme und die verfügbaren Programmiersprachen."
 
-#: /inc/class-wp-rainbow-options.php:112
-msgid "Toggle Sample Code"
-msgstr "Beispielcode"
-
-#: /inc/class-wp-rainbow-options.php:143
-msgid "Show Line numbers."
-msgstr "Zeilennummern zeigen"
-
-#: /inc/class-wp-rainbow-options.php:164
+#: inc/class-wp-rainbow-options.php:164
 msgid "This will customize the languages listbox in WordPress’ visual editor."
-msgstr ""
+msgstr "Bestimmt die Sprachauswahl im WordPress Editor"
 
-#: /inc/class-wp-rainbow-options.php:175
+#: inc/class-wp-rainbow-options.php:175
 msgid "Check this if you want to load a minified Rainbow JS including all Languages."
-msgstr ""
+msgstr "Lade eine minimierte Version von Rainbow JS mit allen Programmiersprachen."
 
-#: /inc/class-wp-rainbow-options.php:178
+#: inc/class-wp-rainbow-options.php:178
 msgid ""
 "When disabled only enabled language modules above will be loaded. Enabling this "
 "option is a good thing when there is no other minification technique around."
 msgstr ""
+"Wenn deaktiviert, werden nur die benötigten Sprachmodule geladen. Aktivieren "
+"ist dann angeraten, wenn keine andere Script-Minimierung auf Deinem Blog läuft."
+
+#: wp-rainbow.php:157
+msgid "C"
+msgstr "C"
+
+#: wp-rainbow.php:158
+msgid "coffeescript"
+msgstr "coffeescript"
+
+#: wp-rainbow.php:159
+msgid "C#"
+msgstr "C#"
+
+#: wp-rainbow.php:160
+msgid "CSS"
+msgstr "CSS"
+
+#: wp-rainbow.php:161
+msgid "D"
+msgstr "D"
+
+#: wp-rainbow.php:162
+msgid "Go"
+msgstr "Go"
+
+#: wp-rainbow.php:163
+msgid "Haskell"
+msgstr "Haskell"
+
+#: wp-rainbow.php:164
+msgid "HTML"
+msgstr "HTML"
+
+#: wp-rainbow.php:165
+msgid "Java"
+msgstr "Java"
+
+#: wp-rainbow.php:166
+msgid "JavaScript"
+msgstr "JavaScript"
+
+#: inc/class-wp-rainbow-editor.php:53
+msgid "- None -"
+msgstr "- Keine -"
+
+#: inc/class-wp-rainbow-editor.php:69
+msgid "Code Language"
+msgstr "Sprache"
+
+#: inc/class-wp-rainbow-editor.php:70 /inc/class-wp-rainbow-options.php:68
+msgid "Line Numbers"
+msgstr "Zeilennummern"
+
+#: inc/class-wp-rainbow-editor.php:71
+msgid "Code Properties"
+msgstr "Code Eigenschaften"
+
+#: inc/class-wp-rainbow-editor.php:72
+msgid "Enable line Numbering"
+msgstr "Zeilennummern anschalten"
+
+#: inc/class-wp-rainbow-editor.php:73
+msgid "Starting Line"
+msgstr "Erste Zeile"
+
+#: inc/class-wp-rainbow-options.php:75
+msgid "Enable Languages"
+msgstr "Sprachen anschalten"
+
+#: inc/class-wp-rainbow-options.php:82
+msgid "Load Minified scripts"
+msgstr "Minifizierte Scripte laden"
+
+#: inc/class-wp-rainbow-options.php:112
+msgid "Toggle Sample Code"
+msgstr "Beispielcode"
+
+#: inc/class-wp-rainbow-options.php:143
+msgid "Show Line numbers."
+msgstr "Zeilennummern zeigen"
