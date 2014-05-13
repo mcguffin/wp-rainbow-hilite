@@ -5,7 +5,7 @@ Plugin Name: WordPress Rainbow
 Plugin URI: https://github.com/mcguffin/wp-rainbow
 Description: Code Syntax coloring using <a href="http://craig.is/making/rainbows">rainbow</a>.
 Author: Jörn Lund
-Version: 0.0.1
+Version: 1.0.0
 Author URI: https://github.com/mcguffin
 License: GPL2
 
@@ -58,6 +58,7 @@ class WPRainbow {
 	 * Private constructor
 	 */
 	private function __construct() {
+		add_action( 'plugins_loaded' , array( &$this , 'plugin_loaded' ) );
 		add_action( 'init' , array( &$this , 'init' ) );
 		add_action( 'init' , array( &$this , 'allow_pre_tag' ) );
 
@@ -68,6 +69,9 @@ class WPRainbow {
 		add_option('wprainbow_languages' , array( 'css' , 'html' , 'php' , 'javascript' , 'java' , 'python' , 'shell' ) );
 		add_option('wprainbow_theme' , 'github' );
 		
+	}
+	public function plugin_loaded() {
+		load_plugin_textdomain( 'rainbow' , false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 	/**
 	 * Adding pre tag and rainbow attributes to list of allowed tags
@@ -86,7 +90,6 @@ class WPRainbow {
 	 *  - Register assets
 	 */
 	function init() {
-		load_plugin_textdomain( 'rainbow' , false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
 		
 		$is_script_debug = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG;
 		

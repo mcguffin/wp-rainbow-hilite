@@ -49,12 +49,13 @@ Either post it on the [GitHub-repo](https://github.com/mcguffin/wp-rainbow) orâ€
 == Screenshots ==
 
 1. Visual Editor
-2. Settings Reading
-3. Colored Code
+2. Code properties dialog
+3. WordPress Settings Writing
+4. Highlighted Code
 
 == Changelog ==
 
-= 0.0.1 =
+= 1.0.0 =
 Initial Release
 
 == Plugin API ==

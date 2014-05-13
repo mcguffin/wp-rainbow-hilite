@@ -31,7 +31,7 @@ tinymce.PluginManager.add( 'wprainbow' , function( editor ){
 			line_value = editor.dom.getAttrib( parent_node, 'data-line' ) || 0,
 			line_enabled = line_value != "-1";
 		editor.windowManager.open({
-			title: 'Anchor',
+			title: wprainbow.l10n.code_properties,
 			body: [
 					{	
 						type: 'listbox', 
