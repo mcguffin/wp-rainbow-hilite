@@ -23,7 +23,6 @@ echo "processing linenumbers"
 rm ./sources/rainbow.linenumbers/js/rainbow.linenumbers.min.js
 java -jar \
 	/usr/local/compiler-latest/compiler.jar \
-	 --compilation_level ADVANCED_OPTIMIZATIONS \
 	--js ./sources/rainbow.linenumbers/js/rainbow.linenumbers.js \
 	--js_output_file ./sources/rainbow.linenumbers/js/rainbow.linenumbers.min.js
 
