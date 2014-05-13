@@ -7,23 +7,56 @@ Description: Code Syntax coloring using <a href="http://craig.is/making/rainbows
 Author: Jörn Lund
 Version: 0.0.1
 Author URI: https://github.com/mcguffin
+License: GPL2
 
 Text Domain: rainbow
 Domain Path: /lang/
 */
 
+/*  Copyright 2014  Jörn Lund  (email : joern@podpirate.org)
 
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License, version 2, as 
+    published by the Free Software Foundation.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+*/
+
+
+/**
+ * Plugin class
+ *
+ * use `WPRainbow::get_instance()`
+ *
+ */
 class WPRainbow {
+	
 	private static $_instance = null;
+	
 	private $_script_queue = array();
 	
 	
+	/**
+	 * Getting a singleton.
+	 *
+	 * @return object single instance of WPRainbow
+	 */
 	public static function get_instance(){
 		if ( is_null( self::$_instance ) )
 			self::$_instance = new self();
 		return self::$_instance;
 	}
-
+	
+	/**
+	 * Private constructor
+	 */
 	private function __construct() {
 		add_action( 'init' , array( &$this , 'init' ) );
 		add_action( 'init' , array( &$this , 'allow_pre_tag' ) );
@@ -36,6 +69,9 @@ class WPRainbow {
 		add_option('wprainbow_theme' , 'github' );
 		
 	}
+	/**
+	 * Adding pre tag and rainbow attributes to list of allowed tags
+	 */
 	function allow_pre_tag() {
 		global $allowedposttags;
 		if ( ! isset( $allowedposttags['pre'] ) )
@@ -43,6 +79,12 @@ class WPRainbow {
 		$allowedposttags['pre'][] = 'data-language';
 		$allowedposttags['pre'][] = 'data-line';
 	}
+	/**
+	 * Init hook.
+	 * 
+	 *  - Load Textdomain
+	 *  - Register assets
+	 */
 	function init() {
 		load_plugin_textdomain( 'rainbow' , false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
 		
@@ -89,6 +131,9 @@ class WPRainbow {
 		wp_register_style( 'wp-rainbow-linenumber-fix' , $linenumberfix_url , array() , "1.0" );
 	}
 	
+	/**
+	 *  Enqueues assets
+	 */
 	function enqueue_assets() {	
 		foreach ( $this->_script_queue as $handle )
 			wp_enqueue_script( $handle );
@@ -98,6 +143,15 @@ class WPRainbow {
 			wp_enqueue_style( 'wp-rainbow-linenumber-fix' );
 	}
 	
+	/**
+	 *  Get Available languages
+	 *
+	 *	Function is not intended to be called directly. Use `wprainbow_get_available_languages()` instead.
+	 *
+	 *	@use private
+	 *
+	 *	@return array Assoc containing all avaliable languages with language slugs as key and localized language Names as values. 
+	 */
 	function get_available_languages() {
 		$langs = array(
 			'c'				=> __('C','rainbow'),
@@ -121,6 +175,15 @@ class WPRainbow {
 		);
 		return apply_filters( 'wprainbow_available_languages' , $langs );
 	}
+	/**
+	 *  Get Available css themes
+	 *
+	 *	Function is not intended to be called directly. Use `wprainbow_get_available_themes()` instead.
+	 *
+	 *	@use private
+	 *
+	 *	@return array Assoc containing all avaliable themes with theme slugs as key and prettified theme slugs values. 
+	 */
 	function get_available_themes() {
 		$theme_instance = new WP_Theme( 'themes' , plugin_dir_path(__FILE__) . 'css' );
 		$css_files = $theme_instance->get_files('css');
@@ -130,26 +193,35 @@ class WPRainbow {
 			$themes[ $filename ] = ucwords(str_replace('-',' ',$filename));
 		}
 		return apply_filters( 'wprainbow_available_themes' , $themes );
-		return $themes;
 	}
 }
 
+/**
+ *  Get Available languages
+ *
+ *	@return array Assoc containing all avaliable themes with theme slugs as key and prettified theme slugs values. 
+ */
 function wprainbow_get_available_languages(){
 	return WPRainbow::get_instance()->get_available_languages();
 }
 
+/**
+ *  Get Available css themes
+ *
+ *	@return array Assoc containing all avaliable themes with theme slugs as key and prettified theme slugs values. 
+ */
 function wprainbow_get_available_themes(){
 	return WPRainbow::get_instance()->get_available_themes();
 }
 
-function load_options() {
+function wprainbow_plugins_loaded() {
 	if ( current_user_can('manage_options') )
 		require_once plugin_dir_path(__FILE__) . '/inc/class-wp-rainbow-editor.php';
 }
 
 if ( is_admin() ) {
 	require_once plugin_dir_path(__FILE__) . '/inc/class-wp-rainbow-options.php';
-	add_action('plugins_loaded','load_options');
+	add_action('plugins_loaded','wprainbow_plugins_loaded');
 }
 
 

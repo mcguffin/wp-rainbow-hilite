@@ -4,31 +4,50 @@
 
 class WPRainbowOptions {
 	private static $_instance = null;
+	/**
+	 * Setup which to WP options page the Rainbow options will be added.
+	 */
 	private $optionset = 'writing';
 	
+	/**
+	 * Getting a singleton.
+	 *
+	 * @return object single instance of WPRainbow
+	 */
 	public static function get_instance() {
 		if ( is_null( self::$_instance ) )
 			self::$_instance = new self();
 		return self::$_instance;
 	}
 
+	/**
+	 * Private constructor
+	 */
 	private function __construct() {
 		add_action( 'admin_init' , array( &$this , 'register_settings' ) );
 		add_action( "load-options-{$this->optionset}.php" , array( &$this , 'enqueue_style' ) );
 	}
 	
+	/**
+	 * Enqueue options CSS and JS
+	 */
 	function enqueue_style() {
-		global $wp_scripts;
+		$is_script_debug = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG;
+
 		wp_enqueue_style( 'wp-rainbow-options' , plugins_url( '/css/wp-rainbow-options.css' , dirname(__FILE__) ));
 		WPRainbow::get_instance()->enqueue_assets();
-		wp_enqueue_script( 'wp-rainbow-options' , plugins_url( '/js/wp-rainbow-options.js' , dirname(__FILE__) ) );
+		$options_js = $is_script_debug ? '/js/wp-rainbow-options.js' : '/js/wp-rainbow-options.min.js';
+
+		wp_enqueue_script( 'wp-rainbow-options' , plugins_url( $options_js , dirname(__FILE__) ) );
 		wp_localize_script('wp-rainbow-options' , 'wprainbow_options' , array(
 			'theme_directory_url' => plugins_url( '/css/themes/' , dirname(__FILE__) )
 		) );
 	}
 	
 	
-	// Options page
+	/**
+	 * Setup options page.
+	 */
 	function register_settings() {
 		$settings_section = 'wprainbow_settings';
 		register_setting( $this->optionset , 'wprainbow_theme' , array( &$this , 'sanitize_theme' ) );
@@ -67,6 +86,10 @@ class WPRainbowOptions {
 		);
 
 	}
+
+	/**
+	 * Print some documentation for the optionset
+	 */
 	public function settings_description() {
 		?>
 		<div class="inside">
@@ -74,6 +97,10 @@ class WPRainbowOptions {
 		</div>
 		<?php
 	}
+	
+	/**
+	 * Output Theme selectbox
+	 */
 	public function select_theme(){
 		$theme = get_option('wprainbow_theme');
 		?><dic class="wprainbow-set-theme"><?php
@@ -106,6 +133,9 @@ class Foo {
 </pre><?php
 		?></div><?php
 	}
+	/**
+	 * Output line numbers checkbox
+	 */
 	public function line_numbers_checkbox() {
 		$enabled = get_option( 'wprainbow_line_numbers' );
 		?><label for="wprainbow_line_numbers"><?php
@@ -114,6 +144,9 @@ class Foo {
 		?></label><?php
 	}
 
+	/**
+	 * Output language select
+	 */
 	public function select_languages() {
 		$langs = wprainbow_get_available_languages();
 		$enabled = (array) get_option( 'wprainbow_languages' );
@@ -132,6 +165,9 @@ class Foo {
 		?></p><?php
 	}
 	
+	/**
+	 * Output the heckbox for load minified option
+	 */
 	public function load_minified_checkbox() {
 		$enabled = get_option( 'wprainbow_load_minified' );
 		?><label for="wprainbow_load_minified"><?php
@@ -139,10 +175,15 @@ class Foo {
 			_e( 'Check this if you want to load a minified Rainbow JS including all Languages.' , 'rainbow' );
 		?></label><?php
 		?><p class="description"><?php
-			_e('When disabled only active language modules will be loaded. Enabling this option is a good idea if there is no other minification technique around.','rainbow');
+			_e('When disabled only enabled language modules above will be loaded. Enabling this option is a good thing when there is no other minification technique around.','rainbow');
 		?></p><?php
-	}	
+	}
 	
+	/**
+	 * Check selected languages against available languages
+	 *
+	 * @return array sanitized list of languages
+	 */
 	function sanitize_langs( $langs ) {	
 		$langs = array_map( 'trim' , $langs);
 		$available_langs = wprainbow_get_available_languages();
@@ -152,6 +193,11 @@ class Foo {
 				$sanitized_langs[] = $lang;
 		return $sanitized_langs;
 	}
+	/**
+	 * Check selected theme against available themes
+	 *
+	 * @return array sanitized theme
+	 */
 	function sanitize_theme( $theme ) {
 		// check existance
 		$available_themes = wprainbow_get_available_themes();

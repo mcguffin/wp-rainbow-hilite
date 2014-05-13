@@ -8,7 +8,6 @@
  * @license http://www.apache.org/licenses/LICENSE-2.0
  * @requires Rainbow.js
  */
- 
 if (window.Rainbow&&!window.Rainbow.linenumbers) window.Rainbow.linenumbers = (function(Rainbow){
 	// line numbering starts at 1 so it is more logical to start counting blocks at 1 as well
 	var iBlock = 0;
@@ -33,7 +32,6 @@ if (window.Rainbow&&!window.Rainbow.linenumbers) window.Rainbow.linenumbers = (f
 			,iCharWidth = calculateCharacterWidth()
 			,iLineBlockWidth = 1 + String(iLineStart+iLines-1).length*iCharWidth
 		;
-		console.log(block.getAttribute('data-line'),iLineStart,bAddLineNumbering);
 		if (bAddLineNumbering) {
 			var iLine = iLineStart
 				,sBlock = getLine(iLineStart)+block.innerHTML.replace(rxLineMatch,function(match){

@@ -46,7 +46,7 @@ tinymce.PluginManager.add( 'wprainbow' , function( editor ){
 						name:'enable_line_numbering',
 						label: wprainbow.l10n.enable_line_numbering, 
 						value: "1",
-						checked: line_enabled,
+						checked: line_enabled
 					},
 					{
 						type:'textbox',

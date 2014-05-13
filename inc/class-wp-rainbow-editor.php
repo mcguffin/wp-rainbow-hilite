@@ -5,12 +5,20 @@
 class WPRainbowEditor {
 	private static $_instance = null;
 	
+	/**
+	 * Getting a singleton.
+	 *
+	 * @return object single instance of WPRainbow
+	 */
 	public static function get_instance() {
 		if ( is_null( self::$_instance ) )
 			self::$_instance = new self();
 		return self::$_instance;
 	}
 
+	/**
+	 * Private constructor
+	 */
 	private function __construct() {
 		// extending mce
 		add_filter( 'mce_buttons_2' , array(&$this,'mce_add_button'));
@@ -33,16 +41,12 @@ class WPRainbowEditor {
 		return $buttons;
 	}
 	function mce_add_code_plugin( $plugins_array ) {
-		$plugins_array['wprainbow'] = plugins_url('/js/wp-rainbow-mce.js?'.time(),dirname(__file__));
+		$is_script_debug = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG;
+		$mce_js = $is_script_debug ? '/js/wp-rainbow-mce.js' : '/js/wp-rainbow-mce.min.js';
+		$plugins_array['wprainbow'] = plugins_url($mce_js,dirname(__file__));
 		return $plugins_array;
 	}
 	function mce_localize(){
-		/*
-			{text: '- None -', value: '' },
-			{text: 'JavaScript', value: 'js'},
-			{text: 'PHP', value: 'php'},
-			{text: 'HTML', value: 'html'}
-		*/
 		$enabled_langs = (array) get_option('wprainbow_languages');
 		$langs = array(
 			(object) array(
