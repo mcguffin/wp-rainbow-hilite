@@ -1,6 +1,6 @@
 === WordPress Rainbow ===
 Contributors: podpirate
-//Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=F8NKC6TCASUXE
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=F8NKC6TCASUXE
 Tags: code, syntax highlighting
 Requires at least: 3.9
 Tested up to: 3.9
@@ -8,7 +8,7 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Adds [rainbow.js](http://craig.is/making/rainbows) to your Blog.
+Code syntax highlighting with [rainbow.js](http://craig.is/making/rainbows).
 
 == Description ==
 
@@ -19,8 +19,7 @@ Latest files on [GitHub](https://github.com/mcguffin/wp-rainbow).
 
 == Installation ==
 
-1. Upload the ZIP to the `/wp-content/plugins/` directory and unzip it.
-2. Activate the plugin through the 'Plugins' menu in WordPress
+Follow the standard [WordPress plugin installation procedere](http://codex.wordpress.org/Managing_Plugins).
 
 == Frequently asked questions ==
 
@@ -63,11 +62,3 @@ Initial Release
 The plugin offers some filters to allow themes and other plugins to hook in.
 
 See [GitHub-Repo](https://github.com/mcguffin/wp-rainbow) for details.
-
-== To Do ==
-
-Fix async error issue
-
-Line numbering:
-https://github.com/Blender3D/rainbow.linenumbers.js
-

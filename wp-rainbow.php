@@ -10,7 +10,7 @@ Author URI: https://github.com/mcguffin
 License: GPL2
 
 Text Domain: rainbow
-Domain Path: /lang/
+Domain Path: /languages/
 */
 
 /*  Copyright 2014  Jörn Lund  (email : joern@podpirate.org)
@@ -33,7 +33,7 @@ Domain Path: /lang/
 /**
  * Plugin class
  *
- * use `WPRainbow::get_instance()`
+ * Don't instantinate. Use `WPRainbow::get_instance()`
  *
  */
 class WPRainbow {
