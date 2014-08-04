@@ -1,9 +1,9 @@
 === WordPress Rainbow ===
 Contributors: podpirate
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=F8NKC6TCASUXE
-Tags: code, syntax highlighting
+Tags: code, syntax highlighting, rainbow, code
 Requires at least: 3.9
-Tested up to: 3.9
+Tested up to: 3.9.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -15,7 +15,30 @@ Code syntax highlighting with [rainbow.js](http://craig.is/making/rainbows).
 Includes [rainbow.js](http://craig.is/making/rainbows) a syntax highlighting script written by [Craig Campbell](http://craig.is/).
 Line numbering through [rainbow.linenumbers](https://github.com/Sjeiti/rainbow.linenumbers) by [Ron Valstar](http://www.sjeiti.com/).
 
+Currently supported languages by Rainbow are
+*    C
+*    C#
+*    Coffeescript
+*    CSS
+*    D
+*    Go
+*    Haskell
+*    HTML
+*    Java
+*    Javascript
+*    Lua
+*    PHP
+*    Python
+*    R
+*    Ruby
+*    Scheme
+*    Shell
+*    Smalltalk
+
+There are some Hooks implemented allowing you to load your own language modules.
+
 Latest files on [GitHub](https://github.com/mcguffin/wp-rainbow).
+
 
 == Installation ==
 
