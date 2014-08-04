@@ -1,15 +1,10 @@
-
 tinymce.PluginManager.add( 'wprainbow' , function( editor ){
-
-	function setLanguageState( button, node ) {
+	var codeSelect;
+	
+	function setLanguageState( button ) {
 		var parent_node = editor.dom.getParent( editor.selection.getNode() ,'PRE');
-		button.disabled( ! parent_node );
-		button.value(editor.dom.getAttrib( parent_node, 'data-language' ));
-	}
-	function setCodeState( button, node ) {
-		var parent_node = editor.dom.getParent( editor.selection.getNode() ,'PRE');
-		button.disabled( ! parent_node );
-		button.value(editor.dom.getAttrib( parent_node, 'data-language' ));
+		codeSelect.disabled( ! parent_node );
+		codeSelect.value(editor.dom.getAttrib( parent_node, 'data-language' ));
 	}
 	function setLanguage( lang ) {
 		editor.dom.setAttrib( 
@@ -44,7 +39,7 @@ tinymce.PluginManager.add( 'wprainbow' , function( editor ){
 					{
 						type:'checkbox',
 						name:'enable_line_numbering',
-						label: wprainbow.l10n.enable_line_numbering, 
+						label: wprainbow.l10n.line_numbers, 
 						value: "1",
 						checked: line_enabled
 					},
@@ -66,12 +61,11 @@ tinymce.PluginManager.add( 'wprainbow' , function( editor ){
 					if ( isNaN( line ) )
 						line = 1;
 				}
-				setLineNumber( line )
 				// set or del line number
+				setLineNumber( line );
 			}
 		});
 	}
-	
 	
 	editor.addButton('wprainbow', {
 		type: 'listbox',
@@ -88,7 +82,6 @@ tinymce.PluginManager.add( 'wprainbow' , function( editor ){
 			editor.on( 'nodechange', function( event ) {
 				setLanguageState( codeSelect, event.element );
 			});
-			
 			for ( var i in wprainbow.languages ) {
 				var lang = wprainbow.languages[i].value;
 				if ( !! lang )
@@ -97,22 +90,12 @@ tinymce.PluginManager.add( 'wprainbow' , function( editor ){
 		}
 		
 	});
-	
-	
+
 	if ( wprainbow.enable_line_numbering ) {
 		editor.addButton('wprainbow_codecontrol', {
 			tooltip: wprainbow.l10n.code_properties,
-			onclick: openControlPanel,
-			onPostRender: function() {
-				var button = this;
-				editor.on( 'nodechange', function( event ) {
-					setCodeState( button, event.element );
-				});
-			
-			}
+			onclick: openControlPanel
 		});
 	}
+	
 } );
-
-
-

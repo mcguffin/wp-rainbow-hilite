@@ -69,7 +69,6 @@ var wprainbow = {
     	'code_language': "<?php _e('Code Language' , 'rainbow' ) ?>",
     	'line_numbers': "<?php _e('Line Numbers' , 'rainbow' ) ?>",
     	'code_properties': "<?php _e('Code Properties' , 'rainbow' ) ?>",
-    	'enable_line_numbering': "<?php _e('Enable line Numbering' , 'rainbow' ) ?>",
     	'starting_line': "<?php _e('Starting Line' , 'rainbow' ) ?>"
     },
     'languages' : <?php echo json_encode( $langs ) ?>,

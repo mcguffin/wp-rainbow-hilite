@@ -55,7 +55,7 @@ class WPRainbowOptions {
 		register_setting( $this->optionset , 'wprainbow_languages' , array( &$this , 'sanitize_langs' ) );
 		register_setting( $this->optionset , 'wprainbow_load_minified' , 'absint' );
 
-		add_settings_section( $settings_section, __( 'Code Highlighting', 'wprainbow' ), array( $this, 'settings_description' ), $this->optionset );
+		add_settings_section( $settings_section, __( 'Code Highlighting', 'rainbow' ), array( $this, 'settings_description' ), $this->optionset );
 		add_settings_field(
 			'wprainbow_theme',
 			__( 'Visual Theme', 'rainbow' ),

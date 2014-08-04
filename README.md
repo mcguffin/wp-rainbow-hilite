@@ -28,7 +28,7 @@ Example:
 		return $langauges;
 	}
 	
-    add_filter('wprainbow_available_languages' , add_chicken );
+    add_filter('wprainbow_available_languages' , 'add_chicken' );
 ```
 
 #### `wprainbow_language_module_url` ####
@@ -44,7 +44,7 @@ Example:
 		return $module_url;
 	}
 	
-    add_filter('wprainbow_language_module_url' , chicken_js_url , 10 ,2 );
+    add_filter('wprainbow_language_module_url' , 'chicken_js_url' , 10 ,2 );
 ```
 
 #### `wprainbow_available_themes` ####
@@ -58,7 +58,7 @@ Example:
 		return $themes;
 	}
 	
-    add_filter('wprainbow_available_themes' , add_fancy_theme );
+    add_filter('wprainbow_available_themes' , 'add_fancy_theme' );
 ```
 
 #### `wprainbow_language_module_url` ####
@@ -74,8 +74,7 @@ Example:
 		return $theme_url;
 	}
 	
-    add_filter('wprainbow_theme_url' , fancy_theme_url , 10 , 2 );
+    add_filter('wprainbow_theme_url' , 'fancy_theme_url' , 10 , 2 );
 ```
 
-## ToDo ##
-- move build.sh to root, minify own backend js
+
