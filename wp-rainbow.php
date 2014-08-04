@@ -2,7 +2,7 @@
 
 /*
 Plugin Name: WordPress Rainbow
-Plugin URI: https://github.com/mcguffin/wp-rainbow
+Plugin URI: https://github.com/mcguffin/wp-rainbow-hilite
 Description: Code Syntax coloring using <a href="http://craig.is/making/rainbows">rainbow</a>.
 Author: Jörn Lund
 Version: 1.0.0
