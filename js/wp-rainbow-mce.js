@@ -1,10 +1,11 @@
 tinymce.PluginManager.add( 'wprainbow' , function( editor ){
-	var codeSelect;
+	var codeSelect, codeControl;
 	
-	function setLanguageState( button ) {
+	function setLanguageState( ) {
 		var parent_node = editor.dom.getParent( editor.selection.getNode() ,'PRE');
 		codeSelect.disabled( ! parent_node );
 		codeSelect.value(editor.dom.getAttrib( parent_node, 'data-language' ));
+		codeControl.disabled( ! parent_node );
 	}
 	function setLanguage( lang ) {
 		editor.dom.setAttrib( 
@@ -80,7 +81,7 @@ tinymce.PluginManager.add( 'wprainbow' , function( editor ){
 		onPostRender: function() {
 			codeSelect = this;
 			editor.on( 'nodechange', function( event ) {
-				setLanguageState( codeSelect, event.element );
+				setLanguageState( );
 			});
 			for ( var i in wprainbow.languages ) {
 				var lang = wprainbow.languages[i].value;
@@ -94,7 +95,13 @@ tinymce.PluginManager.add( 'wprainbow' , function( editor ){
 	if ( wprainbow.enable_line_numbering ) {
 		editor.addButton('wprainbow_codecontrol', {
 			tooltip: wprainbow.l10n.code_properties,
-			onclick: openControlPanel
+			onclick: openControlPanel,
+			onPostRender: function() {
+				codeControl = this;
+				editor.on( 'nodechange', function( event ) {
+					setLanguageState( );
+				});
+			}
 		});
 	}
 	
