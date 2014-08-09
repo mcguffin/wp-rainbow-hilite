@@ -5,7 +5,8 @@ tinymce.PluginManager.add( 'wprainbow' , function( editor ){
 		var parent_node = editor.dom.getParent( editor.selection.getNode() ,'PRE');
 		codeSelect.disabled( ! parent_node );
 		codeSelect.value(editor.dom.getAttrib( parent_node, 'data-language' ));
-		codeControl.disabled( ! parent_node );
+		if ( !! codeControl )
+			codeControl.disabled( ! parent_node );
 	}
 	function setLanguage( lang ) {
 		editor.dom.setAttrib( 
