@@ -40,7 +40,6 @@ java -jar \
 echo "processing options script"
 java -jar \
 	/usr/local/compiler-latest/compiler.jar \
-	 --compilation_level ADVANCED_OPTIMIZATIONS \
 	--js ./js/wp-rainbow-options.js \
 	--js_output_file ./js/wp-rainbow-options.min.js \
 
