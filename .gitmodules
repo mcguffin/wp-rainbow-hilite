@@ -1,0 +1,7 @@
+[submodule "rainbow"]
+ path = sources/rainbow
+ url = git@github.com:mcguffin/rainbow.git
+
+[submodule "rainbow.linenumbers"]
+ path = sources/rainbow.linenumbers
+ url = git@github.com:mcguffin/rainbow.linenumbers.git
