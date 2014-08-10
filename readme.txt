@@ -2,7 +2,7 @@
 Contributors: podpirate
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=F8NKC6TCASUXE
 Tags: code, syntax highlighting, rainbow, code
-Requires at least: 3.9
+Requires at least: 3.8
 Tested up to: 4.0-beta3
 Stable tag: trunk
 License: GPLv2 or later
@@ -17,7 +17,7 @@ Code syntax Highlighting.
 Features:
 - Highlighted code can be copy-pasted directly out of the site. No "view raw" button needed.
 - User friendly TinyMCE integration.
-- Many languages supported
+- Many programming languages supported.
 - German translation.
 
 Includes [rainbow.js](http://craig.is/making/rainbows) a syntax highlighting script written by [Craig Campbell](http://craig.is/).
@@ -43,7 +43,7 @@ Currently supported languages by Rainbow are
 *    Shell
 *    Smalltalk
 
-There are some Hooks implemented allowing you to load your own language modules.
+There are some Hooks implemented allowing you to load your own language modules. Details [here](https://github.com/mcguffin/wp-rainbow-hilite#filters).
 
 Latest files on [GitHub](https://github.com/mcguffin/wp-rainbow-hilite).
 

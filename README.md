@@ -34,7 +34,7 @@ Will return a list of available colorsets.
 
 #### `wprainbow_available_languages` ####
 
-Filter available langauges. Use this filter to add your own language madule.
+Filter available language names. Use this filter to add your own language madule.
 
 Example:
 ```
@@ -76,7 +76,7 @@ Example:
     add_filter('wprainbow_available_themes' , 'add_fancy_theme' );
 ```
 
-#### `wprainbow_language_module_url` ####
+#### `wprainbow_theme_url` ####
 
 Filter URL of the theme css. Use this together with `wprainbow_available_themes`.
 when adding your own theme.
@@ -91,5 +91,6 @@ Example:
 	
     add_filter('wprainbow_theme_url' , 'fancy_theme_url' , 10 , 2 );
 ```
+
 
 
