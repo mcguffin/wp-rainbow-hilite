@@ -103,20 +103,21 @@ class WPRainbow {
 		
 		$dependencies = array( 'rainbow-core' );
 		
-		if ( get_option( 'wprainbow_load_minified' ) ) {
+		if ( get_option( 'wprainbow_load_minified' ) && ! $is_script_debug ) {
 			$rainbow_script_url = plugins_url( '/js/rainbow-custom.min.js' , __FILE__ );
+			$line_number_script_url = plugins_url( '/js/rainbow.linenumbers.min.js' , __FILE__ );
 		} else {
 			// enqueue core
 			// respect WP SCRIPT_DEBUG constant
-			$rainbow_script_url = plugins_url( $is_script_debug ? '/js/dev/rainbow.js' : '/js/dev/rainbow.min.js' , __FILE__ );
+			$rainbow_script_url = plugins_url( '/js/dev/rainbow.js' , __FILE__ );
+			$line_number_script_url = plugins_url( '/js/rainbow.linenumbers.js' , __FILE__ );
 		}
-		$line_number_script_url = plugins_url( $is_script_debug ? '/js/rainbow.linenumbers.js' : '/js/rainbow.linenumbers.min.js' , __FILE__ );
 		
 		wp_register_script( 'rainbow-core' , $rainbow_script_url , array() , false , true );
 		wp_register_script( 'rainbow-linenumbers' , $line_number_script_url , array() , false , true );
 		
 		$this->_script_queue[] = 'rainbow-core';
-		if ( ! get_option( 'wprainbow_load_minified' ) ) {
+		if ( ! get_option( 'wprainbow_load_minified' ) || $is_script_debug ) {
 			// enqueue language modules
 			$languages = (array) get_option('wprainbow_languages');
 			
@@ -132,6 +133,7 @@ class WPRainbow {
 		
 		if ( get_option( 'wprainbow_line_numbers' ) )
 			$this->_script_queue[] = 'rainbow-linenumbers';
+		
 		
 		// register style
 		$theme = get_option( 'wprainbow_theme' );
