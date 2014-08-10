@@ -1,4 +1,4 @@
-=== WordPress Rainbow ===
+=== WordPress Rainbow Hilite ===
 Contributors: podpirate
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=F8NKC6TCASUXE
 Tags: code, syntax highlighting, rainbow, code

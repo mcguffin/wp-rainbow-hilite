@@ -1,7 +1,7 @@
 <?php
 
 /*
-Plugin Name: WordPress Rainbow
+Plugin Name: WordPress Rainbow Hilite
 Plugin URI: https://github.com/mcguffin/wp-rainbow-hilite
 Description: Code Syntax coloring using <a href="http://craig.is/making/rainbows">rainbow</a>.
 Author: Jörn Lund
@@ -60,7 +60,7 @@ class WPRainbow {
 	private function __construct() {
 		add_action( 'plugins_loaded' , array( &$this , 'plugin_loaded' ) );
 		add_action( 'init' , array( &$this , 'init' ) );
-		add_action( 'init' , array( &$this , 'allow_pre_tag' ) );
+		add_filter( 'wp_kses_allowed_html' , array( &$this , 'allow_pre_tag' ) , 10 , 2 );
 
 		add_action( 'wp_enqueue_scripts' , array( &$this , 'enqueue_assets' ) );
 		
@@ -76,12 +76,20 @@ class WPRainbow {
 	/**
 	 * Adding pre tag and rainbow attributes to list of allowed tags
 	 */
-	function allow_pre_tag() {
-		global $allowedposttags;
-		if ( ! isset( $allowedposttags['pre'] ) )
-			$allowedposttags['pre'] = array('width','class','id','style','title','role');
-		$allowedposttags['pre'][] = 'data-language';
-		$allowedposttags['pre'][] = 'data-line';
+	function allow_pre_tag( $allowedposttags , $context = '' ) {
+		if ( $context == 'post' ) {
+			if ( ! isset( $allowedposttags['pre'] ) )
+				$allowedposttags['pre'] = array('width' => true , 
+					'class' => true, 
+					'id' => true, 
+					'style' => true, 
+					'title' => true, 
+					'role' => true,
+				);
+			$allowedposttags['pre']['data-language'] = true;
+			$allowedposttags['pre']['data-line'] = true;
+		}
+		return $allowedposttags;
 	}
 	/**
 	 * Init hook.
@@ -135,7 +143,7 @@ class WPRainbow {
 	}
 	
 	/**
-	 *  Enqueues assets
+	 *  Enqueue Frontend Scripts
 	 */
 	function enqueue_assets() {	
 		foreach ( $this->_script_queue as $handle )
@@ -219,11 +227,11 @@ function wprainbow_get_available_themes(){
 
 function wprainbow_plugins_loaded() {
 	if ( current_user_can('manage_options') )
-		require_once plugin_dir_path(__FILE__) . '/inc/class-wp-rainbow-editor.php';
+		require_once plugin_dir_path(__FILE__) . '/inc/class-wp-rainbow-options.php';
 }
 
 if ( is_admin() ) {
-	require_once plugin_dir_path(__FILE__) . '/inc/class-wp-rainbow-options.php';
+	require_once plugin_dir_path(__FILE__) . '/inc/class-wp-rainbow-editor.php';
 	add_action('plugins_loaded','wprainbow_plugins_loaded');
 }
 
