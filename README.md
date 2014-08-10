@@ -18,7 +18,6 @@ If for some reason the file is located somewhere else on your system you can cha
 var in build.sh line 3.
 
 
-
 ## Plugin API ##
 
 ### Functions: ###
