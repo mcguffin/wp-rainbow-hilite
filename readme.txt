@@ -14,7 +14,7 @@ Code syntax highlighting with [rainbow.js](http://craig.is/making/rainbows).
 
 Code syntax Highlighting.
 
-Features:
+= Features: =
 - Highlighted code can be copy-pasted directly out of the site. No "view raw" button needed.
 - User friendly TinyMCE integration.
 - Many programming languages supported.
@@ -24,24 +24,25 @@ Includes [rainbow.js](http://craig.is/making/rainbows) a syntax highlighting scr
 Line numbering through [rainbow.linenumbers](https://github.com/Sjeiti/rainbow.linenumbers) by [Ron Valstar](http://www.sjeiti.com/).
 
 Currently supported languages by Rainbow are
-*    C
-*    C#
-*    Coffeescript
-*    CSS
-*    D
-*    Go
-*    Haskell
-*    HTML
-*    Java
-*    Javascript
-*    Lua
-*    PHP
-*    Python
-*    R
-*    Ruby
-*    Scheme
-*    Shell
-*    Smalltalk
+
+- C
+- C#
+- Coffeescript
+- CSS
+- D
+- Go
+- Haskell
+- HTML
+- Java
+- Javascript
+- Lua
+- PHP
+- Python
+- R
+- Ruby
+- Scheme
+- Shell
+- Smalltalk
 
 There are some Hooks implemented allowing you to load your own language modules. Details [here](https://github.com/mcguffin/wp-rainbow-hilite#filters).
 
