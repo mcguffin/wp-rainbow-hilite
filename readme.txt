@@ -8,7 +8,7 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Code syntax highlighting with [rainbow.js](http://craig.is/making/rainbows).
+Code syntax highlighting with <a href="http://craig.is/making/rainbows">rainbow.js</a>.
 
 == Description ==
 
