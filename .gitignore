@@ -5,6 +5,7 @@
 *.swp
 *.out
 .svn/
+.svnignore
 .actionScriptProperties
 .flexProperties
 .project
