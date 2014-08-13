@@ -1,7 +1,9 @@
-# WordPress Rainbow #
+# WordPress Rainbow Hilite #
 
 Includes [rainbow.js](http://craig.is/making/rainbows) a syntax highlighting script written by [Craig Campbell](http://craig.is/).
 Line numbering through [rainbow.linenumbers](https://github.com/Sjeiti/rainbow.linenumbers) by [Ron Valstar](http://www.sjeiti.com/).
+
+This is the development repository. If you just want to use the plugin you can find it in the <a href="http://wordpress.org/plugins/wp-rainbow-hilite/">WordPress plugin repository</a>.
 
 ## Developing ##
 
