@@ -5,7 +5,7 @@ Plugin Name: WordPress Rainbow Hilite
 Plugin URI: http://wordpress.org/plugins/wp-rainbow-hilite/
 Description: Code Syntax coloring using <a href="http://craig.is/making/rainbows">rainbow</a>.
 Author: Jörn Lund
-Version: 1.0.0
+Version: 1.0.1
 Author URI: https://github.com/mcguffin
 License: GPL2
 
@@ -94,7 +94,6 @@ class WPRainbow {
 	/**
 	 * Init hook.
 	 * 
-	 *  - Load Textdomain
 	 *  - Register assets
 	 */
 	function init() {
@@ -161,7 +160,7 @@ class WPRainbow {
 	 *
 	 *	Function is not intended to be called directly. Use `wprainbow_get_available_languages()` instead.
 	 *
-	 *	@use private
+	 *	@use public
 	 *
 	 *	@return array Assoc containing all avaliable languages with language slugs as key and localized language Names as values. 
 	 */

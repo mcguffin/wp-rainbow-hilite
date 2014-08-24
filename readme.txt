@@ -87,6 +87,9 @@ Either post it on the [GitHub-repo](https://github.com/mcguffin/wp-rainbow-hilit
 
 == Changelog ==
 
+= 1.0.1 =
+JS Fix: play nice with prevoisly declared document.onreadystatechange callbacks.
+
 = 1.0.0 =
 Initial Release
 
