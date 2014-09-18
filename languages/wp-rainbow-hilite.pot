@@ -1,0 +1,164 @@
+# Copyright (C) 2014 WordPress Rainbow Hilite
+# This file is distributed under the same license as the WordPress Rainbow Hilite package.
+msgid ""
+msgstr ""
+"Project-Id-Version: WordPress Rainbow Hilite 1.0.1\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/wp-rainbow-hilite\n"
+"POT-Creation-Date: 2014-09-18 08:50:49+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: inc/class-wp-rainbow-editor.php:53
+msgid "- None -"
+msgstr ""
+
+#: inc/class-wp-rainbow-editor.php:69
+msgid "Code Language"
+msgstr ""
+
+#: inc/class-wp-rainbow-editor.php:70 inc/class-wp-rainbow-options.php:68
+msgid "Line Numbers"
+msgstr ""
+
+#: inc/class-wp-rainbow-editor.php:71
+msgid "Code Properties"
+msgstr ""
+
+#: inc/class-wp-rainbow-editor.php:72
+msgid "Starting Line"
+msgstr ""
+
+#: inc/class-wp-rainbow-options.php:58
+msgid "Code Highlighting"
+msgstr ""
+
+#: inc/class-wp-rainbow-options.php:61
+msgid "Visual Theme"
+msgstr ""
+
+#: inc/class-wp-rainbow-options.php:75
+msgid "Enable Languages"
+msgstr ""
+
+#: inc/class-wp-rainbow-options.php:82
+msgid "Load Minified scripts"
+msgstr ""
+
+#: inc/class-wp-rainbow-options.php:96
+msgid "Select a visual theme and setup available languages."
+msgstr ""
+
+#: inc/class-wp-rainbow-options.php:112
+msgid "Toggle Sample Code"
+msgstr ""
+
+#: inc/class-wp-rainbow-options.php:143
+msgid "Show Line numbers."
+msgstr ""
+
+#: inc/class-wp-rainbow-options.php:164
+msgid "This will customize the languages listbox in WordPress’ visual editor."
+msgstr ""
+
+#: inc/class-wp-rainbow-options.php:175
+msgid "Check this if you want to load a minified Rainbow JS including all Languages."
+msgstr ""
+
+#: inc/class-wp-rainbow-options.php:178
+msgid "When disabled only enabled language modules above will be loaded. Enabling this option is a good thing when there is no other minification technique around."
+msgstr ""
+
+#: wp-rainbow.php:169
+msgid "C"
+msgstr ""
+
+#: wp-rainbow.php:170
+msgid "coffeescript"
+msgstr ""
+
+#: wp-rainbow.php:171
+msgid "C#"
+msgstr ""
+
+#: wp-rainbow.php:172
+msgid "CSS"
+msgstr ""
+
+#: wp-rainbow.php:173
+msgid "D"
+msgstr ""
+
+#: wp-rainbow.php:174
+msgid "Go"
+msgstr ""
+
+#: wp-rainbow.php:175
+msgid "Haskell"
+msgstr ""
+
+#: wp-rainbow.php:176
+msgid "HTML"
+msgstr ""
+
+#: wp-rainbow.php:177
+msgid "Java"
+msgstr ""
+
+#: wp-rainbow.php:178
+msgid "JavaScript"
+msgstr ""
+
+#: wp-rainbow.php:179
+msgid "Lua"
+msgstr ""
+
+#: wp-rainbow.php:180
+msgid "PHP"
+msgstr ""
+
+#: wp-rainbow.php:181
+msgid "Python"
+msgstr ""
+
+#: wp-rainbow.php:182
+msgid "R"
+msgstr ""
+
+#: wp-rainbow.php:183
+msgid "Ruby"
+msgstr ""
+
+#: wp-rainbow.php:184
+msgid "Scheme"
+msgstr ""
+
+#: wp-rainbow.php:185
+msgid "Shell script"
+msgstr ""
+
+#: wp-rainbow.php:186
+msgid "Smalltalk"
+msgstr ""
+#. Plugin Name of the plugin/theme
+msgid "WordPress Rainbow Hilite"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://wordpress.org/plugins/wp-rainbow-hilite/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Code Syntax coloring using <a href=\"http://craig.is/making/rainbows\">rainbow</a>."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Jörn Lund"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://github.com/mcguffin"
+msgstr ""

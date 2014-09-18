@@ -5,11 +5,11 @@ Plugin Name: WordPress Rainbow Hilite
 Plugin URI: http://wordpress.org/plugins/wp-rainbow-hilite/
 Description: Code Syntax coloring using <a href="http://craig.is/making/rainbows">rainbow</a>.
 Author: Jörn Lund
-Version: 1.0.1
+Version: 1.0.2
 Author URI: https://github.com/mcguffin
 License: GPL2
 
-Text Domain: rainbow
+Text Domain: wp-rainbow-hilite
 Domain Path: /languages/
 */
 
@@ -71,7 +71,7 @@ class WPRainbow {
 		
 	}
 	public function plugin_loaded() {
-		load_plugin_textdomain( 'rainbow' , false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+		load_plugin_textdomain( 'wp-rainbow-hilite' , false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 	/**
 	 * Adding pre tag and rainbow attributes to list of allowed tags
@@ -166,24 +166,24 @@ class WPRainbow {
 	 */
 	function get_available_languages() {
 		$langs = array(
-			'c'				=> __('C','rainbow'),
-			'coffeescript'	=> __('coffeescript','rainbow'),
-			'csharp'		=> __('C#','rainbow'),
-			'css'			=> __('CSS','rainbow'),
-			'd'				=> __('D','rainbow'),
-			'go'			=> __('Go','rainbow'),
-			'haskell'		=> __('Haskell','rainbow'),
-			'html'			=> __('HTML','rainbow'),
-			'java'			=> __('Java','rainbow'),
-			'javascript'	=> __('JavaScript','rainbow'),
-			'lua'			=> __('Lua','rainbow'),
-			'php'			=> __('PHP','rainbow'),
-			'python'		=> __('Python','rainbow'),
-			'r'				=> __('R','rainbow'),
-			'ruby'			=> __('Ruby','rainbow'),
-			'scheme'		=> __('Scheme','rainbow'),
-			'shell'			=> __('Shell script','rainbow'),
-			'smalltalk'		=> __('Smalltalk','rainbow'),
+			'c'				=> __('C','wp-rainbow-hilite'),
+			'coffeescript'	=> __('coffeescript','wp-rainbow-hilite'),
+			'csharp'		=> __('C#','wp-rainbow-hilite'),
+			'css'			=> __('CSS','wp-rainbow-hilite'),
+			'd'				=> __('D','wp-rainbow-hilite'),
+			'go'			=> __('Go','wp-rainbow-hilite'),
+			'haskell'		=> __('Haskell','wp-rainbow-hilite'),
+			'html'			=> __('HTML','wp-rainbow-hilite'),
+			'java'			=> __('Java','wp-rainbow-hilite'),
+			'javascript'	=> __('JavaScript','wp-rainbow-hilite'),
+			'lua'			=> __('Lua','wp-rainbow-hilite'),
+			'php'			=> __('PHP','wp-rainbow-hilite'),
+			'python'		=> __('Python','wp-rainbow-hilite'),
+			'r'				=> __('R','wp-rainbow-hilite'),
+			'ruby'			=> __('Ruby','wp-rainbow-hilite'),
+			'scheme'		=> __('Scheme','wp-rainbow-hilite'),
+			'shell'			=> __('Shell script','wp-rainbow-hilite'),
+			'smalltalk'		=> __('Smalltalk','wp-rainbow-hilite'),
 		);
 		return apply_filters( 'wprainbow_available_languages' , $langs );
 	}

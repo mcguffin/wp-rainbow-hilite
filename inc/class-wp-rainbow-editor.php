@@ -66,10 +66,10 @@ class WPRainbowEditor {
 <script type='text/javascript'>
 var wprainbow = {
     'l10n': {
-    	'code_language': "<?php _e('Code Language' , 'rainbow' ) ?>",
-    	'line_numbers': "<?php _e('Line Numbers' , 'rainbow' ) ?>",
-    	'code_properties': "<?php _e('Code Properties' , 'rainbow' ) ?>",
-    	'starting_line': "<?php _e('Starting Line' , 'rainbow' ) ?>"
+    	'code_language': "<?php _e('Code Language' , 'wp-rainbow-hilite' ) ?>",
+    	'line_numbers': "<?php _e('Line Numbers' , 'wp-rainbow-hilite' ) ?>",
+    	'code_properties': "<?php _e('Code Properties' , 'wp-rainbow-hilite' ) ?>",
+    	'starting_line': "<?php _e('Starting Line' , 'wp-rainbow-hilite' ) ?>"
     },
     'languages' : <?php echo json_encode( $langs ) ?>,
     'enable_line_numbering' : <?php echo get_option('wprainbow_line_numbers') ? 'true' : 'false' ?>

@@ -55,31 +55,31 @@ class WPRainbowOptions {
 		register_setting( $this->optionset , 'wprainbow_languages' , array( &$this , 'sanitize_langs' ) );
 		register_setting( $this->optionset , 'wprainbow_load_minified' , 'absint' );
 
-		add_settings_section( $settings_section, __( 'Code Highlighting', 'rainbow' ), array( $this, 'settings_description' ), $this->optionset );
+		add_settings_section( $settings_section, __( 'Code Highlighting', 'wp-rainbow-hilite' ), array( $this, 'settings_description' ), $this->optionset );
 		add_settings_field(
 			'wprainbow_theme',
-			__( 'Visual Theme', 'rainbow' ),
+			__( 'Visual Theme', 'wp-rainbow-hilite' ),
 			array( $this, 'select_theme' ),
 			$this->optionset,
 			$settings_section
 		);
 		add_settings_field(
 			'wprainbow_line_numbers',
-			__( 'Line Numbers', 'rainbow' ),
+			__( 'Line Numbers', 'wp-rainbow-hilite' ),
 			array( $this, 'line_numbers_checkbox' ),
 			$this->optionset,
 			$settings_section
 		);
 		add_settings_field(
 			'wprainbow_languages',
-			__( 'Enable Languages', 'rainbow' ),
+			__( 'Enable Languages', 'wp-rainbow-hilite' ),
 			array( $this, 'select_languages' ),
 			$this->optionset,
 			$settings_section
 		);
 		add_settings_field(
 			'wprainbow_load_minified',
-			__( 'Load Minified scripts', 'rainbow' ),
+			__( 'Load Minified scripts', 'wp-rainbow-hilite' ),
 			array( $this, 'load_minified_checkbox' ),
 			$this->optionset,
 			$settings_section
@@ -93,7 +93,7 @@ class WPRainbowOptions {
 	public function settings_description() {
 		?>
 		<div class="inside">
-			<p><?php _e( 'Select a visual theme and setup available languages.', 'rainbow' ); ?></p>
+			<p><?php _e( 'Select a visual theme and setup available languages.', 'wp-rainbow-hilite' ); ?></p>
 		</div>
 		<?php
 	}
@@ -109,7 +109,7 @@ class WPRainbowOptions {
 				?><option value="<?php echo $slug ?>" <?php selected( $theme == $slug, true ,true) ?>><?php echo $name ?></option><?php
 			}
 		?></select><?php
-		?><a class="button secondary" id="wprainbow-toggle-sample-code" href="#"><?php _e('Toggle Sample Code','rainbow') ?></a><?php
+		?><a class="button secondary" id="wprainbow-toggle-sample-code" href="#"><?php _e('Toggle Sample Code','wp-rainbow-hilite') ?></a><?php
 ?><pre class="sample" data-language="php">
 /*
 Example class doing stuff.
@@ -140,7 +140,7 @@ class Foo {
 		$enabled = get_option( 'wprainbow_line_numbers' );
 		?><label for="wprainbow_line_numbers"><?php
 			?><input type="checkbox" name="wprainbow_line_numbers" id="wprainbow_line_numbers" value="1" <?php checked($enabled,true,true) ?> /><?php
-			_e( 'Show Line numbers.' , 'rainbow' );
+			_e( 'Show Line numbers.' , 'wp-rainbow-hilite' );
 		?></label><?php
 	}
 
@@ -161,7 +161,7 @@ class Foo {
 		}
 		?></p><?php
 		?><p class="description"><?php
-			_e('This will customize the languages listbox in WordPress’ visual editor.','rainbow');
+			_e('This will customize the languages listbox in WordPress’ visual editor.','wp-rainbow-hilite');
 		?></p><?php
 	}
 	
@@ -172,10 +172,10 @@ class Foo {
 		$enabled = get_option( 'wprainbow_load_minified' );
 		?><label for="wprainbow_load_minified"><?php
 			?><input type="checkbox" name="wprainbow_load_minified" id="wprainbow_load_minified" value="1" <?php checked($enabled,true,true) ?> /><?php
-			_e( 'Check this if you want to load a minified Rainbow JS including all Languages.' , 'rainbow' );
+			_e( 'Check this if you want to load a minified Rainbow JS including all Languages.' , 'wp-rainbow-hilite' );
 		?></label><?php
 		?><p class="description"><?php
-			_e('When disabled only enabled language modules above will be loaded. Enabling this option is a good thing when there is no other minification technique around.','rainbow');
+			_e('When disabled only enabled language modules above will be loaded. Enabling this option is a good thing when there is no other minification technique around.','wp-rainbow-hilite');
 		?></p><?php
 	}
 	
