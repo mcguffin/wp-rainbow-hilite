@@ -12,7 +12,7 @@ Code syntax highlighting with <a href="http://craig.is/making/rainbows">rainbow.
 
 == Description ==
 
-Code syntax Highlighting.
+Code syntax Highlighting. Documentation can be found <a href="http://wpdev.podpirate.org/wordpress-rainbow-hilite/">here</a>.
 
 = Features: =
 - Highlighted code can be copy-pasted directly out of the site. No "view raw" button needed.
@@ -22,6 +22,7 @@ Code syntax Highlighting.
 
 Includes [rainbow.js](http://craig.is/making/rainbows) a syntax highlighting script written by [Craig Campbell](http://craig.is/).
 Line numbering through [rainbow.linenumbers](https://github.com/Sjeiti/rainbow.linenumbers) by [Ron Valstar](http://www.sjeiti.com/).
+
 
 Currently supported languages by Rainbow are
 
