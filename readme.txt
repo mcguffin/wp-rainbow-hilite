@@ -12,7 +12,7 @@ Code syntax highlighting with <a href="http://craig.is/making/rainbows">rainbow.
 
 == Description ==
 
-Code syntax Highlighting. Documentation can be found <a href="http://wpdev.podpirate.org/wordpress-rainbow-hilite/">here</a>.
+Code syntax Highlighting. Documentation can be found [here](http://wpdev.podpirate.org/wordpress-rainbow-hilite).
 
 = Features: =
 - Highlighted code can be copy-pasted directly out of the site. No "view raw" button needed.
