@@ -45,7 +45,7 @@ Currently supported languages by Rainbow are
 - Shell
 - Smalltalk
 
-There are some Hooks implemented allowing you to load your own language modules. Details [here](https://github.com/mcguffin/wp-rainbow-hilite#filters).
+There are some Hooks implemented allowing you to load your own language modules. Details [here](https://github.com/mcguffin/wp-rainbow-hilite/wiki).
 
 Latest files on [GitHub](https://github.com/mcguffin/wp-rainbow-hilite).
 
@@ -55,6 +55,11 @@ Latest files on [GitHub](https://github.com/mcguffin/wp-rainbow-hilite).
 Follow the standard [WordPress plugin installation procedere](http://codex.wordpress.org/Managing_Plugins).
 
 == Frequently asked questions ==
+
+= Craig Campbells rainbow.js on GitHub looks dead. Will you maintain a new 'official' fork now? =
+
+Short answer: No. I forked ccampell/rainbow to get an [issue](https://github.com/ccampbell/rainbow/issues/156) fixed. 
+As soon as Craig is finding time to maintain rainbow.js again I will switch back to the original code.
 
 = I found a bug. Where should I post it? =
 
