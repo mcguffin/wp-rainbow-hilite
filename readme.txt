@@ -93,6 +93,9 @@ Either post it on the [GitHub-repo](https://github.com/mcguffin/wp-rainbow-hilit
 
 == Changelog ==
 
+= 1.0.3 =
+Fix: Load rainbow css after theme css
+
 = 1.0.2 =
 l10n: Change plugin textdomain to plugin slug.
 
