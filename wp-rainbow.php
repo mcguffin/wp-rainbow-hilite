@@ -62,7 +62,7 @@ class WPRainbow {
 		add_action( 'init' , array( &$this , 'init' ) );
 		add_filter( 'wp_kses_allowed_html' , array( &$this , 'allow_pre_tag' ) , 10 , 2 );
 
-		add_action( 'wp_enqueue_scripts' , array( &$this , 'enqueue_assets' ) );
+		add_action( 'wp_enqueue_scripts' , array( &$this , 'enqueue_assets' ) , 20 );
 		
 		add_option('wprainbow_load_minified' , true );
 		add_option('wprainbow_line_numbers' , false );
