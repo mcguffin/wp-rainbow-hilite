@@ -93,6 +93,9 @@ Either post it on the [GitHub-repo](https://github.com/mcguffin/wp-rainbow-hilit
 
 == Changelog ==
 
+= 1.0.4 =
+Fix: Scripts now are correctly minified by Autoptimize.
+
 = 1.0.3 =
 Fix: Load rainbow css after theme css
 
