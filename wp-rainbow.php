@@ -101,8 +101,8 @@ class WPRainbow {
 		$is_script_debug = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG;
 		
 		$dependencies = array( 'rainbow-core' );
-		
-		if ( get_option( 'wprainbow_load_minified' ) && ! $is_script_debug ) {
+		$load_minified = get_option( 'wprainbow_load_minified' );
+		if ( $load_minified && ! $is_script_debug ) {
 			$rainbow_script_url = plugins_url( '/js/rainbow-custom.min.js' , __FILE__ );
 			$line_number_script_url = plugins_url( '/js/rainbow.linenumbers.min.js' , __FILE__ );
 		} else {
@@ -112,8 +112,8 @@ class WPRainbow {
 			$line_number_script_url = plugins_url( '/js/rainbow.linenumbers.js' , __FILE__ );
 		}
 		
-		wp_register_script( 'rainbow-core' , $rainbow_script_url , array() , false , true );
-		wp_register_script( 'rainbow-linenumbers' , $line_number_script_url , array() , false , true );
+		wp_register_script( 'rainbow-core' , $rainbow_script_url , array() , false , $load_minified );
+		wp_register_script( 'rainbow-linenumbers' , $line_number_script_url , array() , false , $load_minified );
 		
 		$this->_script_queue[] = 'rainbow-core';
 		if ( ! get_option( 'wprainbow_load_minified' ) || $is_script_debug ) {
@@ -125,7 +125,7 @@ class WPRainbow {
 			foreach ( $languages as $lang ) {
 				$script_url = apply_filters('wprainbow_language_module_url' , plugins_url( "/js/dev/language/{$lang}.js" , __FILE__ ) , $lang );
 				$handle = "rainbow-lang-{$lang}";
-				wp_register_script( $handle , $script_url , array( 'rainbow-core' ) , false , true );
+				wp_register_script( $handle , $script_url , array( 'rainbow-core' ) , false , $load_minified );
 				$this->_script_queue[] = $handle;
 			}
 		}
@@ -140,7 +140,7 @@ class WPRainbow {
 		wp_register_style( 'wp-rainbow-css' , $theme_url );
 
 		$linenumberfix_url = plugins_url( "/css/wp-rainbow-linenumbers-fix.css" , __FILE__ );
-		wp_register_style( 'wp-rainbow-linenumber-fix' , $linenumberfix_url , array() , "1.0" );
+		wp_register_style( 'wp-rainbow-linenumber-fix' , $linenumberfix_url );
 	}
 	
 	/**
