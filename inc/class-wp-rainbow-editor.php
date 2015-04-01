@@ -24,10 +24,12 @@ class WPRainbowEditor {
 		add_filter( 'mce_buttons_2' , array(&$this,'mce_add_button'));
 		add_filter( 'mce_external_plugins' , array(&$this,"mce_add_code_plugin") );
 		
-		foreach ( array('post.php','post-new.php') as $hook ) {
-			add_action( "admin_head-$hook", array(&$this,'mce_localize') );
-			add_action( "load-$hook", array(&$this,'enqueue_editor_css') );
-		}
+// 		foreach ( array('post.php','post-new.php') as $hook ) {
+// 			add_action( "admin_head-$hook", array(&$this,'mce_localize') );
+// 			add_action( "load-$hook", array(&$this,'enqueue_editor_css') );
+// 		}
+		add_action( "admin_init", array(&$this,'enqueue_editor_css') );
+		add_action( 'wp_enqueue_editor' , array( &$this , 'mce_localize' ) );
 		add_filter('mce_css' , array( &$this , 'mce_add_css' ) );
 	}
 	function enqueue_editor_css(){
@@ -46,22 +48,26 @@ class WPRainbowEditor {
 		$plugins_array['wprainbow'] = plugins_url($mce_js,dirname(__file__));
 		return $plugins_array;
 	}
-	function mce_localize(){
-		$enabled_langs = (array) get_option('wprainbow_languages');
-		$langs = array(
-			(object) array(
-				'text' => __('- None -'),
-				'value' => '',
-			),
-		);
-		foreach ( wprainbow_get_available_languages() as $name => $label ) {
-			if ( in_array($name,$enabled_langs) )
-			$langs[] = (object) array(
-				'text' => $label,
-				'value' => $name,
+	/**
+	 *	@action 'wp_enqueue_editor'
+	 */
+	function mce_localize( $to_load ) {
+		if ( $to_load['tinymce'] ) {
+			$enabled_langs = (array) get_option('wprainbow_languages');
+			$langs = array(
+				(object) array(
+					'text' => __('- None -'),
+					'value' => '',
+				),
 			);
-		}
-    ?>
+			foreach ( wprainbow_get_available_languages() as $name => $label ) {
+				if ( in_array($name,$enabled_langs) )
+				$langs[] = (object) array(
+					'text' => $label,
+					'value' => $name,
+				);
+			}
+?>
 <!-- TinyMCE Shortcode Plugin -->
 <script type='text/javascript'>
 var wprainbow = {
@@ -76,7 +82,8 @@ var wprainbow = {
 };
 </script>
 <!-- TinyMCE Shortcode Plugin -->
-    <?php
+<?php
+		}
 	}
 	function mce_add_css( $styles ) {
 		$styles .= ','. plugins_url( '/css/wp-rainbow-mce.css', dirname(__FILE__) ).'?'.time();
