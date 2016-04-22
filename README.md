@@ -27,8 +27,6 @@ See the [Project Wiki](../../wiki/) for details.
 
 Support
 -------
-You like what you see? Maybe you already make some money with it? 
-Here are two ways to keep me rocking:
+You like what you see? Here's a way to keep me rocking:
 
-[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=joern.lund&url=https://github.com/mcguffin/wp-rainbow-hilite&title=WP%20Rainbow%20Hilite&language=php&tags=github&category=software)
 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=F8NKC6TCASUXE"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" /></a>
