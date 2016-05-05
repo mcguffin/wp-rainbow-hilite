@@ -18,7 +18,6 @@ Code syntax Highlighting. Documentation can be found [here](http://wpdev.podpira
 - Highlighted code can be copy-pasted directly out of the site. No "view raw" button needed.
 - User friendly TinyMCE integration.
 - Many programming languages supported.
-- German translation.
 
 Includes [rainbow.js](http://craig.is/making/rainbows) a syntax highlighting script written by [Craig Campbell](http://craig.is/).
 Line numbering through [rainbow.linenumbers](https://github.com/Sjeiti/rainbow.linenumbers) by [Ron Valstar](http://www.sjeiti.com/).
