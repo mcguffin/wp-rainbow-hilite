@@ -5,7 +5,7 @@ Plugin Name: WordPress Rainbow Hilite
 Plugin URI: http://wordpress.org/plugins/wp-rainbow-hilite/
 Description: Code Syntax coloring using <a href="http://craig.is/making/rainbows">rainbow</a>.
 Author: Jörn Lund
-Version: 1.0.5
+Version: 1.0.6
 Author URI: https://github.com/mcguffin
 License: GPL2
 
