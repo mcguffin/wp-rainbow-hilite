@@ -1,4 +1,0 @@
-[submodule "rainbow"]
- path = sources/rainbow
- url = git@github.com:ccampbell/rainbow.git
-
