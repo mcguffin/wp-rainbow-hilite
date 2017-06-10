@@ -19,8 +19,41 @@ class Core extends Singleton {
 		register_activation_hook( RAINBOW_HILITE_FILE, array( __CLASS__ , 'activate' ) );
 		register_deactivation_hook( RAINBOW_HILITE_FILE, array( __CLASS__ , 'deactivate' ) );
 		register_uninstall_hook( RAINBOW_HILITE_FILE, array( __CLASS__ , 'uninstall' ) );
+
 		add_action( 'upgrader_process_complete', array( $this, 'upgrader_process_complete' ) );
+		
+		add_filter( 'the_content', array( $this, 'fix_pre_markup' ) );
+
 		parent::__construct();
+
+	}
+
+	/**
+	 *	@filter the_content
+	 */
+	function fix_pre_markup( $the_content ) {
+
+		if ( false === strpos( $the_content, '<pre' ) ) {
+			return $the_content;
+		}
+		$ret = preg_replace_callback( '/<pre( ([^>]*)data-language([^>]*))>(?!<code)(.*)<\/pre>/imsU', array( $this, '_fix_markup_cb' ), $the_content );
+
+		return $ret;
+	}
+
+	private function _fix_markup_cb($matches) {
+		$attr = $matches[1];
+		$content = $matches[4];
+		$code_attr = '';
+
+		if ( preg_match( '/data-line="([-\d]+)"/', $attr, $match_attr ) ) {
+			$code_attr = 'data-line="'.$match_attr[1].'"';
+			$attr = str_replace( $code_attr, '', $attr );
+		}
+
+		return '<pre '.$attr.'><code '.$code_attr.'>'.$content . '</code></pre>';
+
+		return $matches[0];
 	}
 
 	/**
@@ -43,9 +76,10 @@ class Core extends Singleton {
 		$is_script_debug = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG;
 		if ( $is_script_debug ) {
 			// scripts
-			$deps = array( 'rainbow' );
+			$deps = array( 'rainbow', 'rainbow-linenumbers' );
 
 			wp_register_script( 'rainbow', $this->get_asset_url( 'js/rainbow/rainbow.js' ) );
+			wp_register_script( 'rainbow-linenumbers', $this->get_asset_url( 'js/rainbow.linenumbers/rainbow.linenumbers.js' ), array('rainbow') );
 
 			$languages = get_option( 'wprainbow_languages' );
 			foreach ( $languages as $language ) {
@@ -92,12 +126,12 @@ class Core extends Singleton {
 		$handle = fopen( $generated_file, 'a' );
 		$files = array( 
 			$this->get_asset_path( 'js/rainbow/rainbow.min.js' ),
+			$this->get_asset_path( 'js/rainbow.linenumbers/rainbow.linenumbers.min.js' ),
 		);
 		foreach ( $languages as $language ) {
 			$files[] = $this->get_asset_path( 'js/rainbow/language/' . $language . '.min.js' );
 		}
 		$files[] = $this->get_asset_path( 'js/frontend/wp-rainbow.js' );
-		$files[] = $this->get_asset_path( 'js/frontend/wp-rainbow-linenumbers.js' );
 		$this->concat_files( $generated_file, $files );
 	}
 

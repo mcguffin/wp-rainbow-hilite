@@ -3,23 +3,45 @@ tinymce.PluginManager.add( 'wprainbow' , function( editor ){
 	var codeSelect, codeControl, wprainbow = mce_wprainbow;
 	
 	function setLanguageState( ) {
-		var parent_node = editor.dom.getParent( editor.selection.getNode() ,'PRE');
 
-		codeSelect.disabled( ! parent_node );
-		codeSelect.value(editor.dom.getAttrib( parent_node, 'data-language' ));
+		var pre = _getPreEl();
+
+		codeSelect.disabled( ! pre );
+		codeSelect.value(editor.dom.getAttrib( pre, 'data-language' ));
 
 		if ( !! codeControl ) {
-			codeControl.disabled( ! parent_node );
+			codeControl.disabled( ! pre );
 		}
 	}
 
-	function setLanguage( lang ) {
-		var pre = editor.dom.getParent( editor.selection.getNode(), 'PRE' ),
-			$pre = $(pre);
+	function _getPreEl() {
+		return editor.dom.getParent( editor.selection.getNode(), 'PRE' );
+	}
+	function _getCodeEl() {
+		var $pre = $( _getPreEl() ),
+			$code, ln;
 
-		// wrap in code
+		// fix markup
 		if ( ! $pre.children().first().is('code') ) {
+			ln = $pre.attr( 'data-line' );
 			$pre.html( '<code>' + $pre.html() + '</code>' );
+			$code = $pre.children().first();
+
+			if ( ln ) {
+				$pre.removeAttr('data-line');
+				$code.attr( 'data-line', ln );
+			} else {
+				$code.attr( 'data-line', '-1' );
+			}
+		}
+		return $pre.children().get(0);
+	}
+	function setLanguage( lang ) {
+		var pre = _getPreEl(),
+			code = _getCodeEl();
+
+		if ( lang === '' && ! $(code).attr('data-line') ) {
+			$(pre).html( $(code).html() );
 		}
 
 		// wrap in code if
@@ -32,16 +54,15 @@ tinymce.PluginManager.add( 'wprainbow' , function( editor ){
 	}
 	function setLineNumber( line_number ) {
 		editor.dom.setAttrib( 
-			editor.dom.getParent( editor.selection.getNode(), 'PRE' ), 
+			_getCodeEl(), 
 			'data-line' , 
 			line_number
 		);
 	}
 
 	function openControlPanel() {
-		var parent_node = editor.dom.getParent( editor.selection.getNode() ,'PRE'),
-			lang_value = editor.dom.getAttrib( parent_node, 'data-language' ),
-			line_value = editor.dom.getAttrib( parent_node, 'data-line' ) || 0,
+		var lang_value = $( _getPreEl() ).attr( 'data-language' ),
+			line_value = $( _getCodeEl() ).attr( 'data-line' ) || '1',
 			line_enabled = line_value != "-1";
 
 		editor.windowManager.open({
@@ -72,7 +93,6 @@ tinymce.PluginManager.add( 'wprainbow' , function( editor ){
 			onsubmit: function(e) {
 				// set language
 				setLanguage( e.data.language );
-				console.log();
 				
 				var line = -1;
 				if (e.data.enable_line_numbering) {
@@ -85,7 +105,7 @@ tinymce.PluginManager.add( 'wprainbow' , function( editor ){
 			}
 		});
 	}
-	
+
 	editor.addButton('wprainbow', {
 		type: 'listbox',
 		text: wprainbow.l10n.code_language,

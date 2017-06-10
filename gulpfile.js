@@ -10,6 +10,16 @@ var clean			= require('gulp-clean');
 var runSequence		= require('run-sequence');
 var autoprefixer	= require('gulp-autoprefixer');
 
+gulp.task( 'rainbow.linenumbers-scripts', function() {
+	// 
+	return gulp.src( './src/vendor/Sjeiti/rainbow.linenumbers/js/rainbow.linenumbers.js' )
+		.pipe( gulp.dest( './js/rainbow.linenumbers/' ) )
+		.pipe( uglify() )
+		.pipe( rename({ suffix: '.min' }) )
+		.pipe( gulp.dest( './js/rainbow.linenumbers/' ) );
+
+});
+
 
 gulp.task( 'rainbow-scripts', function() {
 	// 
@@ -121,6 +131,7 @@ gulp.task( 'watch', function() {
 gulp.task( 'build', function(){
 	runSequence( 
 		'admin-scripts', 'rainbow-scripts', 'frontend-scripts', 
+		'rainbow.linenumbers-scripts',
 		'admin-styles',  'rainbow-styles',  'frontend-styles' 
 	);
 } );

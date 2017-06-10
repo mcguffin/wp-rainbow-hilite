@@ -1,13 +1,23 @@
 pre {
 	&[data-language] {
+		display:block;
 		position:relative;
 		&:before {
 			position:absolute;
 			right:0.5em;
 			top:0.5em;
 			font-size:0.75em;
-			color:#999999;
+			color:#999;
 		}
 	}
 }
 
+.mce-content-body {
+	code {
+		&,
+		&[data-mce-selected] {
+			padding:0;
+			background:transparent;
+		}
+	}
+}
