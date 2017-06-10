@@ -1,0 +1,13 @@
+pre {
+	&[data-language] {
+		position:relative;
+		&:before {
+			position:absolute;
+			right:0.5em;
+			top:0.5em;
+			font-size:0.75em;
+			color:#999999;
+		}
+	}
+}
+

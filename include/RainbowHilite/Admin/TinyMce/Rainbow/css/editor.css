@@ -1,0 +1,46 @@
+.mce-content-body {
+/* 
+	-webkit-hyphens:manual;
+	-moz-hyphens:manual;
+	-ms-hyphens:manual;
+	hyphens:manual;
+ */
+}
+
+[data-wp-entity='shy'] {
+	display:none;
+}
+.showinvisible [data-wp-entity='shy'] {
+	display:inline-block;
+	width:1px;
+	height:1em;
+	background:#999;
+	vertical-align:text-bottom;
+}
+/* 
+
+[data-wp-entity='br'] {
+	display:block;
+	clear:right;
+}
+.showinvisible [data-wp-entity='br'] {
+	display:inline-block;
+	width:0.6em;
+	margin-top:0.6em;
+	height:0.3em;
+	vertical-align:text-top;
+	border-right:1px solid #999;
+	border-top:1px solid #999;
+}
+.showinvisible br {
+	content: "*";
+	display:block;
+}
+ */
+
+.showinvisible p::after {
+	content:'¶';
+	display:inline-block;
+	color:#999;
+	width:0;
+}

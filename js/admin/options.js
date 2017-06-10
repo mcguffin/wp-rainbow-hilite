@@ -1,0 +1,2 @@
+!function(e){e(document).on("change","#select-wp-rainbow-theme",function(){var s=wprainbow_options.theme_directory_url+e(this).val()+".css";e("#wp-rainbow-css-css").remove(),e('<link id="wp-rainbow-css-css" rel="stylesheet" type="text/css" href="'+s+'" media="all">').appendTo("head")}),e(document).on("click","#wprainbow-toggle-sample-code",function(s){return console.log(s),e(this).closest(".wprainbow-set-theme").find(".sample").toggleClass("expanded"),s.preventDefault(),!1})}(jQuery);
+//# sourceMappingURL=options.js.map

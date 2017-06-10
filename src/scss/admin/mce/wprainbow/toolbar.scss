@@ -1,0 +1,16 @@
+/* TinyMCE toolbar icon */
+i {
+	&.mce-i-wprainbow_codecontrol {
+		font: normal 20px/1 'dashicons';
+		padding: 0;
+		vertical-align: top;
+		speak: none;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		margin-left: -2px;
+		padding-right: 2px;
+		&:before {
+			content: '\f475';
+		}
+	}
+}

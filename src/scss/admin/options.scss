@@ -1,0 +1,20 @@
+/* Options page styles */
+.wp-rainbow-language-item {
+	display:inline-block;
+	width:12em;
+	padding:0.25em 0.25em 0.25em 1em;
+	background:#dddddd;
+	margin:0.125em;
+}
+
+.wprainbow-set-theme {
+	.sample {
+		display:none;
+		code {
+			background:transparent;
+		}
+		&.expanded {
+			display:block;
+		}
+	}
+}

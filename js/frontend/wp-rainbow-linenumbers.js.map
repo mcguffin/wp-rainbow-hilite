@@ -1,0 +1,1 @@
+{"version":3,"sources":["wp-rainbow-linenumbers.js"],"names":["exports","console","log","Rainbow","this"],"mappings":"CAAA,SAAUA,GAETC,QAAQC,IAAIF,EAAQG,UAElBC","file":"wp-rainbow-linenumbers.js","sourcesContent":["(function(exports){\n\n\tconsole.log(exports.Rainbow);\n\n})(this);"]}

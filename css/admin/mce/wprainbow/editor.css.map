@@ -1,0 +1,1 @@
+{"version":3,"sources":["editor.scss"],"names":[],"mappings":"AAAA,mBAEE,iBAAkB,CAFpB,0BAIG,kBACA,YACA,UACA,iBACA,aAAc,CACd","file":"editor.css","sourcesContent":["pre {\n\t&[data-language] {\n\t\tposition:relative;\n\t\t&:before {\n\t\t\tposition:absolute;\n\t\t\tright:0.5em;\n\t\t\ttop:0.5em;\n\t\t\tfont-size:0.75em;\n\t\t\tcolor:#999999;\n\t\t}\n\t}\n}\n\n"]}

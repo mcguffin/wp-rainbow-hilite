@@ -1,0 +1,34 @@
+/* I fucken love DIY Icons! */
+.mce-i-shy {
+	overflow:hidden;
+}
+.mce-i-shy:before {
+	position:relative;
+	content:'fuba';
+	font-weight:700;
+	font-size:11px;
+	line-height:11px;
+	color:#999;
+	top:-3px;
+	margin-left:-0px;
+}
+.mce-i-shy:after {
+	position:relative;
+	content:'';
+	display:block;
+	height:18px;
+	width:1px;
+	background:#333;
+	top:-20px;
+	margin-left:10px;
+}
+
+.mce-i-showinvisible:before {
+	position:relative;
+	content:'¶';
+	font-weight:700;
+	font-size:18px;
+	line-height:11px;
+	top:-3px;
+	margin-left:-0px;
+}
