@@ -10,6 +10,6 @@
 .flexProperties
 .project
 .settings
-src/bin-*
-src/html-template
-src/libs
+src/*
+.sass-cache
+node_modules/
