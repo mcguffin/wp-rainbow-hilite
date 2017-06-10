@@ -1,3 +1,6 @@
 [submodule "src/vendor/ccampbell/rainbow"]
 	path = src/vendor/ccampbell/rainbow
 	url = git@github.com:ccampbell/rainbow.git
+[submodule "src/vendor/Sjeiti/rainbow.linenumbers"]
+	path = src/vendor/Sjeiti/rainbow.linenumbers
+	url = git@github.com:Sjeiti/rainbow.linenumbers.git
