@@ -2,6 +2,3 @@
  path = sources/rainbow
  url = git@github.com:ccampbell/rainbow.git
 
-[submodule "rainbow.linenumbers"]
- path = sources/rainbow.linenumbers
- url = git@github.com:mcguffin/rainbow.linenumbers.git
