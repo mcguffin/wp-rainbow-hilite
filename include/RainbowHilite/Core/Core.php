@@ -172,7 +172,7 @@ class Core extends Singleton {
 		foreach ( $files as $file ) {
 			fwrite( sprintf("/* %s */\n" ), str_replace( RAINBOW_HILITE_DIRECTORY . $file ) );
 			fwrite( $handle, file_get_contents( $file ) );
-			fwrite( "\n" )
+			fwrite( "\n" );
 		}
 		fclose( $handle );
 	}
