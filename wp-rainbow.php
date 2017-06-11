@@ -7,7 +7,7 @@ Description: Code Syntax coloring using <a href="http://craig.is/making/rainbows
 Author: Jörn Lund
 Version: 2.0.0
 Author URI: https://github.com/mcguffin
-License: GPL2
+License: GPL3
 
 Text Domain: wp-rainbow-hilite
 Domain Path: /languages/
