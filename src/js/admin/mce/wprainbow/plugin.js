@@ -1,6 +1,7 @@
 (function($){
 tinymce.PluginManager.add( 'wprainbow' , function( editor ){
-	var codeSelect, codeControl, wprainbow = mce_wprainbow;
+	var codeSelect, codeControl, wprainbow = mce_wprainbow,
+		prevPre = null;
 	
 	function setLanguageState( ) {
 
@@ -15,11 +16,21 @@ tinymce.PluginManager.add( 'wprainbow' , function( editor ){
 	}
 
 	function _getPreEl() {
-		return editor.dom.getParent( editor.selection.getNode(), 'PRE' );
+		var node = editor.selection.getNode();
+
+		if ( ! $( node ).is('pre') ) {
+			if ( $( node ).is('#mcepastebin') ) {
+				return prevPre;
+			}
+			node = editor.dom.getParent( node, 'PRE' );
+		}
+		prevPre = node;
+
+		return node;
 	}
 
 	function setLanguage( lang ) {
-		var el = _getPreEl()
+		var el = _getPreEl();
 		// wrap in code if
 		editor.dom.setAttrib( 
 			el,
@@ -168,6 +179,20 @@ tinymce.PluginManager.add( 'wprainbow' , function( editor ){
 			});
 		}
 	});
-	
+	var c1,c2;
+	editor.on( 'PastePreProcess', function(e) {
+		var el = _getPreEl();
+
+		c1=e.content;
+	}, true);
+
+	editor.on( 'PastePreProcess', function(e) {
+		var el = _getPreEl(),
+			pastebin,
+			pasted;
+		c2=e.content;
+		console.log(c1==c2);
+		console.log(e);
+	});
 } );
 })(jQuery);
