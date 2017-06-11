@@ -10,7 +10,7 @@ class Core extends Singleton {
 	 *	Private constructor
 	 */
 	protected function __construct() {
-		add_action( 'plugins_loaded' , array( $this , 'load_textdomain' ) );
+		add_action( 'plugins_loaded' , array( $this , 'plugins_loaded' ) );
 		add_action( 'wp_enqueue_scripts' , array( $this , 'enqueue_assets' ) );
 
 		add_action( 'update_option_wprainbow_theme' , array( $this , 'maybe_build_assets' ), 10, 2 );
@@ -113,9 +113,11 @@ class Core extends Singleton {
 	 * 
 	 *  @action plugins_loaded
 	 */
-	public function load_textdomain() {
-		$path = pathinfo( dirname( RAINBOW_HILITE_FILE ), PATHINFO_FILENAME );
-		load_plugin_textdomain( 'wp-rainbow-hilite' , false, $path . '/languages' );
+	public function plugins_loaded() {
+
+		load_plugin_textdomain( 'wp-rainbow-hilite' , false, RAINBOW_HILITE_DIRECTORY. 'languages' );
+
+		$this->maybe_build_assets();
 	}
 
 
