@@ -170,7 +170,9 @@ class Core extends Singleton {
 	private function concat_files( $destfile, $files ) {
 		$handle = fopen( $destfile, 'a' );
 		foreach ( $files as $file ) {
+			fwrite( sprintf("/* %s */\n" ), str_replace( RAINBOW_HILITE_DIRECTORY . $file ) );
 			fwrite( $handle, file_get_contents( $file ) );
+			fwrite( "\n" )
 		}
 		fclose( $handle );
 	}
