@@ -13,8 +13,8 @@ class Core extends Singleton {
 		add_action( 'plugins_loaded' , array( $this , 'plugins_loaded' ) );
 		add_action( 'wp_enqueue_scripts' , array( $this , 'enqueue_assets' ) );
 
-		add_action( 'update_option_wprainbow_theme' , array( $this , 'maybe_build_assets' ), 10, 2 );
-		add_action( 'update_option_wprainbow_languages' , array( $this , 'maybe_build_assets' ), 10, 2 );
+		add_action( 'update_option_wprainbow_theme' , array( $this, 'build_assets' ), 10, 2 );
+		add_action( 'update_option_wprainbow_languages' , array( $this, 'build_assets' ), 10, 2 );
 
 		register_activation_hook( RAINBOW_HILITE_FILE, array( __CLASS__ , 'activate' ) );
 		register_deactivation_hook( RAINBOW_HILITE_FILE, array( __CLASS__ , 'deactivate' ) );
@@ -118,6 +118,7 @@ class Core extends Singleton {
 		load_plugin_textdomain( 'wp-rainbow-hilite' , false, RAINBOW_HILITE_DIRECTORY. 'languages' );
 
 		$this->maybe_build_assets();
+
 	}
 
 
@@ -125,19 +126,22 @@ class Core extends Singleton {
 
 		wp_mkdir_p( $this->get_cache_path() );
 
-		if ( ! file_exists( $this->get_cache_path() . 'wp-rainbow.js' ) ) {
+		$js_file = $this->get_cache_path() . 'wp-rainbow.js';
+		$css_file = $this->get_cache_path() . 'wp-rainbow.css';
+
+		if ( ! file_exists( $js_file ) ||  0 == filesize( $js_file ) ) {
 			$this->build_scripts();
 		}
-		if ( ! file_exists( $this->get_cache_path() . 'wp-rainbow.css' ) ) {
+		if ( ! file_exists( $css_file ) ||  0 == filesize( $css_file ) ) {
 			$this->build_styles();
 		}
 	}
 
 	public function build_assets() {
-		wp_mkdir_p( $core->get_cache_path() );
+		wp_mkdir_p( $this->get_cache_path() );
 
-		$core->build_scripts();
-		$core->build_styles();
+		$this->build_scripts();
+		$this->build_styles();
 	}
 	
 	public function build_scripts() {
@@ -151,7 +155,7 @@ class Core extends Singleton {
 		foreach ( $languages as $language ) {
 			$files[] = $this->get_asset_path( 'js/rainbow/language/' . $language . '.min.js' );
 		}
-		$files[] = $this->get_asset_path( 'js/frontend/wp-rainbow.js' );
+//		$files[] = $this->get_asset_path( 'js/frontend/wp-rainbow.js' );
 		$this->concat_files( $generated_file, $files );
 	}
 
@@ -168,13 +172,13 @@ class Core extends Singleton {
 	}
 
 	private function concat_files( $destfile, $files ) {
-		$handle = fopen( $destfile, 'a' );
+		$contents = '';
 		foreach ( $files as $file ) {
-			fwrite( sprintf("/* %s */\n" ), str_replace( RAINBOW_HILITE_DIRECTORY . $file ) );
-			fwrite( $handle, file_get_contents( $file ) );
-			fwrite( "\n" );
+			$contents .= sprintf("/* %s */\n", str_replace( RAINBOW_HILITE_DIRECTORY, '', $file ) );
+			$contents .= file_get_contents( $file );
+			$contents .= "\n";
 		}
-		fclose( $handle );
+		file_put_contents( $destfile, $contents );
 	}
 
 	/**
