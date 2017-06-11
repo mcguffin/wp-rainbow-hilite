@@ -32,10 +32,14 @@ gulp.task( 'rainbow-scripts', function() {
 
 		gulp.src( './src/vendor/ccampbell/rainbow/dist/rainbow.js' )
 			.pipe( gulp.dest( './js/rainbow/' ) )
-			.pipe( uglify() )
+			.pipe( uglify({
+				mangle: {
+	                except: ['Prism']
+				}
+			}) )
 			.pipe( rename({ suffix: '.min' }) )
 			.pipe( gulp.dest( './js/rainbow/' ) )
-		];
+	];
 });
 
 gulp.task( 'rainbow-styles', function() {
@@ -99,7 +103,7 @@ gulp.task( 'admin-styles', function() {
 			.on('error', sass.logError)
 			.pipe( sourcemaps.write( '.' ) )
 			.pipe( gulp.dest('./css/admin/mce/wprainbow/')),
-		];
+	];
 });
 
 gulp.task( 'admin-scripts', function() {
