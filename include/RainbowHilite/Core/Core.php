@@ -13,8 +13,8 @@ class Core extends Singleton {
 		add_action( 'plugins_loaded' , array( $this , 'load_textdomain' ) );
 		add_action( 'wp_enqueue_scripts' , array( $this , 'enqueue_assets' ) );
 
-		add_action( 'update_option_wprainbow_theme' , array( $this , 'build_styles' ), 10, 2 );
-		add_action( 'update_option_wprainbow_languages' , array( $this , 'build_scripts' ), 10, 2 );
+		add_action( 'update_option_wprainbow_theme' , array( $this , 'maybe_build_assets' ), 10, 2 );
+		add_action( 'update_option_wprainbow_languages' , array( $this , 'maybe_build_assets' ), 10, 2 );
 
 		register_activation_hook( RAINBOW_HILITE_FILE, array( __CLASS__ , 'activate' ) );
 		register_deactivation_hook( RAINBOW_HILITE_FILE, array( __CLASS__ , 'deactivate' ) );
@@ -61,8 +61,7 @@ class Core extends Singleton {
 	 */
 	public function upgrader_process_complete( $upgrader ) {
 		if ( $upgrader instanceOf Plugin_Upgrader ) {
-			$this->build_scripts();
-			$this->build_styles();
+			$this->maybe_build_assets();
 		}
 	}
 
@@ -120,9 +119,28 @@ class Core extends Singleton {
 	}
 
 
+	public function maybe_build_assets() {
+
+		wp_mkdir_p( $this->get_cache_path() );
+
+		if ( ! file_exists( $this->get_cache_path() . 'wp-rainbow.js' ) ) {
+			$this->build_scripts();
+		}
+		if ( ! file_exists( $this->get_cache_path() . 'wp-rainbow.css' ) ) {
+			$this->build_styles();
+		}
+	}
+
+	public function build_assets() {
+		wp_mkdir_p( $core->get_cache_path() );
+
+		$core->build_scripts();
+		$core->build_styles();
+	}
+	
 	public function build_scripts() {
 		$languages = get_option( 'wprainbow_languages' );
-		$generated_file = $this->get_cache_path() . 'wp-rainbow.css';
+		$generated_file = $this->get_cache_path() . 'wp-rainbow.js';
 		$handle = fopen( $generated_file, 'a' );
 		$files = array( 
 			$this->get_asset_path( 'js/rainbow/rainbow.min.js' ),
@@ -135,6 +153,7 @@ class Core extends Singleton {
 		$this->concat_files( $generated_file, $files );
 	}
 
+
 	public function build_styles() {
 		$theme = get_option( 'wprainbow_theme' );
 		$generated_file = $this->get_cache_path() . 'wp-rainbow.css';
@@ -145,7 +164,7 @@ class Core extends Singleton {
 		$this->concat_files( $generated_file, $files );
 
 	}
-	
+
 	private function concat_files( $destfile, $files ) {
 		$handle = fopen( $destfile, 'a' );
 		foreach ( $files as $file ) {
@@ -153,7 +172,7 @@ class Core extends Singleton {
 		}
 		fclose( $handle );
 	}
-	
+
 	/**
 	 *  Get Available css themes
 	 *
@@ -241,11 +260,8 @@ class Core extends Singleton {
 	 */
 	public static function activate() {
 		$core = self::instance();
-		wp_mkdir_p( $core->get_cache_path() );
 
-		$core->build_scripts();
-		$core->build_styles();
-
+		$core->build_assets();
 	}
 
 	/**
