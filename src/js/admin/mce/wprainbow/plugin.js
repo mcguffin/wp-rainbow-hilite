@@ -63,9 +63,39 @@ tinymce.PluginManager.add( 'wprainbow' , function( editor ){
 	function openControlPanel() {
 		var lang_value = $( _getPreEl() ).attr( 'data-language' ),
 			line_value = $( _getCodeEl() ).attr( 'data-line' ) || '1',
-			line_enabled = line_value != "-1";
+			line_enabled = line_value != "-1",
+			windowId = 'wp_rainbow_code_properties';
 
+		function findByName( container, name ) {
+			var result;
+
+			if ( ('function' === typeof container.name ) && container.name() == name ) {
+				return container;
+			}
+
+			if ( 'function' === typeof container.items ) {
+				$.each( container.items(), function( i, item ) {
+					result = findByName( item, name );
+					if ( !! result ) {
+						return false;
+					}
+				} );
+			}
+			return result;
+		}
+
+		function getWin() {
+			var currentWin;
+			$.each( editor.windowManager.getWindows(), function(i,win) {
+				if ( win.settings.id === windowId ) {
+					currentWin = win;
+					return false;
+				}
+			});
+			return currentWin;
+		}
 		editor.windowManager.open({
+			id: windowId,
 			title: wprainbow.l10n.code_properties,
 			body: [
 					{	
@@ -81,7 +111,22 @@ tinymce.PluginManager.add( 'wprainbow' , function( editor ){
 						name:'enable_line_numbering',
 						label: wprainbow.l10n.line_numbers, 
 						value: "1",
-						checked: line_enabled
+						checked: line_enabled,
+						onclick: function(e){
+							// checkbox
+							var checked = $( this.getEl() ).is('[aria-checked="true"]'),
+								lang_input = findByName( getWin(), 'language' ),
+								line_input = findByName( getWin(), 'starting_line' ); // örx!
+
+							if ( checked ) {
+								if ( -1 === parseInt( line_input.value() ) ) {
+									line_input.value(1);
+								}
+								if ( '' === lang_input.value() ) {
+									lang_input.value( 'generic' );
+								}
+							}
+						}
 					},
 					{
 						type:'textbox',
@@ -97,8 +142,9 @@ tinymce.PluginManager.add( 'wprainbow' , function( editor ){
 				var line = -1;
 				if (e.data.enable_line_numbering) {
 					line = Math.abs(e.data.starting_line);
-					if ( isNaN( line ) )
+					if ( isNaN( line ) ) {
 						line = 1;
+					}
 				}
 				// set or del line number
 				setLineNumber( line );

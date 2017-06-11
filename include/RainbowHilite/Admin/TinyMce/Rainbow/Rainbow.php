@@ -26,14 +26,18 @@ class Rainbow extends TinyMce\TinyMce {
 		$enabled_langs = (array) get_option('wprainbow_languages');
 
 		$langs = array(
-			(object) array(
+			array(
 				'text' => __('- None -'),
 				'value' => '',
+			),
+			array(
+				'text' => __('Generic'),
+				'value' => 'generic',
 			),
 		);
 		foreach ( $core->get_available_languages() as $name => $label ) {
 			if ( in_array($name,$enabled_langs) )
-			$langs[] = (object) array(
+			$langs[] = array(
 				'text' => $label,
 				'value' => $name,
 			);

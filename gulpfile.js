@@ -67,14 +67,14 @@ gulp.task( 'frontend-scripts', function() {
 gulp.task( 'frontend-styles', function() {
 	// rainbow + linenumbers + theme
 	return gulp.src( './src/scss/frontend/*.scss' )
-		.pipe( sourcemaps.init() )
+//		.pipe( sourcemaps.init() )
 		.pipe( sass({
 			precision: 8,
 			outputStyle: 'compressed'
 		}) )
 		.on('error', sass.logError)
         .pipe( autoprefixer( { browsers: ['last 2 versions'] } ) )
-		.pipe( sourcemaps.write( '.' ) )
+//		.pipe( sourcemaps.write( '.' ) )
 		.pipe( gulp.dest('./css/frontend/'));
 });
 

@@ -93,8 +93,7 @@ class Core extends Singleton {
 			$theme = get_option( 'wprainbow_theme' );
 
 			wp_register_style( 'rainbow-theme', $this->get_asset_url( 'css/rainbow/themes/' . $theme . '.css' ) );
-			wp_register_style( 'wp-rainbow-linenumbers', $this->get_asset_url( 'css/frontend/wp-rainbow.css' ) );
-			wp_register_style( 'wp-rainbow', $this->get_asset_url( 'css/frontend/wp-rainbow.css' ), array( 'rainbow-theme', 'wp-rainbow-linenumbers' ) );
+			wp_register_style( 'wp-rainbow', $this->get_asset_url( 'css/frontend/wp-rainbow.css' ), array( 'rainbow-theme' ) );
 
 		} else {
 			wp_register_script( 'wp-rainbow', $this->get_cache_url( 'wp-rainbow.js' ) );
@@ -162,12 +161,13 @@ class Core extends Singleton {
 
 	public function build_styles() {
 		$theme = get_option( 'wprainbow_theme' );
-		$generated_file = $this->get_cache_path() . 'wp-rainbow.css';
-		$files = array( 
-			$this->get_asset_path( 'css/rainbow/themes/' . $theme . '.css' ),
-			$this->get_asset_path( 'css/frontend/wp-rainbow-linenumbers.css' ),
-		);
-		$this->concat_files( $generated_file, $files );
+
+		$this->concat_files( $generated_file, 
+			$this->get_cache_path() . 'wp-rainbow.css',
+			array( 
+				$this->get_asset_path( 'css/rainbow/themes/' . $theme . '.css' ),
+				$this->get_asset_path( 'css/frontend/wp-rainbow.css' ),
+			) );
 
 	}
 
