@@ -170,7 +170,7 @@ class Core extends Singleton {
 	private function concat_files( $destfile, $files ) {
 		$handle = fopen( $destfile, 'a' );
 		foreach ( $files as $file ) {
-			fwrite( $handle, file_get_contents( $files ) );
+			fwrite( $handle, file_get_contents( $file ) );
 		}
 		fclose( $handle );
 	}
