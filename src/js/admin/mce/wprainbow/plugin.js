@@ -17,52 +17,33 @@ tinymce.PluginManager.add( 'wprainbow' , function( editor ){
 	function _getPreEl() {
 		return editor.dom.getParent( editor.selection.getNode(), 'PRE' );
 	}
-	function _getCodeEl() {
-		var $pre = $( _getPreEl() ),
-			$code, ln;
 
-		// fix markup
-		if ( ! $pre.children().first().is('code') ) {
-			ln = $pre.attr( 'data-line' );
-			$pre.html( '<code>' + $pre.html() + '</code>' );
-			$code = $pre.children().first();
-
-			if ( ln ) {
-				$pre.removeAttr('data-line');
-				$code.attr( 'data-line', ln );
-			} else {
-				$code.attr( 'data-line', '-1' );
-			}
-		}
-		return $pre.children().get(0);
-	}
 	function setLanguage( lang ) {
-		var pre = _getPreEl(),
-			code = _getCodeEl();
-
-		if ( lang === '' && ! $(code).attr('data-line') ) {
-			$(pre).html( $(code).html() );
-		}
-
+		var el = _getPreEl()
 		// wrap in code if
 		editor.dom.setAttrib( 
-			pre,
+			el,
 			'data-language' , 
 			lang
 		);
 
+		// set no line numbers by default
+		if ( ! $( el ).attr( 'data-line' ) ) {
+			$( el ).attr( 'data-line', '-1' )
+		}
 	}
 	function setLineNumber( line_number ) {
 		editor.dom.setAttrib( 
-			_getCodeEl(), 
+			_getPreEl(), 
 			'data-line' , 
 			line_number
 		);
 	}
 
 	function openControlPanel() {
-		var lang_value = $( _getPreEl() ).attr( 'data-language' ),
-			line_value = $( _getCodeEl() ).attr( 'data-line' ) || '1',
+		var el = _getPreEl(),
+			lang_value = $( el ).attr( 'data-language' ),
+			line_value = $( el ).attr( 'data-line' ) || '1',
 			line_enabled = line_value != "-1",
 			windowId = 'wp_rainbow_code_properties';
 
