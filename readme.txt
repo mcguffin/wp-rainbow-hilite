@@ -3,7 +3,7 @@ Contributors: podpirate
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=F8NKC6TCASUXE
 Tags: code, syntax highlighting, rainbow, code
 Requires at least: 3.8
-Tested up to: 4.8
+Tested up to: 5.0-alpha
 Stable tag: 1.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -57,7 +57,7 @@ Follow the standard [WordPress plugin installation procedere](http://codex.wordp
 
 = Craig Campbells rainbow.js on GitHub looks dead. Will you maintain a new 'official' fork now? =
 
-Short answer: No. I forked ccampell/rainbow to get an [issue](https://github.com/ccampbell/rainbow/issues/156) fixed. 
+Short answer: No. I forked ccampell/rainbow to get an [issue](https://github.com/ccampbell/rainbow/issues/156) fixed.
 As soon as Craig is finding time to maintain rainbow.js again I will switch back to the original code.
 
 = I found a bug. Where should I post it? =
@@ -91,6 +91,9 @@ Either post it on the [GitHub-repo](https://github.com/mcguffin/wp-rainbow-hilit
 4. Highlighted Code
 
 == Changelog ==
+
+= 2.0.0 =
+Lots of Code refactoring
 
 = 1.0.6 =
 Localization: Move de_DE to translate.wordpress.org
