@@ -21,7 +21,7 @@ class Core extends Singleton {
 		register_uninstall_hook( RAINBOW_HILITE_FILE, array( __CLASS__ , 'uninstall' ) );
 
 		add_action( 'upgrader_process_complete', array( $this, 'upgrader_process_complete' ) );
-		
+
 		add_filter( 'the_content', array( $this, 'fix_pre_markup' ) );
 
 		parent::__construct();
@@ -106,10 +106,10 @@ class Core extends Singleton {
 
 	}
 
-	
+
 	/**
 	 *	Load text domain
-	 * 
+	 *
 	 *  @action plugins_loaded
 	 */
 	public function plugins_loaded() {
@@ -142,12 +142,12 @@ class Core extends Singleton {
 		$this->build_scripts();
 		$this->build_styles();
 	}
-	
+
 	public function build_scripts() {
 		$languages = get_option( 'wprainbow_languages' );
 		$generated_file = $this->get_cache_path() . 'wp-rainbow.js';
 		$handle = fopen( $generated_file, 'a' );
-		$files = array( 
+		$files = array(
 			$this->get_asset_path( 'js/rainbow/rainbow.min.js' ),
 			$this->get_asset_path( 'js/rainbow.linenumbers/rainbow.linenumbers.min.js' ),
 		);
@@ -161,10 +161,8 @@ class Core extends Singleton {
 
 	public function build_styles() {
 		$theme = get_option( 'wprainbow_theme' );
-
-		$this->concat_files( $generated_file, 
-			$this->get_cache_path() . 'wp-rainbow.css',
-			array( 
+		$this->concat_files( $this->get_cache_path() . 'wp-rainbow.css',
+			array(
 				$this->get_asset_path( 'css/rainbow/themes/' . $theme . '.css' ),
 				$this->get_asset_path( 'css/frontend/wp-rainbow.css' ),
 			) );
@@ -173,6 +171,7 @@ class Core extends Singleton {
 
 	private function concat_files( $destfile, $files ) {
 		$contents = '';
+
 		foreach ( $files as $file ) {
 			$contents .= sprintf("/* %s */\n", str_replace( RAINBOW_HILITE_DIRECTORY, '', $file ) );
 			$contents .= file_get_contents( $file );
@@ -188,7 +187,7 @@ class Core extends Singleton {
 	 *
 	 *	@use private
 	 *
-	 *	@return array Assoc containing all avaliable themes with theme slugs as key and prettified theme slugs values. 
+	 *	@return array Assoc containing all avaliable themes with theme slugs as key and prettified theme slugs values.
 	 */
 	public function get_available_themes() {
 
@@ -211,7 +210,7 @@ class Core extends Singleton {
 	 *
 	 *	@use public
 	 *
-	 *	@return array Assoc containing all avaliable languages with language slugs as key and localized language Names as values. 
+	 *	@return array Assoc containing all avaliable languages with language slugs as key and localized language Names as values.
 	 */
 	public function get_available_languages( ) {
 		$langs = array(
