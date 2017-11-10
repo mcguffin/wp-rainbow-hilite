@@ -93,7 +93,7 @@ Either post it on the [GitHub-repo](https://github.com/mcguffin/wp-rainbow-hilit
 == Changelog ==
 
 = 2.0.0 =
-Lots of Code refactoring
+Code refactoring
 
 = 1.0.6 =
 Localization: Move de_DE to translate.wordpress.org

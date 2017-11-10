@@ -1,0 +1,12 @@
+# git
+.gitignore export-ignore
+.gitattributes export-ignore
+.gitmodules export-ignore
+README.md export-ignore
+# gulp
+gulpfile.js export-ignore
+package*.json export-ignore
+/src export-ignore
+TODO.md export-ignore
+# wp
+screenshot*.png
