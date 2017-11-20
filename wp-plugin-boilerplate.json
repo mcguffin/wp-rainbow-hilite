@@ -1,41 +1,17 @@
 {
   "modules": {
     "admin": {},
-    "admin_page": {
-      "tools": {
-        "css": true,
-        "js": true
-      }
-    },
-    "ajax": {},
-    "autoupdate": {},
-    "core": {},
-    "cron": {},
+    "core": {
+	  "css": true
+	},
     "git": {},
     "gulp": {},
-    "model": {
-      "things": {}
-    },
-    "posttype": {},
     "settings": {
-      "Plugin Settings": {
-        "css": true,
-        "js": true
-      },
-      "reading": {
+      "writing": {
         "css": true,
         "js": true
       }
     },
-    "shortcode": {
-      "A Shortcode": {
-        "mce": true
-      }
-    },
-    "taxonomy": {},
-    "widget": {
-      "A Widget": {}
-    }
   },
   "plugin_author": "J\u00f6rn Lund",
   "plugin_author_uri": "",
