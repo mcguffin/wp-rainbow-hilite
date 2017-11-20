@@ -1,0 +1,47 @@
+{
+  "modules": {
+    "admin": {},
+    "admin_page": {
+      "tools": {
+        "css": true,
+        "js": true
+      }
+    },
+    "ajax": {},
+    "autoupdate": {},
+    "core": {},
+    "cron": {},
+    "git": {},
+    "gulp": {},
+    "model": {
+      "things": {}
+    },
+    "posttype": {},
+    "settings": {
+      "Plugin Settings": {
+        "css": true,
+        "js": true
+      },
+      "reading": {
+        "css": true,
+        "js": true
+      }
+    },
+    "shortcode": {
+      "A Shortcode": {
+        "mce": true
+      }
+    },
+    "taxonomy": {},
+    "widget": {
+      "A Widget": {}
+    }
+  },
+  "plugin_author": "J\u00f6rn Lund",
+  "plugin_author_uri": "",
+  "plugin_name": "Test Plugin",
+  "plugin_namespace": "TestPlugin",
+  "plugin_slug": "test_plugin",
+  "this_year": 2017,
+  "wp_plugin_slug": "test-plugin"
+}

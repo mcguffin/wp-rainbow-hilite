@@ -8,5 +8,6 @@ gulpfile.js export-ignore
 package*.json export-ignore
 /src export-ignore
 TODO.md export-ignore
+wp-plugin-boilerplate.json export-ignore
 # wp
 screenshot*.png
