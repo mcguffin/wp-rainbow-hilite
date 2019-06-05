@@ -1,7 +1,7 @@
 var gulp			= require('gulp');
 var fs				= require('fs');
-var concat			= require('gulp-concat');  
-var uglify			= require('gulp-uglify');  
+var concat			= require('gulp-concat');
+var uglify			= require('gulp-uglify');
 var sass			= require('gulp-sass');
 var sourcemaps		= require('gulp-sourcemaps');
 var rename			= require('gulp-rename');
@@ -11,7 +11,7 @@ var runSequence		= require('run-sequence');
 var autoprefixer	= require('gulp-autoprefixer');
 
 gulp.task( 'rainbow.linenumbers-scripts', function() {
-	// 
+	//
 	return gulp.src( './src/vendor/Sjeiti/rainbow.linenumbers/js/rainbow.linenumbers.js' )
 		.pipe( gulp.dest( './js/rainbow.linenumbers/' ) )
 		.pipe( uglify() )
@@ -22,7 +22,7 @@ gulp.task( 'rainbow.linenumbers-scripts', function() {
 
 
 gulp.task( 'rainbow-scripts', function() {
-	// 
+	//
 	return [
 		gulp.src( './src/vendor/ccampbell/rainbow/src/language/*.js' )
 			.pipe( gulp.dest( './js/rainbow/language/' ) )
@@ -48,7 +48,7 @@ gulp.task( 'rainbow-styles', function() {
 			precision: 8,
 			outputStyle: 'compressed'
 		}) )
-        .pipe( autoprefixer( { browsers: ['last 2 versions'] } ) )
+        .pipe( autoprefixer( { browsers: ['last 3 versions'] } ) )
 		.on('error', sass.logError)
 		.pipe( gulp.dest('./css/rainbow/themes/'));
 });
@@ -62,7 +62,7 @@ gulp.task( 'frontend-scripts', function() {
 			.pipe( uglify() )
 			.pipe( sourcemaps.write( '.' ) )
 			.pipe( gulp.dest( './js/frontend/' ) );
-	
+
 });
 gulp.task( 'frontend-styles', function() {
 	// rainbow + linenumbers + theme
@@ -81,7 +81,7 @@ gulp.task( 'frontend-styles', function() {
 
 
 gulp.task( 'admin-styles', function() {
-	// rainbow. linenumbers. lang-modules. 
+	// rainbow. linenumbers. lang-modules.
 	return [
 		gulp.src( './src/scss/admin/*.scss' )
 			.pipe( sourcemaps.init() )
@@ -107,7 +107,7 @@ gulp.task( 'admin-styles', function() {
 });
 
 gulp.task( 'admin-scripts', function() {
-	return [ 
+	return [
 		gulp.src( './src/js/admin/*.js' )
 			.pipe( sourcemaps.init() )
 			.pipe( uglify() )
@@ -133,10 +133,10 @@ gulp.task( 'watch', function() {
 
 
 gulp.task( 'build', function(){
-	runSequence( 
-		'admin-scripts', 'rainbow-scripts', 'frontend-scripts', 
+	runSequence(
+		'admin-scripts', 'rainbow-scripts', 'frontend-scripts',
 		'rainbow.linenumbers-scripts',
-		'admin-styles',  'rainbow-styles',  'frontend-styles' 
+		'admin-styles',  'rainbow-styles',  'frontend-styles'
 	);
 } );
 

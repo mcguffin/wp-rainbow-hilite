@@ -16,7 +16,7 @@ Domain Path: /languages/
 /*  Copyright 2017  Jörn Lund  (email : joern AT podpirate DOT org)
 
     This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License, version 2, as 
+    it under the terms of the GNU General Public License, version 2, as
     published by the Free Software Foundation.
 
     This program is distributed in the hope that it will be useful,
@@ -45,21 +45,7 @@ Core\Core::instance();
 
 if ( is_admin() || defined( 'DOING_AJAX' ) ) {
 
-
 	Admin\Admin::instance();
 	Settings\SettingsWriting::instance();
 
-/*
-	Admin\Tools::instance();
-	Admin\Settings::instance();
-
-	// Compatibility plugins
-	$compat = glob(plugin_dir_path(__FILE__) . 'include/compat/*.php');
-	foreach ( $compat as $compat_file ) {
-		require_once $compat_file;
-	}
-*/
 }
-
-
-

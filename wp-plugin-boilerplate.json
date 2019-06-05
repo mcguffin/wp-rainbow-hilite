@@ -15,9 +15,9 @@
   },
   "plugin_author": "J\u00f6rn Lund",
   "plugin_author_uri": "",
-  "plugin_name": "Test Plugin",
-  "plugin_namespace": "TestPlugin",
-  "plugin_slug": "test_plugin",
+  "plugin_name": "WordPress Rainbow Hilite",
+  "plugin_namespace": "RainbowHilite",
+  "plugin_slug": "rainbow_hilite",
   "this_year": 2017,
-  "wp_plugin_slug": "test-plugin"
+  "wp_plugin_slug": "wp-rainbow-hilite"
 }
