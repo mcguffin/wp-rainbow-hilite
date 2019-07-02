@@ -4,6 +4,7 @@ const wp = require('./lib/wp-release.js');
 
 //
 let svn_user = null;
+
 const contributors = wp.read_header_tag('readme.txt','Contributors').split(',');
 
 contributors.forEach( nickname => {
@@ -15,7 +16,6 @@ contributors.forEach( nickname => {
 		).replace(/\n$/g,'');
 
 	} catch (err) {}
-//	console.log( JSON.stringify( result.replace(/\n$/g,'') ) )
 })
 
 if ( null === svn_user ) {
@@ -70,11 +70,18 @@ console.log(exec.execSync('svn status',{
 	cwd:svn_dir,
 }))
 
+
 console.log('Committing')
 exec.execSync(`svn commit -m "Release ${package.version}" --non-interactive`,{
 	cwd:svn_dir,
 })
 console.log('...done')
+
+
+console.log('Cleaning up')
+exec.execSync('rm -rf tmp');
+console.log('...done')
+
 
 console.log('All done!')
 

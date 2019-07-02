@@ -48,7 +48,7 @@ const make_remote_release = (url,data,token) => {
 
 git
 	.listRemote(['--get-url'], (err,res) => {
-		repo = res.match(/git@github\.com:(.*)\.git/)[1];
+		repo = res.match(/^git@github\.com:(.+)\.git/s)[1];
 	})
 	.branch( (err,res) => {
 		branch = res.current;
