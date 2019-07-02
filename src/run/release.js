@@ -56,21 +56,21 @@ glob.sync('languages/*.pot').forEach( file => {
 /**
  *	Build assets
  */
-localGulp.build()
+localGulp.build( () => {
+	git.branch( (err,res) => {
+		branch = res.current;
+		// ... add and commit
+		git
+			.add('.')
+			.commit(`Release ${version} from ${branch}`)
+	});
+});
 
 
 /**
  *	Add, commit push
  */
 // detect branch ...
-git.branch( (err,res) => {
-	branch = res.current;
-	// ... add and commit
-	git
-		.add('.')
-		.commit(`Release ${version} from ${branch}`)
-});
-
 
 /*
 Release pipeline:
