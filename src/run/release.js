@@ -54,7 +54,7 @@ glob.sync('languages/*.pot').forEach( file => {
 
 
 /**
- *	Build assets
+ *	Build assets then commit
  */
 localGulp.build( () => {
 	git.branch( (err,res) => {
@@ -65,41 +65,3 @@ localGulp.build( () => {
 			.commit(`Release ${version} from ${branch}`)
 	});
 });
-
-
-/**
- *	Add, commit push
- */
-// detect branch ...
-
-/*
-Release pipeline:
-
-A. Sources (Always)
-`npm run release [major|minor|patch]`
- - [x] Build i18n => npm run i18n
- - [x] Increment versions (readme.txt, package.json, style.css, src/scss/style.scss, main plugin file, languages/xxx.pot)
- - [x] Build assets => $ gulp build
- - [x] commit -m "release x.y.z"
- - [ ] create git tag "x.y.z"
- - [ ] push
-
-B. Release to wp.org
- - clone svn to tmp/
- - download to trunk/
- - copy assets from .wordpress.org/ > tmp/svn-repo/assets/
- - add/rm/...
- - svn cp trunk/ tags/x.y.z/
- - svn ci -m "release x.y.z"
- - rm -rf tmp/
-
-*/
-
-// upgrade plugin version
-// console.log(wp.find_package_files())
-// wp.write_header_tag( wp.find_package_file(), 'Version', version );
-// try {
-// 	wp.write_header_tag( './readme.txt', 'Stable tag', version );
-// } catch {
-// 	console.log('no readme.txt')
-// }
