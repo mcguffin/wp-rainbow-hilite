@@ -3,7 +3,7 @@ Contributors: podpirate
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=F8NKC6TCASUXE
 Tags: code, syntax highlighting, rainbow, code
 Requires at least: 3.8
-Tested up to: 5.0-alpha
+Tested up to: 5.2.2
 Requires PHP: 5.3.0
 Stable tag: 2.0.0
 License: GPLv2 or later
@@ -92,6 +92,9 @@ Either post it on the [GitHub-repo](https://github.com/mcguffin/wp-rainbow-hilit
 4. Highlighted Code
 
 == Changelog ==
+
+= 2.0.1 =
+Introduce new release pipeline
 
 = 2.0.0 =
 Code refactoring
