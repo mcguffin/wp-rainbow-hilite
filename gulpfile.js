@@ -142,7 +142,7 @@ gulp.task( 'build', gulp.series(
 	'frontend:js', 'frontend:css'
 ));
 
-gulp.task( 'default', gulp.series('build', 'watch') );
+gulp.task( 'dev', gulp.series('build', 'watch') );
 
 module.exports = {
 	build:gulp.series('build')
