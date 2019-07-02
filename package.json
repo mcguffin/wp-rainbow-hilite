@@ -5,8 +5,22 @@
   "main": "./src/rainbow-node.js",
   "homepage": "https://github.com/mcguffin/wp-rainbow-hilite",
   "scripts": {
-  	"test": "echo \"Error: no test specified\" && exit 1"
+    "init": "",
+    "dev": "gulp dev",
+    "build": "gulp build && npm run i18n",
+    "release": "npm run release:build && npm run release:github",
+    "release:build": "npm run i18n && node ./src/run/release.js",
+    "release:git": "VERSION=$(node -e 'console.log(require(\"./package.json\").version)') && git add . && git commit -m \"Release ${VERSION}\"",
+    "release:github": "node ./src/run/release-github.js",
+    "release:wporg": "node ./src/run/release-wporg.js",
+    "i18n": "wp i18n make-pot . languages/wp-rainbow-hilite.pot --domain=wp-rainbow-hilite",
+    "rollback": "git reset --hard HEAD~ && git push origin +master"
   },
+  "browserslist": [
+    "last 3 versions",
+    "> 0.25%",
+    "IE 10"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mcguffin/wp-rainbow-hilite.git"
@@ -21,18 +35,14 @@
   "license": "GPL-3.0",
   "readmeFilename": "README.md",
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^3.1.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^6.1.0",
     "gulp-bump": "^2.1.0",
-    "gulp-eslint": "^2.0.0",
-    "gulp-git": "^1.7.2",
-    "gulp-sass": "^2.3.2",
+    "gulp-sass": "^4.0.2",
     "gulp-clean": "^0.3.2",
     "gulp-concat": "^2.6.1",
-    "gulp-rename": "^1.2.2",
-    "gulp-replace": "^0.5.4",
-    "gulp-sourcemaps": "^2.6.0",
-    "gulp-uglify": "^2.0.0",
-    "run-sequence": "1.2.2"
+    "gulp-rename": "^1.4.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglify": "^3.0.2"
   }
 }
