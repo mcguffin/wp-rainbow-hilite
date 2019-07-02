@@ -5,8 +5,8 @@ use RainbowHilite\Core;
 
 class SettingsWriting extends Settings {
 
-	private $optionset = 'writing'; 
-	
+	private $optionset = 'writing';
+
 	private $core;
 
 
@@ -42,7 +42,7 @@ class SettingsWriting extends Settings {
 			'theme_directory_url' => $this->core->get_asset_url( '/css/rainbow/themes/' )
 		) );
 	}
-	
+
 
 
 	/**
@@ -104,7 +104,7 @@ class SettingsWriting extends Settings {
 		$theme = get_option('wprainbow_theme');
 		?>
 		<div class="wprainbow-set-theme">
-		
+
 		<select name="wprainbow_theme" id="select-wp-rainbow-theme">
 			<?php
 			foreach ( $this->core->get_available_themes() as $slug => $name ) {
@@ -114,7 +114,7 @@ class SettingsWriting extends Settings {
 			}
 			?>
 		</select>
-		
+
 		<a class="button secondary" id="wprainbow-toggle-sample-code" href="#"><?php _e('Toggle Sample Code','wp-rainbow-hilite') ?></a>
 
 <pre class="sample" data-language="php"><code>
@@ -124,7 +124,7 @@ Example class doing stuff.
 class Foo {
 	private $baz;
 	public $quux;
-	
+
 	// this function is not useful
 	function bar( $arg ) {
 		$count = 0;
@@ -151,7 +151,7 @@ class Foo {
 		?><p><?php
 		foreach ( $langs as $slug => $label ) {
 			$id = "wprainbow_languages-{$slug}";
-			
+
 			?><label class="wp-rainbow-language-item" for="<?php echo $id ?>"><?php
 				?><input type="checkbox" name="wprainbow_languages[]" id="<?php echo $id ?>" value="<?php echo $slug ?>" <?php checked(in_array($slug,$enabled),true,true) ?> /><?php
 				echo $label;
@@ -162,14 +162,14 @@ class Foo {
 			_e('This will customize the languages listbox in WordPress’ visual editor.','wp-rainbow-hilite');
 		?></p><?php
 	}
-	
-	
+
+
 	/**
 	 * Check selected languages against available languages
 	 *
 	 * @return array sanitized list of languages
 	 */
-	function sanitize_langs( $langs ) {	
+	function sanitize_langs( $langs ) {
 
 		$langs = array_map( 'trim' , $langs);
 
@@ -199,8 +199,8 @@ class Foo {
 			return $theme;
 		return key($available_themes);
 	}
-	
-	
-	
+
+
+
 
 }

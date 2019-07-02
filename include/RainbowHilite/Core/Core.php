@@ -36,9 +36,9 @@ class Core extends Singleton {
 		if ( false === strpos( $the_content, '<pre' ) ) {
 			return $the_content;
 		}
-		$ret = preg_replace_callback( '/<pre( ([^>]*)data-language([^>]*))>(?!<code)(.*)<\/pre>/imsU', array( $this, '_fix_markup_cb' ), $the_content );
+		$the_content = preg_replace_callback( '/<pre( ([^>]*)data-language([^>]*))>(?!<code)(.*)<\/pre>/imsU', array( $this, '_fix_markup_cb' ), $the_content );
 
-		return $ret;
+		return $the_content;
 	}
 
 	private function _fix_markup_cb($matches) {
@@ -72,37 +72,23 @@ class Core extends Singleton {
 	 */
 	public function enqueue_assets() {
 
-		$is_script_debug = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG;
-		if ( $is_script_debug ) {
-			// scripts
-			$deps = array( 'rainbow', 'rainbow-linenumbers' );
+		// scripts
+		$deps = array( 'rainbow', 'rainbow-linenumbers' );
 
-			wp_register_script( 'rainbow', $this->get_asset_url( 'js/rainbow/rainbow.js' ) );
-			wp_register_script( 'rainbow-linenumbers', $this->get_asset_url( 'js/rainbow.linenumbers/rainbow.linenumbers.js' ), array('rainbow') );
+		wp_register_script( 'rainbow', $this->get_asset_url( 'js/rainbow/rainbow.js' ), array(), null, true );
+		wp_register_script( 'rainbow-linenumbers', $this->get_asset_url( 'js/rainbow.linenumbers/rainbow.linenumbers.js' ), array('rainbow'), null, true );
 
-			$languages = get_option( 'wprainbow_languages' );
-			foreach ( $languages as $language ) {
-				$script_slug = 'rainbow-lang-'.$language;
-				wp_register_script( $script_slug, $this->get_asset_url( 'js/rainbow/language/'.$language.'.js' ) );
-				$deps[] = $script_slug;
-			}
-			wp_register_script( 'wp-rainbow', $this->get_asset_url( 'js/frontend/wp-rainbow.js' ), $deps );
-
-
-			// styles
-			$theme = get_option( 'wprainbow_theme' );
-
-			wp_register_style( 'rainbow-theme', $this->get_asset_url( 'css/rainbow/themes/' . $theme . '.css' ) );
-			wp_register_style( 'wp-rainbow', $this->get_asset_url( 'css/frontend/wp-rainbow.css' ), array( 'rainbow-theme' ) );
-
-		} else {
-			wp_register_script( 'wp-rainbow', $this->get_cache_url( 'wp-rainbow.js' ) );
-			wp_register_style( 'wp-rainbow', $this->get_cache_url( 'wp-rainbow.css' ) );
+		$languages = get_option( 'wprainbow_languages' );
+		foreach ( $languages as $language ) {
+			$script_slug = 'rainbow-lang-'.$language;
+			wp_enqueue_script( $script_slug, $this->get_asset_url( 'js/rainbow/language/'.$language.'.js' ), $deps, null, true );
 		}
 
+		// styles
+		$theme = get_option( 'wprainbow_theme' );
 
-		wp_enqueue_script( 'wp-rainbow' );
-		wp_enqueue_style( 'wp-rainbow' );
+		wp_register_style( 'rainbow-theme', $this->get_asset_url( 'css/rainbow/themes/' . $theme . '.css' ) );
+		wp_enqueue_style( 'wp-rainbow', $this->get_asset_url( 'css/frontend/wp-rainbow.css' ), array( 'rainbow-theme' ) );
 
 	}
 
@@ -120,65 +106,6 @@ class Core extends Singleton {
 
 	}
 
-
-	public function maybe_build_assets() {
-
-		wp_mkdir_p( $this->get_cache_path() );
-
-		$js_file = $this->get_cache_path() . 'wp-rainbow.js';
-		$css_file = $this->get_cache_path() . 'wp-rainbow.css';
-
-		if ( ! file_exists( $js_file ) ||  0 == filesize( $js_file ) ) {
-			$this->build_scripts();
-		}
-		if ( ! file_exists( $css_file ) ||  0 == filesize( $css_file ) ) {
-			$this->build_styles();
-		}
-	}
-
-	public function build_assets() {
-		wp_mkdir_p( $this->get_cache_path() );
-
-		$this->build_scripts();
-		$this->build_styles();
-	}
-
-	public function build_scripts() {
-		$languages = get_option( 'wprainbow_languages' );
-		$generated_file = $this->get_cache_path() . 'wp-rainbow.js';
-		$handle = fopen( $generated_file, 'a' );
-		$files = array(
-			$this->get_asset_path( 'js/rainbow/rainbow.min.js' ),
-			$this->get_asset_path( 'js/rainbow.linenumbers/rainbow.linenumbers.min.js' ),
-		);
-		foreach ( $languages as $language ) {
-			$files[] = $this->get_asset_path( 'js/rainbow/language/' . $language . '.min.js' );
-		}
-//		$files[] = $this->get_asset_path( 'js/frontend/wp-rainbow.js' );
-		$this->concat_files( $generated_file, $files );
-	}
-
-
-	public function build_styles() {
-		$theme = get_option( 'wprainbow_theme' );
-		$this->concat_files( $this->get_cache_path() . 'wp-rainbow.css',
-			array(
-				$this->get_asset_path( 'css/rainbow/themes/' . $theme . '.css' ),
-				$this->get_asset_path( 'css/frontend/wp-rainbow.css' ),
-			) );
-
-	}
-
-	private function concat_files( $destfile, $files ) {
-		$contents = '';
-
-		foreach ( $files as $file ) {
-			$contents .= sprintf("/* %s */\n", str_replace( RAINBOW_HILITE_DIRECTORY, '', $file ) );
-			$contents .= file_get_contents( $file );
-			$contents .= "\n";
-		}
-		file_put_contents( $destfile, $contents );
-	}
 
 	/**
 	 *  Get Available css themes
@@ -248,18 +175,6 @@ class Core extends Singleton {
 
 	public function get_asset_path( $asset ) {
 		return RAINBOW_HILITE_DIRECTORY . $asset;
-	}
-
-	public function get_cache_path() {
-		return WP_CONTENT_DIR . '/cache/wp-rainbow/';
-	}
-
-	public function get_cache_url_path() {
-		return WP_CONTENT_URL . '/cache/wp-rainbow/';
-	}
-
-	public function get_cache_url( $asset ) {
-		return $this->get_cache_url_path() . $asset;
 	}
 
 	/**

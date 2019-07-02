@@ -1,6 +1,6 @@
 {
   "name": "wp-rainbow-hilite",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "WordPress Code Syntax hilighting Plugin",
   "main": "./src/rainbow-node.js",
   "homepage": "https://github.com/mcguffin/wp-rainbow-hilite",

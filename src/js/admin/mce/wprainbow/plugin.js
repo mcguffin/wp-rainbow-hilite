@@ -1,7 +1,7 @@
 (function($){
 tinymce.PluginManager.add( 'wprainbow' , function( editor ){
 	var codeSelect, codeControl, wprainbow = mce_wprainbow;
-	
+
 	function setLanguageState( ) {
 
 		var pre = _getPreEl();
@@ -21,9 +21,9 @@ tinymce.PluginManager.add( 'wprainbow' , function( editor ){
 	function setLanguage( lang ) {
 		var el = _getPreEl()
 		// wrap in code if
-		editor.dom.setAttrib( 
+		editor.dom.setAttrib(
 			el,
-			'data-language' , 
+			'data-language' ,
 			lang
 		);
 
@@ -33,9 +33,9 @@ tinymce.PluginManager.add( 'wprainbow' , function( editor ){
 		}
 	}
 	function setLineNumber( line_number ) {
-		editor.dom.setAttrib( 
-			_getPreEl(), 
-			'data-line' , 
+		editor.dom.setAttrib(
+			_getPreEl(),
+			'data-line' ,
 			line_number
 		);
 	}
@@ -79,18 +79,18 @@ tinymce.PluginManager.add( 'wprainbow' , function( editor ){
 			id: windowId,
 			title: wprainbow.l10n.code_properties,
 			body: [
-					{	
-						type: 'listbox', 
-						name: 'language', 
-						size: 40, 
-						label: wprainbow.l10n.code_language, 
+					{
+						type: 'listbox',
+						name: 'language',
+						size: 40,
+						label: wprainbow.l10n.code_language,
 						values: wprainbow.languages,
-						value: lang_value 
+						value: lang_value
 					},
 					{
 						type:'checkbox',
 						name:'enable_line_numbering',
-						label: wprainbow.l10n.line_numbers, 
+						label: wprainbow.l10n.line_numbers,
 						value: "1",
 						checked: line_enabled,
 						onclick: function(e){
@@ -112,14 +112,14 @@ tinymce.PluginManager.add( 'wprainbow' , function( editor ){
 					{
 						type:'textbox',
 						name:'starting_line',
-						label: wprainbow.l10n.starting_line, 
+						label: wprainbow.l10n.starting_line,
 						value: line_value
 					}
 				],
 			onsubmit: function(e) {
 				// set language
 				setLanguage( e.data.language );
-				
+
 				var line = -1;
 				if (e.data.enable_line_numbering) {
 					line = Math.abs(e.data.starting_line);
@@ -138,7 +138,7 @@ tinymce.PluginManager.add( 'wprainbow' , function( editor ){
 		text: wprainbow.l10n.code_language,
 		tooltip: wprainbow.l10n.code_language,
 		menu_button : true,
-		classes : 'widget btn fixed-width', 
+		classes : 'widget btn fixed-width',
 		onselect: function(e) {
 			setLanguage( this.value() );
 		},
@@ -155,7 +155,7 @@ tinymce.PluginManager.add( 'wprainbow' , function( editor ){
 				}
 			}
 		}
-		
+
 	});
 
 	editor.addButton('wprainbow_codecontrol', {
@@ -168,6 +168,6 @@ tinymce.PluginManager.add( 'wprainbow' , function( editor ){
 			});
 		}
 	});
-	
+
 } );
 })(jQuery);
