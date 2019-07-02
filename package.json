@@ -5,7 +5,7 @@
   "main": "./src/rainbow-node.js",
   "homepage": "https://github.com/mcguffin/wp-rainbow-hilite",
   "scripts": {
-    "init": "",
+    "postinstall": "git clone git@github.com:ccampbell/rainbow.git ./src/vendor/rainbow && git clone git@github.com:Sjeiti/rainbow.linenumbers.git ./src/vendor/rainbow.linenumbers",
     "dev": "gulp dev",
     "build": "gulp build && npm run i18n",
     "release": "npm run release:build && npm run release:github",
@@ -39,7 +39,6 @@
     "gulp-autoprefixer": "^6.1.0",
     "gulp-bump": "^2.1.0",
     "gulp-sass": "^4.0.2",
-    "gulp-clean": "^0.3.2",
     "gulp-concat": "^2.6.1",
     "gulp-rename": "^1.4.0",
     "gulp-sourcemaps": "^2.6.5",

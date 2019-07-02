@@ -9,7 +9,7 @@ var autoprefixer	= require('gulp-autoprefixer');
 
 gulp.task( 'linenumbers:js', function() {
 	//
-	return gulp.src( './src/vendor/Sjeiti/rainbow.linenumbers/js/rainbow.linenumbers.js' )
+	return gulp.src( './src/vendor/rainbow.linenumbers/js/rainbow.linenumbers.js' )
 		.pipe( gulp.dest( './js/rainbow.linenumbers/' ) )
 		.pipe( uglify() )
 		.pipe( rename({ suffix: '.min' }) )
@@ -20,14 +20,14 @@ gulp.task( 'linenumbers:js', function() {
 
 gulp.task( 'rainbow:js:language', function() {
 	//
-	return gulp.src( './src/vendor/ccampbell/rainbow/src/language/*.js' )
+	return gulp.src( './src/vendor/rainbow/src/language/*.js' )
 			.pipe( gulp.dest( './js/rainbow/language/' ) )
 			.pipe( uglify() )
 			.pipe( rename({ suffix: '.min' }) )
 			.pipe( gulp.dest( './js/rainbow/language/' ) );
 })
 gulp.task( 'rainbow:js:main', function() {
-	return gulp.src( './src/vendor/ccampbell/rainbow/dist/rainbow.js' )
+	return gulp.src( './src/vendor/rainbow/dist/rainbow.js' )
 		.pipe( gulp.dest( './js/rainbow/' ) )
 		.pipe( uglify({
 			mangle: {
@@ -40,7 +40,7 @@ gulp.task( 'rainbow:js:main', function() {
 gulp.task('rainbow:js',gulp.parallel('rainbow:js:main','rainbow:js:language'))
 
 gulp.task( 'rainbow:css', function() {
-	return gulp.src( './src/vendor/ccampbell/rainbow/themes/sass/*.sass' )
+	return gulp.src( './src/vendor/rainbow/themes/sass/*.sass' )
 		.pipe( sass({
 			precision: 8,
 			outputStyle: 'compressed'
