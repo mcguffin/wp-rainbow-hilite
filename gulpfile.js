@@ -31,7 +31,7 @@ gulp.task( 'rainbow:js:main', function() {
 		.pipe( gulp.dest( './js/rainbow/' ) )
 		.pipe( uglify({
 			mangle: {
-                except: ['Prism']
+                reserved: ['Prism']
 			}
 		}) )
 		.pipe( rename({ suffix: '.min' }) )
@@ -45,7 +45,7 @@ gulp.task( 'rainbow:css', function() {
 			precision: 8,
 			outputStyle: 'compressed'
 		}) )
-        .pipe( autoprefixer( { browsers: ['last 3 versions'] } ) )
+        .pipe( autoprefixer() )
 		.on('error', sass.logError)
 		.pipe( gulp.dest('./css/rainbow/themes/'));
 });
@@ -70,7 +70,7 @@ gulp.task( 'frontend:css', function() {
 			outputStyle: 'compressed'
 		}) )
 		.on('error', sass.logError)
-        .pipe( autoprefixer( { browsers: ['last 2 versions'] } ) )
+        .pipe( autoprefixer() )
 //		.pipe( sourcemaps.write( '.' ) )
 		.pipe( gulp.dest('./css/frontend/'));
 });
@@ -85,7 +85,7 @@ gulp.task( 'admin:css:main', function() {
 				precision: 8,
 				outputStyle: 'compressed'
 			}) )
-	        .pipe( autoprefixer( { browsers: ['last 2 versions'] } ) )
+	        .pipe( autoprefixer() )
 			.on('error', sass.logError)
 			.pipe( sourcemaps.write( '.' ) )
 			.pipe( gulp.dest('./css/admin/'));
@@ -98,7 +98,7 @@ gulp.task( 'admin:css:mce', function() {
 			precision: 8,
 			outputStyle: 'compressed'
 		}) )
-        .pipe( autoprefixer( { browsers: ['last 2 versions'] } ) )
+        .pipe( autoprefixer( ) )
 		.on('error', sass.logError)
 		.pipe( sourcemaps.write( '.' ) )
 		.pipe( gulp.dest('./css/admin/mce/wprainbow/'));
@@ -143,3 +143,7 @@ gulp.task( 'build', gulp.series(
 ));
 
 gulp.task( 'default', gulp.series('build', 'watch') );
+
+module.exports = {
+	build:gulp.series('build')
+}
