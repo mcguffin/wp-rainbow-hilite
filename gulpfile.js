@@ -144,6 +144,11 @@ gulp.task( 'build', gulp.series(
 
 gulp.task( 'dev', gulp.series('build', 'watch') );
 
+gulp.task('default',cb => {
+	console.log('run either `gulp build` or `gulp dev`');
+	cb();
+});
+
 module.exports = {
 	build:gulp.series('build')
 }
