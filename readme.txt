@@ -1,6 +1,6 @@
 === WordPress Rainbow Hilite ===
 Contributors: podpirate
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=F8NKC6TCASUXE
+Donate link: https://www.msf.org/donate
 Tags: code, syntax highlighting, rainbow, code
 Requires at least: 3.8
 Tested up to: 5.2.2
