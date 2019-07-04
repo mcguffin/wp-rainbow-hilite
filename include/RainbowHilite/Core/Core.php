@@ -56,14 +56,6 @@ class Core extends Singleton {
 		return $matches[0];
 	}
 
-	/**
-	 *	@action upgrader_process_complete
-	 */
-	public function upgrader_process_complete( $upgrader ) {
-		if ( $upgrader instanceOf Plugin_Upgrader ) {
-			$this->maybe_build_assets();
-		}
-	}
 
 	/**
 	 *	Load frontend styles and scripts
@@ -101,8 +93,6 @@ class Core extends Singleton {
 	public function plugins_loaded() {
 
 		load_plugin_textdomain( 'wp-rainbow-hilite' , false, RAINBOW_HILITE_DIRECTORY. 'languages' );
-
-		$this->maybe_build_assets();
 
 	}
 
