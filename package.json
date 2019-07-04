@@ -14,6 +14,7 @@
     "release:github": "node ./src/run/release-github.js",
     "release:wporg": "node ./src/run/release-wporg.js",
     "i18n": "wp i18n make-pot . languages/wp-rainbow-hilite.pot --domain=wp-rainbow-hilite",
+    "package:wporg": "cp ./.wporg/screenshot-*.png . && git add . && git commit -m \"tmp\" && git archive --format=zip --prefix=wp-rainbow-hilite/ --output=../wp-rainbow-hilite.zip --worktree-attributes HEAD && git reset --hard HEAD~",
     "rollback": "git reset --hard HEAD~ && git push origin +master"
   },
   "browserslist": [
