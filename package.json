@@ -8,13 +8,7 @@
     "postinstall": "git clone git@github.com:ccampbell/rainbow.git ./src/vendor/rainbow && git clone git@github.com:Sjeiti/rainbow.linenumbers.git ./src/vendor/rainbow.linenumbers",
     "dev": "gulp dev",
     "build": "gulp build && npm run i18n",
-    "release": "npm run i18n && node ./src/run/release.js -- build github",
-    "release:build": "npm run i18n && node ./src/run/release.js -- build",
-    "release:github": "node ./src/run/release.js -- github",
-    "release:bitbucket": "node ./src/run/release.js -- bitbucket",
-    "release:wporg": "node ./src/run/release.js -- wporg",
     "i18n": "wp i18n make-pot . languages/wp-rainbow-hilite.pot --domain=wp-rainbow-hilite",
-    "package:wporg": "cp ./.wporg/screenshot-*.png . && git add . && git commit -m \"tmp\" && git archive --format=zip --prefix=wp-rainbow-hilite/ --output=../wp-rainbow-hilite.zip --worktree-attributes HEAD && git reset --hard HEAD~",
     "rollback": "git reset --hard HEAD~ && git push origin +master"
   },
   "browserslist": [
@@ -45,5 +39,28 @@
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
     "simple-git": "^1.117.0"
+  },
+  "wporg": {
+    "steps": [
+      "build",
+      "git",
+      "github",
+      "wporg"
+    ],
+    "type": "plugin",
+    "build": {
+      "prebuild": [
+        "wp i18n make-pot . languages/wp-rainbow-hilite.pot --domain=wp-rainbow-hilite --exclude=tmp"
+      ],
+      "build": ["gulp build"]
+    },
+    "git": {
+      "host": "github.com",
+      "user": "mcguffin"
+    },
+    "wporg": {
+      "assets": ".wporg",
+      "svn": "https://plugins.svn.wordpress.org/wp-rainbow-hilite/"
+    }
   }
 }
