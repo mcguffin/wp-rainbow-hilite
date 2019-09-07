@@ -4,8 +4,6 @@ namespace RainbowHilite\Core;
 
 class Core extends Singleton {
 
-	private $_script_queue = array();
-
 	/**
 	 *	Private constructor
 	 */
@@ -19,8 +17,6 @@ class Core extends Singleton {
 		register_activation_hook( RAINBOW_HILITE_FILE, array( __CLASS__ , 'activate' ) );
 		register_deactivation_hook( RAINBOW_HILITE_FILE, array( __CLASS__ , 'deactivate' ) );
 		register_uninstall_hook( RAINBOW_HILITE_FILE, array( __CLASS__ , 'uninstall' ) );
-
-		add_action( 'upgrader_process_complete', array( $this, 'upgrader_process_complete' ) );
 
 		add_filter( 'the_content', array( $this, 'fix_pre_markup' ) );
 
