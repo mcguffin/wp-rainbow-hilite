@@ -88,6 +88,9 @@ Either post it on the [GitHub-repo](https://github.com/mcguffin/wp-rainbow-hilit
 
 == Changelog ==
 
+= 2.0.4 =
+Fix PHP Fatal Error
+
 = 2.0.2 =
 Get rid of concating assets in PHP (use a Script optimizer plugin instead)
 
