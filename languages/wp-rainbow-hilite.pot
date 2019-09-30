@@ -2,16 +2,16 @@
 # This file is distributed under the same license as the WordPress Rainbow Hilite plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: WordPress Rainbow Hilite 2.0.3\n"
+"Project-Id-Version: WordPress Rainbow Hilite 2.0.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-rainbow-hilite\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-07-04T07:36:03+00:00\n"
+"POT-Creation-Date: 2019-09-30T16:26:39+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.1.0\n"
+"X-Generator: WP-CLI 2.2.0\n"
 "X-Domain: wp-rainbow-hilite\n"
 
 #. Plugin Name of the plugin
@@ -58,75 +58,75 @@ msgstr ""
 msgid "This will customize the languages listbox in WordPress’ visual editor."
 msgstr ""
 
-#: include/RainbowHilite/Core/Core.php:134
+#: include/RainbowHilite/Core/Core.php:127
 msgid "C"
 msgstr ""
 
-#: include/RainbowHilite/Core/Core.php:135
+#: include/RainbowHilite/Core/Core.php:128
 msgid "coffeescript"
 msgstr ""
 
-#: include/RainbowHilite/Core/Core.php:136
+#: include/RainbowHilite/Core/Core.php:129
 msgid "C#"
 msgstr ""
 
-#: include/RainbowHilite/Core/Core.php:137
+#: include/RainbowHilite/Core/Core.php:130
 msgid "CSS"
 msgstr ""
 
-#: include/RainbowHilite/Core/Core.php:138
+#: include/RainbowHilite/Core/Core.php:131
 msgid "D"
 msgstr ""
 
-#: include/RainbowHilite/Core/Core.php:139
+#: include/RainbowHilite/Core/Core.php:132
 msgid "Go"
 msgstr ""
 
-#: include/RainbowHilite/Core/Core.php:140
+#: include/RainbowHilite/Core/Core.php:133
 msgid "Haskell"
 msgstr ""
 
-#: include/RainbowHilite/Core/Core.php:141
+#: include/RainbowHilite/Core/Core.php:134
 msgid "HTML"
 msgstr ""
 
-#: include/RainbowHilite/Core/Core.php:142
+#: include/RainbowHilite/Core/Core.php:135
 msgid "Java"
 msgstr ""
 
-#: include/RainbowHilite/Core/Core.php:143
+#: include/RainbowHilite/Core/Core.php:136
 msgid "JavaScript"
 msgstr ""
 
-#: include/RainbowHilite/Core/Core.php:144
+#: include/RainbowHilite/Core/Core.php:137
 msgid "Lua"
 msgstr ""
 
-#: include/RainbowHilite/Core/Core.php:145
+#: include/RainbowHilite/Core/Core.php:138
 msgid "PHP"
 msgstr ""
 
-#: include/RainbowHilite/Core/Core.php:146
+#: include/RainbowHilite/Core/Core.php:139
 msgid "Python"
 msgstr ""
 
-#: include/RainbowHilite/Core/Core.php:147
+#: include/RainbowHilite/Core/Core.php:140
 msgid "R"
 msgstr ""
 
-#: include/RainbowHilite/Core/Core.php:148
+#: include/RainbowHilite/Core/Core.php:141
 msgid "Ruby"
 msgstr ""
 
-#: include/RainbowHilite/Core/Core.php:149
+#: include/RainbowHilite/Core/Core.php:142
 msgid "Scheme"
 msgstr ""
 
-#: include/RainbowHilite/Core/Core.php:150
+#: include/RainbowHilite/Core/Core.php:143
 msgid "Shell script"
 msgstr ""
 
-#: include/RainbowHilite/Core/Core.php:151
+#: include/RainbowHilite/Core/Core.php:144
 msgid "Smalltalk"
 msgstr ""
 
