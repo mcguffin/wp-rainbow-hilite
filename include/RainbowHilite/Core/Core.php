@@ -11,9 +11,6 @@ class Core extends Singleton {
 		add_action( 'plugins_loaded' , array( $this , 'plugins_loaded' ) );
 		add_action( 'wp_enqueue_scripts' , array( $this , 'enqueue_assets' ) );
 
-		add_action( 'update_option_wprainbow_theme' , array( $this, 'build_assets' ), 10, 2 );
-		add_action( 'update_option_wprainbow_languages' , array( $this, 'build_assets' ), 10, 2 );
-
 		register_activation_hook( RAINBOW_HILITE_FILE, array( __CLASS__ , 'activate' ) );
 		register_deactivation_hook( RAINBOW_HILITE_FILE, array( __CLASS__ , 'deactivate' ) );
 		register_uninstall_hook( RAINBOW_HILITE_FILE, array( __CLASS__ , 'uninstall' ) );
@@ -167,9 +164,6 @@ class Core extends Singleton {
 	 *	Fired on plugin activation
 	 */
 	public static function activate() {
-		$core = self::instance();
-
-		$core->build_assets();
 	}
 
 	/**
