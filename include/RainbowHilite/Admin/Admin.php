@@ -1,6 +1,17 @@
 <?php
+/**
+ *	@package RainbowHilite\Admin
+ *	@version 1.0.0
+ *	2018-09-22
+ */
 
 namespace RainbowHilite\Admin;
+
+if ( ! defined('ABSPATH') ) {
+	die('FU!');
+}
+
+use RainbowHilite\Asset;
 use RainbowHilite\Core;
 
 
@@ -9,33 +20,31 @@ class Admin extends Core\Singleton {
 	private $core;
 
 	/**
-	 *	Private constructor
+	 *	@inheritdoc
 	 */
 	protected function __construct() {
 
 		$this->core = Core\Core::instance();
-		TinyMce\Rainbow\Rainbow::instance();
+	//	TinyMce\Rainbow\Rainbow::instance();
 
-		add_action( 'admin_init', array( $this , 'admin_init' ) );
+		add_action( 'admin_print_scripts', array( $this , 'enqueue_assets' ) );
+
 	}
 
 
 	/**
-	 * Admin init
+	 *	Enqueue options Assets
+	 *	@action admin_print_scripts
 	 */
-	function admin_init() {
-	}
+	public function enqueue_assets() {
+		Asset\Asset::get('css/admin/main.css')->enqueue();
 
-	/**
-	 * Enqueue options Assets
-	 */
-	function enqueue_assets() {
-		wp_enqueue_style( 'rainbow_hilite-admin' , $this->core->get_asset_url( '/css/admin.css' ) );
-
-		wp_enqueue_script( 'rainbow_hilite-admin' , $this->core->get_asset_url( 'js/admin.js' ) );
-		wp_localize_script('rainbow_hilite-admin' , 'rainbow_hilite_admin' , array(
-		) );
+		Asset\Asset::get('js/admin.js')
+			->deps( array( 'jquery' ) )
+			->localize( array(
+				/* Script Localization */
+			) )
+			->enqueue();
 	}
 
 }
-

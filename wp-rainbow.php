@@ -3,7 +3,7 @@
 /*
 Plugin Name: WordPress Rainbow Hilite
 Plugin URI: http://wordpress.org/plugins/wp-rainbow-hilite/
-Description: Code Syntax coloring using <a href="http://craig.is/making/rainbows">rainbow</a>.
+Description: WordPress Code Syntax coloring plugin.
 Author: Jörn Lund
 Version: 2.0.4
 Author URI: https://github.com/mcguffin
@@ -33,12 +33,9 @@ Domain Path: /languages/
 
 namespace RainbowHilite;
 
-define( 'RAINBOW_HILITE_FILE', __FILE__ );
-define( 'RAINBOW_HILITE_DIRECTORY', plugin_dir_path(__FILE__) );
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'include/autoload.php';
 
-require_once RAINBOW_HILITE_DIRECTORY . 'include/vendor/autoload.php';
-
-Core\Core::instance();
+Core\Core::instance( __FILE__ );
 
 
 
@@ -46,6 +43,6 @@ Core\Core::instance();
 if ( is_admin() || defined( 'DOING_AJAX' ) ) {
 
 	Admin\Admin::instance();
-	Settings\SettingsWriting::instance();
+	Admin\Settings\Writing::instance();
 
 }

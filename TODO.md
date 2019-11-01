@@ -5,3 +5,5 @@ WP Rainbow Hilite
  - [x] wp-release
  - [ ] Composer
  - [ ] JS: Use Prism
+ - [ ] Support Block Editor
+ - [ ] Upgrade process 

@@ -1,19 +1,19 @@
 {
   "name": "wp-rainbow-hilite",
   "version": "2.0.4",
-  "description": "WordPress Code Syntax hilighting Plugin",
-  "main": "./src/rainbow-node.js",
+  "description": "WordPress Code Syntax Coloring plugin.",
   "homepage": "https://github.com/mcguffin/wp-rainbow-hilite",
   "scripts": {
-    "postinstall": "git clone git@github.com:ccampbell/rainbow.git ./src/vendor/rainbow && git clone git@github.com:Sjeiti/rainbow.linenumbers.git ./src/vendor/rainbow.linenumbers",
     "dev": "gulp dev",
     "build": "gulp build && npm run i18n",
-    "i18n": "wp i18n make-pot . languages/wp-rainbow-hilite.pot --domain=wp-rainbow-hilite",
-    "rollback": "git reset --hard HEAD~ && git push origin +master"
+    "i18n": "node src/run/json-i18n.js wp-rainbow-hilite",
+    "rollback": "git reset --hard HEAD~ && git push origin +master",
+    "dashicons": "node ./src/run/dashicons.js",
+    "init": "mkdir -p json/acf && mkdir -p json/post-type && mkdir -p json/taxonomy && mkdir -p src/php"
   },
   "browserslist": [
     "last 3 versions",
-    "> 0.25%",
+    "> 0.125%",
     "IE 10"
   ],
   "repository": {
@@ -30,6 +30,16 @@
   "license": "GPL-3.0",
   "readmeFilename": "README.md",
   "devDependencies": {
+    "@babel/core": "^7.5.4",
+    "@babel/plugin-proposal-class-properties": "^7.5.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.5.4",
+    "@babel/plugin-transform-react-jsx": "^7.3.0",
+    "@babel/preset-env": "^7.5.4",
+    "babel-plugin-prismjs": "^1.1.1",
+    "babelify": "^10.0.0",
+    "browserify": "^16.3.0",
+    "browserify-shim": "^3.8.14",
+    "event-stream": "^4.0.1",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^6.1.0",
     "gulp-bump": "^2.1.0",
@@ -38,7 +48,52 @@
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
-    "simple-git": "^1.117.0"
+    "prismjs": "^1.17.1",
+    "simple-git": "^1.117.0",
+    "tinyify": "^2.5.1",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
+  },
+  "wpSkeleton": {
+    "slug": "wp-rainbow-hilite",
+    "name": "WP Rainbow Hilite",
+    "components": {
+      "core": {
+        "components": [],
+        "flags": [
+          "css"
+        ]
+      },
+      "settings": {
+        "components": {
+          "writing": {
+            "flags": [
+              "css",
+              "js"
+            ]
+          }
+        },
+        "flags": []
+      },
+      "admin": {
+        "components": {},
+        "flags": [
+          "css",
+          "js"
+        ]
+      },
+      "git": {
+        "user": "mcguffin",
+        "remote": "git@github.com:mcguffin/wp-rainbow-hilite.git"
+      }
+    },
+    "type": "plugin",
+    "prefix": "wp_rainbow_hilite",
+    "textdomain": "wp-rainbow-hilite",
+    "namespace": "RainbowHilite",
+    "author": "Jörn Lund",
+    "author_uri": "https://github.com/mcguffin",
+    "year": "2019"
   },
   "wporg": {
     "steps": [
@@ -64,5 +119,16 @@
       "assets": ".wporg",
       "svn": "https://plugins.svn.wordpress.org/wp-rainbow-hilite/"
     }
+  },
+  "browserify-shim": {
+    "jquery": "global:jQuery",
+    "backbone": "global:Backbone"
+  },
+  "dependencies": {
+    "current-script-polyfill": "^1.0.0",
+    "jquery": "^1.12.4"
+  },
+  "bugs": {
+    "url": "https://github.com/mcguffin/wp-rainbow-hilite/issues"
   }
 }

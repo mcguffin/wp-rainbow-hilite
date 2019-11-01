@@ -1,54 +1,31 @@
 <?php
+/**
+ *	@package RainbowHilite\Core
+ *	@version 1.0.1
+ *	2018-09-22
+ */
 
 namespace RainbowHilite\Core;
 
-class Core extends Singleton {
+if ( ! defined('ABSPATH') ) {
+	die('FU!');
+}
+use RainbowHilite\Asset;
+
+class Core extends Plugin implements CoreInterface {
 
 	/**
-	 *	Private constructor
+	 *	@inheritdoc
 	 */
 	protected function __construct() {
-		add_action( 'plugins_loaded' , array( $this , 'plugins_loaded' ) );
+
+		add_action( 'init' , array( $this , 'init' ) );
+
 		add_action( 'wp_enqueue_scripts' , array( $this , 'enqueue_assets' ) );
 
-		register_activation_hook( RAINBOW_HILITE_FILE, array( __CLASS__ , 'activate' ) );
-		register_deactivation_hook( RAINBOW_HILITE_FILE, array( __CLASS__ , 'deactivate' ) );
-		register_uninstall_hook( RAINBOW_HILITE_FILE, array( __CLASS__ , 'uninstall' ) );
-
-		add_filter( 'the_content', array( $this, 'fix_pre_markup' ) );
-
-		parent::__construct();
-
+		$args = func_get_args();
+		parent::__construct( ...$args );
 	}
-
-	/**
-	 *	@filter the_content
-	 */
-	function fix_pre_markup( $the_content ) {
-
-		if ( false === strpos( $the_content, '<pre' ) ) {
-			return $the_content;
-		}
-		$the_content = preg_replace_callback( '/<pre( ([^>]*)data-language([^>]*))>(?!<code)(.*)<\/pre>/imsU', array( $this, '_fix_markup_cb' ), $the_content );
-
-		return $the_content;
-	}
-
-	private function _fix_markup_cb($matches) {
-		$attr = $matches[1];
-		$content = $matches[4];
-		$code_attr = '';
-
-		if ( preg_match( '/data-line="([-\d]+)"/', $attr, $match_attr ) ) {
-			$code_attr = 'data-line="'.$match_attr[1].'"';
-			$attr = str_replace( $code_attr, '', $attr );
-		}
-
-		return '<pre '.$attr.'><code '.$code_attr.'>'.$content . '</code></pre>';
-
-		return $matches[0];
-	}
-
 
 	/**
 	 *	Load frontend styles and scripts
@@ -56,38 +33,11 @@ class Core extends Singleton {
 	 *	@action wp_enqueue_scripts
 	 */
 	public function enqueue_assets() {
-
-		// scripts
-		$deps = array( 'rainbow', 'rainbow-linenumbers' );
-
-		wp_register_script( 'rainbow', $this->get_asset_url( 'js/rainbow/rainbow.js' ), array(), null, true );
-		wp_register_script( 'rainbow-linenumbers', $this->get_asset_url( 'js/rainbow.linenumbers/rainbow.linenumbers.js' ), array('rainbow'), null, true );
-
-		$languages = get_option( 'wprainbow_languages' );
-		foreach ( $languages as $language ) {
-			$script_slug = 'rainbow-lang-'.$language;
-			wp_enqueue_script( $script_slug, $this->get_asset_url( 'js/rainbow/language/'.$language.'.js' ), $deps, null, true );
-		}
-
-		// styles
-		$theme = get_option( 'wprainbow_theme' );
-
-		wp_register_style( 'rainbow-theme', $this->get_asset_url( 'css/rainbow/themes/' . $theme . '.css' ) );
-		wp_enqueue_style( 'wp-rainbow', $this->get_asset_url( 'css/frontend/wp-rainbow.css' ), array( 'rainbow-theme' ) );
-
+		Asset\Asset::get( 'js/main.js' )->enqueue();
+		Asset\Asset::get( 'css/main.css' )->enqueue();
+		Asset\Asset::get( 'css/prism/themes/prism.css' )->enqueue();
 	}
 
-
-	/**
-	 *	Load text domain
-	 *
-	 *  @action plugins_loaded
-	 */
-	public function plugins_loaded() {
-
-		load_plugin_textdomain( 'wp-rainbow-hilite' , false, RAINBOW_HILITE_DIRECTORY. 'languages' );
-
-	}
 
 
 	/**
@@ -146,36 +96,33 @@ class Core extends Singleton {
 		return apply_filters( 'wprainbow_available_languages' , $langs );
 	}
 
+
+
 	/**
-	 *	Get asset url for this plugin
+	 *	@param string $template
+	 */
+	public function locate_template( $template ) {
+		if ( $located = locate_template( 'pp/' . $template, false, false ) ) {
+			return $located;
+		}
+		foreach ( $this->get_asset_roots() as $dir => $url ) {
+			$located = $dir . '/templates/' . $template;
+			if ( file_exists( $located ) ) {
+				return $located;
+			}
+		}
+
+		return false;
+	}
+
+
+	/**
+	 *	Init hook.
 	 *
-	 *	@param	string	$asset	URL part relative to plugin class
-	 *	@return wp_enqueue_editor
+	 *  @action init
 	 */
-	public function get_asset_url( $asset ) {
-		return plugins_url( $asset, RAINBOW_HILITE_FILE );
+	public function init() {
 	}
 
-	public function get_asset_path( $asset ) {
-		return RAINBOW_HILITE_DIRECTORY . $asset;
-	}
-
-	/**
-	 *	Fired on plugin activation
-	 */
-	public static function activate() {
-	}
-
-	/**
-	 *	Fired on plugin deactivation
-	 */
-	public static function deactivate() {
-	}
-
-	/**
-	 *	Fired on plugin deinstallation
-	 */
-	public static function uninstall() {
-	}
 
 }

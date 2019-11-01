@@ -1,4 +1,4 @@
-=== WordPress Rainbow Hilite ===
+=== WordPress Prisbow Hilite ===
 Contributors: podpirate
 Donate link: https://www.msf.org/donate
 Tags: code, syntax highlighting, rainbow, code
@@ -9,43 +9,25 @@ Stable tag: 2.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Code syntax highlighting with <a href="http://craig.is/making/rainbows">rainbow.js</a>.
+Just one of many Code Syntax Coloring plugins.
 
 == Description ==
 
-Code syntax Highlighting. Documentation can be found [here](http://wpdev.podpirate.org/wordpress-rainbow-hilite).
+Code syntax Highlighting using [Prism](https://prismjs.com).
 
 = Features: =
 - Highlighted code can be copy-pasted directly out of the site. No "view raw" button needed.
-- User friendly TinyMCE integration.
-- Many programming languages supported.
+- Block-Editor integration.
+- Text Formats for <code>&lt;kbd&gt;KBD&lt;/kbd&gt;</code> and <code>&lt;var&gt;VAR&lt;/var&gt;</code>
+- There is still TinyMCE integration.
+- A lot of [supported Programming languages](https://prismjs.com/index.html#supported-languages)
 
-Includes [rainbow.js](http://craig.is/making/rainbows) a syntax highlighting script written by [Craig Campbell](http://craig.is/).
-Line numbering through [rainbow.linenumbers](https://github.com/Sjeiti/rainbow.linenumbers) by [Ron Valstar](http://www.sjeiti.com/).
+This Plugin used to include [rainbow.js](http://craig.is/making/rainbows) by [Craig Campbell](http://craig.is/)
+and [rainbow.linenumbers](https://github.com/Sjeiti/rainbow.linenumbers) by [Ron Valstar](http://www.sjeiti.com/). That's where the name comes from.
 
+As both projects are no longer supported, TODO
 
-Currently supported languages by Rainbow are
-
-- C
-- C#
-- Coffeescript
-- CSS
-- D
-- Go
-- Haskell
-- HTML
-- Java
-- Javascript
-- Lua
-- PHP
-- Python
-- R
-- Ruby
-- Scheme
-- Shell
-- Smalltalk
-
-There are some Hooks implemented allowing you to load your own language modules. Details [here](https://github.com/mcguffin/wp-rainbow-hilite/wiki).
+TODO There are some Hooks implemented allowing you to load your own language modules. Details [here](https://github.com/mcguffin/wp-rainbow-hilite/wiki).
 
 Latest files on [GitHub](https://github.com/mcguffin/wp-rainbow-hilite).
 
@@ -87,6 +69,11 @@ Either post it on the [GitHub-repo](https://github.com/mcguffin/wp-rainbow-hilit
 4. Highlighted Code
 
 == Changelog ==
+
+= 3.0.0 =
+ - Switch to Prismjs
+ - Add Editor Formats for KBD and VAR
+ - ESNext
 
 = 2.0.4 =
 Fix PHP Fatal Error

@@ -1,148 +1,208 @@
-var gulp			= require('gulp');
-var fs				= require('fs');
-var concat			= require('gulp-concat');
-var uglify			= require('gulp-uglify');
-var sass			= require('gulp-sass');
-var sourcemaps		= require('gulp-sourcemaps');
-var rename			= require('gulp-rename');
-var autoprefixer	= require('gulp-autoprefixer');
+const fs			= require( 'fs' );
+const gulp			= require( 'gulp' );
+const glob			= require( 'glob' );
+const autoprefixer	= require( 'gulp-autoprefixer' );
+const browserify	= require( 'browserify' );
+const babelify		= require( 'babelify' );
+const buffer		= require( 'vinyl-buffer' );
+const sass			= require( 'gulp-sass' );
+const source		= require( 'vinyl-source-stream' );
+const es			= require( 'event-stream' );
+const child_process	= require( 'child_process' );
 
-gulp.task( 'linenumbers:js', function() {
-	//
-	return gulp.src( './src/vendor/rainbow.linenumbers/js/rainbow.linenumbers.js' )
-		.pipe( gulp.dest( './js/rainbow.linenumbers/' ) )
-		.pipe( uglify() )
-		.pipe( rename({ suffix: '.min' }) )
-		.pipe( gulp.dest( './js/rainbow.linenumbers/' ) );
+const package = require( './package.json' );
 
-});
+let bundlemap = {};
 
+const onFile = (target) => function( file, id, parent ) {
 
-gulp.task( 'rainbow:js:language', function() {
-	//
-	return gulp.src( './src/vendor/rainbow/src/language/*.js' )
-			.pipe( gulp.dest( './js/rainbow/language/' ) )
-			.pipe( uglify() )
-			.pipe( rename({ suffix: '.min' }) )
-			.pipe( gulp.dest( './js/rainbow/language/' ) );
-})
-gulp.task( 'rainbow:js:main', function() {
-	return gulp.src( './src/vendor/rainbow/dist/rainbow.js' )
-		.pipe( gulp.dest( './js/rainbow/' ) )
-		.pipe( uglify({
-			mangle: {
-                reserved: ['Prism']
+	let f = file.replace(__dirname+'/','')
+	if ( ! bundlemap[ f ] ) {
+		bundlemap[ f ] = [];
+	}
+	bundlemap[ f ].push('js/'+target)
+}
+const onPackage = function(bundle) {
+	// extract from
+	Object.keys(bundlemap).forEach(src => {
+		//  distinct
+		bundlemap[src] = bundlemap[src].filter( ( val, idx, self ) => self.indexOf( val ) === idx )
+	})
+	fs.writeFileSync( './src/js/bundlemap.json',JSON.stringify(bundlemap,null,2), {encoding:'utf-8'});
+}
+
+const config = {
+	sass : {
+		outputStyle: 'compressed',
+		precision: 8,
+		stopOnError: false,
+		functions: {
+			'base64Encode($string)': $string => {
+				var buffer = new Buffer( $string.getValue() );
+				return sass.types.String( buffer.toString('base64') );
 			}
-		}) )
-		.pipe( rename({ suffix: '.min' }) )
-		.pipe( gulp.dest( './js/rainbow/' ) );
+		},
+		includePaths:['src/scss/','node_modules/']
+	},
+	destPath: e => {
+		if ( ['style.css','editor-style.css'].includes( e.basename ) ) {
+			return './';
+		}
+		return e.extname.replace( /^\./, './' );
+	},
+	prism: {
+//		languages:Object.keys(require( 'prismjs/components' ).languages).filter( el => el !== 'meta' ) // 338.86k
+//		languages:require('./js/languages-popular.json') // 104.16k
+		languages:require('./js/languages-web.json') // 57.49k
+//		languages:require('./js/languages-rainbow.json') // 41.68k
+	}
+}
+
+
+gulp.task('i18n:fix-pot', cb => {
+	try {
+		bundlemap = require( './src/js/bundlemap.json')
+		glob.sync('./languages/*.pot')
+			.map( entry => {
+				let contents = fs.readFileSync( entry, {encoding:'utf-8'} );
+				Object.keys(bundlemap).forEach( src => {
+					let replace = '';
+					let search = RegExp( '#:\\s'+ src.replace('.','\\.') + ':(\\d+)\n', 'g' );
+					bundlemap[src].forEach( dest => {
+						replace += '#: ' + dest + "\n";
+					} );
+					contents = contents.replace( search, replace ).replace( replace+replace,replace);
+				} );
+				fs.writeFileSync(entry,contents,{encoding:'utf-8'});
+			} )
+	} catch(err) {};
+	cb();
 });
-gulp.task('rainbow:js',gulp.parallel('rainbow:js:main','rainbow:js:language'))
-
-gulp.task( 'rainbow:css', function() {
-	return gulp.src( './src/vendor/rainbow/themes/sass/*.sass' )
-		.pipe( sass({
-			precision: 8,
-			outputStyle: 'compressed'
-		}) )
-        .pipe( autoprefixer() )
-		.on('error', sass.logError)
-		.pipe( gulp.dest('./css/rainbow/themes/'));
-});
-
-
-
-gulp.task( 'frontend:js', function() {
-	// rainbow + linenumbers + lang-modules
-	return gulp.src( './src/js/frontend/*.js' )
-			.pipe( sourcemaps.init() )
-			.pipe( uglify() )
-			.pipe( sourcemaps.write( '.' ) )
-			.pipe( gulp.dest( './js/frontend/' ) );
-
-});
-gulp.task( 'frontend:css', function() {
-	// rainbow + linenumbers + theme
-	return gulp.src( './src/scss/frontend/*.scss' )
-//		.pipe( sourcemaps.init() )
-		.pipe( sass({
-			precision: 8,
-			outputStyle: 'compressed'
-		}) )
-		.on('error', sass.logError)
-        .pipe( autoprefixer() )
-//		.pipe( sourcemaps.write( '.' ) )
-		.pipe( gulp.dest('./css/frontend/'));
-});
-
-
-
-gulp.task( 'admin:css:main', function() {
-	// rainbow. linenumbers. lang-modules.
-	return gulp.src( './src/scss/admin/*.scss' )
-			.pipe( sourcemaps.init() )
-			.pipe( sass({
-				precision: 8,
-				outputStyle: 'compressed'
-			}) )
-	        .pipe( autoprefixer() )
-			.on('error', sass.logError)
-			.pipe( sourcemaps.write( '.' ) )
-			.pipe( gulp.dest('./css/admin/'));
+gulp.task('i18n:make-pot',cb => {
+	child_process.execSync(`wp i18n make-pot . languages/${package.name}.pot --domain=${package.name} --exclude=./js,tmp`);
+	cb();
+})
+gulp.task('i18n:make-json',cb => {
+	// rm -f languages/*.json
+	glob.sync('./languages/*.json').map( fs.unlinkSync );
+	glob.sync('./languages/*.po').length && child_process.execSync( "wp i18n make-json languages/*.po --no-purge" );
+	cb();
 });
 
-gulp.task( 'admin:css:mce', function() {
-	return gulp.src( './src/scss/admin/mce/wprainbow/*.scss' )
-		.pipe( sourcemaps.init() )
-		.pipe( sass({
-			precision: 8,
-			outputStyle: 'compressed'
-		}) )
-        .pipe( autoprefixer( ) )
-		.on('error', sass.logError)
-		.pipe( sourcemaps.write( '.' ) )
-		.pipe( gulp.dest('./css/admin/mce/wprainbow/'));
+
+gulp.task('i18n:strings-from-json', cb => {
+	// rm -f languages/*.json
+	const xt = require('./src/run/lib/json-extract.js');
+
+
+	let strings = [];
+
+	const common_mapping = {
+		title:xt.map_string,
+		description:xt.map_string,
+		label:xt.map_string,
+		labels:xt.map_values,
+	}
+
+	const acf_mapping = {
+		title:xt.map_string,
+		description:xt.map_string,
+		label:xt.map_string,
+		instructions:xt.map_string,
+		prepend:xt.map_string,
+		append:xt.map_string,
+		message:xt.map_string,
+		choices:xt.map_values
+	}
+
+
+	// ptype, taxo
+	strings = xt.parse_files( glob.sync('./json/post-type/*.json'), common_mapping, strings);
+	strings = xt.parse_files( glob.sync('./json/taxonomy/*.json'), common_mapping, strings);
+
+	// acf
+	strings = xt.parse_files( glob.sync('./json/acf/*.json'), acf_mapping, strings);
+
+	xt.generate_php( './src/php/json-strings.php', strings, package.name );
+
+	cb();
 });
 
-gulp.task('admin:css',gulp.parallel( 'admin:css:main', 'admin:css:mce' ));
 
+function js_task(debug) {
 
+	return cb => {
+		let tasks = glob.sync("./src/js/**/index.js")
+			.map( entry => {
+				let target = entry.replace(/(\.\/src\/js\/|\/index)/g,'');
 
-gulp.task( 'admin:js:main', function() {
-	return gulp.src( './src/js/admin/*.js' )
-		.pipe( sourcemaps.init() )
-		.pipe( uglify() )
-		.pipe( sourcemaps.write( '.' ) )
-		.pipe( gulp.dest( './js/admin/' ) );
-});
+				return browserify({
+				        entries: [entry],
+						debug: debug,
+						paths:['./src/js/lib']
+				    })
+					.transform( "babelify" )
+					.transform( 'browserify-shim' )
+					.plugin('tinyify')
+					.on( 'file', onFile(target) )
+					.on( 'package', onPackage )
+					.bundle()
+					.pipe(source(target))
+					.pipe( gulp.dest( config.destPath ) );
+			} );
 
-gulp.task( 'admin:js:mce', function() {
-	return gulp.src( './src/js/admin/mce/wprainbow/plugin.js' )
-		.pipe( sourcemaps.init() )
-		.pipe( uglify() )
-		.pipe( sourcemaps.write( '.' ) )
-		.pipe( gulp.dest( './js/admin/mce/wprainbow/' ) );
-});
+		return es.merge(tasks).on('end',cb)
+	}
+}
+function scss_task(debug) {
+	return cb => {
+		return gulp.src( './src/scss/**/*.scss', { sourcemaps: debug } )
+			.pipe(
+				sass( config.sass )
+			)
+			.pipe( autoprefixer( { browsers: package.browserlist } ) )
+			.pipe( gulp.dest( config.destPath, { sourcemaps: debug } ) );
+	}
+}
 
-gulp.task('admin:js',gulp.parallel( 'admin:js:main', 'admin:js:mce' ));
+gulp.task('build:js', js_task( false ) );
+gulp.task('build:scss', scss_task( false ) );
 
+gulp.task('dev:js', js_task( true ) );
+gulp.task('dev:scss', scss_task( true ) );
 
 
 gulp.task('watch', cb => {
-	gulp.watch('./src/js/admin/**/*.js', gulp.parallel( 'admin:js' ) );
-	gulp.watch('./src/scss/admin/**/*.scss', gulp.parallel( 'admin:css' ) );
-	gulp.watch('./src/js/frontend/**/*.js', gulp.parallel( 'frontend:js' ) );
-	gulp.watch('./src/scss/frontend/**/*.scss', gulp.parallel( 'frontend:css' ) );
+	gulp.watch('./src/scss/**/*.scss',gulp.parallel('dev:scss'));
+	gulp.watch('./src/js/**/*.js',gulp.parallel('dev:js'));
+	gulp.watch('./languages/*.pot',gulp.parallel('i18n:fix-pot'));
+	gulp.watch('./languages/*.po',gulp.parallel('i18n:make-json'));
 });
 
+gulp.task('init', cb => {
+	let dest;
 
-gulp.task( 'build', gulp.series(
-	'rainbow:js', 'rainbow:css', 'linenumbers:js',
-	'admin:js', 'admin:css',
-	'frontend:js', 'frontend:css'
-));
+	dest = './css/prism/themes/';
+	fs.mkdirSync(dest,{recursive:true})
+	glob.sync('./node_modules/prismjs/themes/*.css').forEach( file => {
+		fs.copyFileSync(file, dest + file.split('/').pop() )
+	});
 
-gulp.task( 'dev', gulp.series('build', 'watch') );
+	dest = './js/prism/components/';
+	fs.mkdirSync(dest,{recursive:true})
+	glob.sync('./node_modules/prismjs/components/*.min.js').forEach( file => {
+		fs.copyFileSync(file, dest + file.split('/').pop() )
+	});
+
+
+	cb();
+});
+
+gulp.task('dev',gulp.series('dev:scss','dev:js','watch'));
+
+gulp.task('i18n', gulp.series( 'i18n:strings-from-json','i18n:make-pot','i18n:fix-pot','i18n:make-json'));
+
+gulp.task('build', gulp.series('build:js','build:scss', 'i18n'));
 
 gulp.task('default',cb => {
 	console.log('run either `gulp build` or `gulp dev`');

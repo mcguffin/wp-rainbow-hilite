@@ -1,0 +1,11 @@
+{
+  "src/js/admin/index.js": [
+    "js/admin.js"
+  ],
+  "src/js/main/index.js": [
+    "js/main.js"
+  ],
+  "src/js/admin/settings/writing/index.js": [
+    "js/admin/settings/writing.js"
+  ]
+}
