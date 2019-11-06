@@ -1,8 +1,0 @@
-/* Linenumbers: fix horizontal scrollbar in plain PREs, breaks support for hilited lines */
-.rainbow {
-	 .line {
-	 	&:after {
-			content:none !important;
-		}
-	}
-}

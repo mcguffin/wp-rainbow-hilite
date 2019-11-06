@@ -14,6 +14,9 @@ use RainbowHilite\Asset;
 
 class Core extends Plugin implements CoreInterface {
 
+	private $prism_css = null;
+	private $prism_js = null;
+
 	/**
 	 *	@inheritdoc
 	 */
@@ -27,18 +30,42 @@ class Core extends Plugin implements CoreInterface {
 		parent::__construct( ...$args );
 	}
 
+
+	/**
+	 *	Init hook.
+	 *
+	 *  @action init
+	 */
+	public function init() {
+		$this->prism_css = Asset\Asset::get( sprintf( 'css/prism/themes/%s.css', get_option( 'wprainbow_prism_theme', 'prism' ) ) );
+		$this->prism_js = Asset\Asset::get( 'js/main.js' )->enqueue();
+	}
+
+
 	/**
 	 *	Load frontend styles and scripts
 	 *
 	 *	@action wp_enqueue_scripts
 	 */
 	public function enqueue_assets() {
-		Asset\Asset::get( 'js/main.js' )->enqueue();
-		Asset\Asset::get( 'css/main.css' )->enqueue();
-		Asset\Asset::get( 'css/prism/themes/prism.css' )->enqueue();
+
+		$this->prism_css->enqueue();
+		$this->prism_js->enqueue();
+
 	}
 
 
+	/**
+	 *	magic getter
+	 */
+	public function __get( $var ) {
+		switch ( $var ) {
+			case 'css':
+				return $this->prism_css;
+			case 'js':
+				return $this->prism_js;
+		}
+	}
 
 	/**
 	 *  Get Available css themes
@@ -50,17 +77,8 @@ class Core extends Plugin implements CoreInterface {
 	 *	@return array Assoc containing all avaliable themes with theme slugs as key and prettified theme slugs values.
 	 */
 	public function get_available_themes() {
-
-		$css_files = glob( RAINBOW_HILITE_DIRECTORY . 'css/rainbow/themes/*.css' );
-
-		$themes = array();
-
-		foreach ( $css_files as $filename ) {
-			$filename = (basename( $filename, '.css' ));
-			$themes[ $filename ] = ucwords(str_replace('-',' ',$filename));
-		}
-
-		return apply_filters( 'wprainbow_available_themes' , $themes );
+		$prism = $this->get_prism_data();
+		return apply_filters( 'wprainbow_available_themes' , $prism['themes'] );
 	}
 
 	/**
@@ -73,29 +91,39 @@ class Core extends Plugin implements CoreInterface {
 	 *	@return array Assoc containing all avaliable languages with language slugs as key and localized language Names as values.
 	 */
 	public function get_available_languages( ) {
-		$langs = array(
-			'c'				=> __('C','wp-rainbow-hilite'),
-			'coffeescript'	=> __('coffeescript','wp-rainbow-hilite'),
-			'csharp'		=> __('C#','wp-rainbow-hilite'),
-			'css'			=> __('CSS','wp-rainbow-hilite'),
-			'd'				=> __('D','wp-rainbow-hilite'),
-			'go'			=> __('Go','wp-rainbow-hilite'),
-			'haskell'		=> __('Haskell','wp-rainbow-hilite'),
-			'html'			=> __('HTML','wp-rainbow-hilite'),
-			'java'			=> __('Java','wp-rainbow-hilite'),
-			'javascript'	=> __('JavaScript','wp-rainbow-hilite'),
-			'lua'			=> __('Lua','wp-rainbow-hilite'),
-			'php'			=> __('PHP','wp-rainbow-hilite'),
-			'python'		=> __('Python','wp-rainbow-hilite'),
-			'r'				=> __('R','wp-rainbow-hilite'),
-			'ruby'			=> __('Ruby','wp-rainbow-hilite'),
-			'scheme'		=> __('Scheme','wp-rainbow-hilite'),
-			'shell'			=> __('Shell script','wp-rainbow-hilite'),
-			'smalltalk'		=> __('Smalltalk','wp-rainbow-hilite'),
-		);
-		return apply_filters( 'wprainbow_available_languages' , $langs );
+		$prism = $this->get_prism_data();
+		return apply_filters( 'wprainbow_available_languages' , $prism['languages'] );
+
+		//
+		// $langs = array(
+		// 	'c'				=> __('C','wp-rainbow-hilite'),
+		// 	'coffeescript'	=> __('coffeescript','wp-rainbow-hilite'),
+		// 	'csharp'		=> __('C#','wp-rainbow-hilite'),
+		// 	'css'			=> __('CSS','wp-rainbow-hilite'),
+		// 	'd'				=> __('D','wp-rainbow-hilite'),
+		// 	'go'			=> __('Go','wp-rainbow-hilite'),
+		// 	'haskell'		=> __('Haskell','wp-rainbow-hilite'),
+		// 	'html'			=> __('HTML','wp-rainbow-hilite'),
+		// 	'java'			=> __('Java','wp-rainbow-hilite'),
+		// 	'javascript'	=> __('JavaScript','wp-rainbow-hilite'),
+		// 	'lua'			=> __('Lua','wp-rainbow-hilite'),
+		// 	'php'			=> __('PHP','wp-rainbow-hilite'),
+		// 	'python'		=> __('Python','wp-rainbow-hilite'),
+		// 	'r'				=> __('R','wp-rainbow-hilite'),
+		// 	'ruby'			=> __('Ruby','wp-rainbow-hilite'),
+		// 	'scheme'		=> __('Scheme','wp-rainbow-hilite'),
+		// 	'shell'			=> __('Shell script','wp-rainbow-hilite'),
+		// 	'smalltalk'		=> __('Smalltalk','wp-rainbow-hilite'),
+		// );
 	}
 
+
+	private function get_prism_data() {
+		if ( is_null( $this->prism ) ) {
+			$this->prism = json_decode( Asset\Asset::get('js/prism.json')->contents, true );
+		}
+		return $this->prism;
+	}
 
 
 	/**
@@ -115,14 +143,6 @@ class Core extends Plugin implements CoreInterface {
 		return false;
 	}
 
-
-	/**
-	 *	Init hook.
-	 *
-	 *  @action init
-	 */
-	public function init() {
-	}
 
 
 }

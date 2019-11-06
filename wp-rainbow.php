@@ -44,5 +44,5 @@ if ( is_admin() || defined( 'DOING_AJAX' ) ) {
 
 	Admin\Admin::instance();
 	Admin\Settings\Writing::instance();
-
+	Admin\BlockEditor::instance();
 }

@@ -28,6 +28,8 @@ class Admin extends Core\Singleton {
 	//	TinyMce\Rainbow\Rainbow::instance();
 
 		add_action( 'admin_print_scripts', array( $this , 'enqueue_assets' ) );
+		add_action( 'print_media_templates', [ $this , 'print_media_templates' ] );
+		add_action( 'wp_footer', [ $this , 'maybe_print_media_templates' ] );
 
 	}
 
@@ -45,6 +47,26 @@ class Admin extends Core\Singleton {
 				/* Script Localization */
 			) )
 			->enqueue();
+	}
+
+	/**
+	 *	@action wp_footer
+	 */
+	public function maybe_print_media_templates() {
+		if ( ! did_action( 'print_media_templates' ) ) {
+			$this->print_media_templates();
+		}
+	}
+
+	/**
+	 *	@action print_media_templates
+	 */
+	public function print_media_templates() {
+		$glob = trailingslashit( $this->core->get_plugin_dir() ) . 'include/template/media/*.php';
+
+		foreach ( glob( $glob ) as $template ) {
+			include $template;
+		}
 	}
 
 }

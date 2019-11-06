@@ -296,8 +296,12 @@ class Asset {
 			case 'url':
 			case 'varname':
 				return $this->$var;
+			case 'url_path':
+				return dirname($this->url);
 			case 'deps':
 				return array_values( $this->$var );
+			case 'contents':
+				return file_get_contents( $this->path );
 		}
 	}
 

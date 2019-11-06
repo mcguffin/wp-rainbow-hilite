@@ -1,0 +1,673 @@
+{
+	"themes": {
+		"prism": "Default",
+		"prism-dark": "Dark",
+		"prism-funky": "Funky",
+		"prism-okaidia": "Okaidia",
+		"prism-twilight": "Twilight",
+		"prism-coy": "Coy",
+		"prism-solarizedlight": "Solarized Light",
+		"prism-tomorrow": "Tomorrow Night"
+	},
+	"languages": {
+		"markup": {
+			"title": "Markup",
+			"alias": [
+				"html",
+				"xml",
+				"svg",
+				"mathml"
+			],
+			"aliasTitles": [
+				"HTML",
+				"XML",
+				"SVG",
+				"MathML"
+			]
+		},
+		"css": {
+			"title": "CSS"
+		},
+		"clike": {
+			"title": "C-like"
+		},
+		"javascript": {
+			"title": "JavaScript",
+			"alias": [
+				"js"
+			]
+		},
+		"abap": {
+			"title": "ABAP"
+		},
+		"abnf": {
+			"title": "Augmented Backus–Naur form"
+		},
+		"actionscript": {
+			"title": "ActionScript"
+		},
+		"ada": {
+			"title": "Ada"
+		},
+		"apacheconf": {
+			"title": "Apache Configuration"
+		},
+		"apl": {
+			"title": "APL"
+		},
+		"applescript": {
+			"title": "AppleScript"
+		},
+		"arduino": {
+			"title": "Arduino"
+		},
+		"arff": {
+			"title": "ARFF"
+		},
+		"asciidoc": {
+			"alias": [
+				"adoc"
+			],
+			"title": "AsciiDoc"
+		},
+		"asm6502": {
+			"title": "6502 Assembly"
+		},
+		"aspnet": {
+			"title": "ASP.NET (C#)"
+		},
+		"autohotkey": {
+			"title": "AutoHotkey"
+		},
+		"autoit": {
+			"title": "AutoIt"
+		},
+		"bash": {
+			"title": "Bash",
+			"alias": [
+				"shell"
+			],
+			"aliasTitles": [
+				"Shell"
+			]
+		},
+		"basic": {
+			"title": "BASIC"
+		},
+		"batch": {
+			"title": "Batch"
+		},
+		"bison": {
+			"title": "Bison"
+		},
+		"bnf": {
+			"title": "Backus–Naur form",
+			"alias": [
+				"rbnf"
+			],
+			"aliasTitles": [
+				"Routing Backus–Naur form"
+			]
+		},
+		"brainfuck": {
+			"title": "Brainfuck"
+		},
+		"bro": {
+			"title": "Bro"
+		},
+		"c": {
+			"title": "C"
+		},
+		"csharp": {
+			"title": "C#",
+			"alias": [
+				"cs",
+				"dotnet"
+			]
+		},
+		"cpp": {
+			"title": "C++"
+		},
+		"cil": {
+			"title": "CIL"
+		},
+		"coffeescript": {
+			"title": "CoffeeScript",
+			"alias": [
+				"coffee"
+			]
+		},
+		"cmake": {
+			"title": "CMake"
+		},
+		"clojure": {
+			"title": "Clojure"
+		},
+		"crystal": {
+			"title": "Crystal"
+		},
+		"csp": {
+			"title": "Content-Security-Policy"
+		},
+		"css-extras": {
+			"title": "CSS Extras"
+		},
+		"d": {
+			"title": "D"
+		},
+		"dart": {
+			"title": "Dart"
+		},
+		"diff": {
+			"title": "Diff"
+		},
+		"django": {
+			"title": "Django/Jinja2",
+			"alias": [
+				"jinja2"
+			]
+		},
+		"dns-zone-file": {
+			"title": "DNS zone file",
+			"alias": [
+				"dns-zone"
+			]
+		},
+		"docker": {
+			"title": "Docker",
+			"alias": [
+				"dockerfile"
+			]
+		},
+		"ebnf": {
+			"title": "Extended Backus–Naur form"
+		},
+		"eiffel": {
+			"title": "Eiffel"
+		},
+		"ejs": {
+			"title": "EJS"
+		},
+		"elixir": {
+			"title": "Elixir"
+		},
+		"elm": {
+			"title": "Elm"
+		},
+		"erb": {
+			"title": "ERB"
+		},
+		"erlang": {
+			"title": "Erlang"
+		},
+		"fsharp": {
+			"title": "F#"
+		},
+		"flow": {
+			"title": "Flow"
+		},
+		"fortran": {
+			"title": "Fortran"
+		},
+		"gcode": {
+			"title": "G-code"
+		},
+		"gedcom": {
+			"title": "GEDCOM"
+		},
+		"gherkin": {
+			"title": "Gherkin"
+		},
+		"git": {
+			"title": "Git"
+		},
+		"glsl": {
+			"title": "GLSL"
+		},
+		"gml": {
+			"title": "GameMaker Language",
+			"alias": [
+				"gamemakerlanguage"
+			]
+		},
+		"go": {
+			"title": "Go"
+		},
+		"graphql": {
+			"title": "GraphQL"
+		},
+		"groovy": {
+			"title": "Groovy"
+		},
+		"haml": {
+			"title": "Haml"
+		},
+		"handlebars": {
+			"title": "Handlebars"
+		},
+		"haskell": {
+			"title": "Haskell",
+			"alias": [
+				"hs"
+			]
+		},
+		"haxe": {
+			"title": "Haxe"
+		},
+		"hcl": {
+			"title": "HCL"
+		},
+		"http": {
+			"title": "HTTP"
+		},
+		"hpkp": {
+			"title": "HTTP Public-Key-Pins"
+		},
+		"hsts": {
+			"title": "HTTP Strict-Transport-Security"
+		},
+		"ichigojam": {
+			"title": "IchigoJam"
+		},
+		"icon": {
+			"title": "Icon"
+		},
+		"inform7": {
+			"title": "Inform 7"
+		},
+		"ini": {
+			"title": "Ini"
+		},
+		"io": {
+			"title": "Io"
+		},
+		"j": {
+			"title": "J"
+		},
+		"java": {
+			"title": "Java"
+		},
+		"javadoc": {
+			"title": "JavaDoc"
+		},
+		"javadoclike": {
+			"title": "JavaDoc-like"
+		},
+		"javastacktrace": {
+			"title": "Java stack trace"
+		},
+		"jolie": {
+			"title": "Jolie"
+		},
+		"jq": {
+			"title": "JQ"
+		},
+		"jsdoc": {
+			"title": "JSDoc"
+		},
+		"js-extras": {
+			"title": "JS Extras"
+		},
+		"js-templates": {
+			"title": "JS Templates"
+		},
+		"json": {
+			"title": "JSON"
+		},
+		"jsonp": {
+			"title": "JSONP"
+		},
+		"json5": {
+			"title": "JSON5"
+		},
+		"julia": {
+			"title": "Julia"
+		},
+		"keyman": {
+			"title": "Keyman"
+		},
+		"kotlin": {
+			"title": "Kotlin"
+		},
+		"latex": {
+			"title": "LaTeX",
+			"alias": [
+				"tex",
+				"context"
+			],
+			"aliasTitles": [
+				"TeX",
+				"ConTeXt"
+			]
+		},
+		"less": {
+			"title": "Less"
+		},
+		"lilypond": {
+			"title": "LilyPond",
+			"alias": [
+				"ly"
+			]
+		},
+		"liquid": {
+			"title": "Liquid"
+		},
+		"lisp": {
+			"title": "Lisp",
+			"alias": [
+				"emacs",
+				"elisp",
+				"emacs-lisp"
+			]
+		},
+		"livescript": {
+			"title": "LiveScript"
+		},
+		"lolcode": {
+			"title": "LOLCODE"
+		},
+		"lua": {
+			"title": "Lua"
+		},
+		"makefile": {
+			"title": "Makefile"
+		},
+		"markdown": {
+			"title": "Markdown",
+			"alias": [
+				"md"
+			]
+		},
+		"markup-templating": {
+			"title": "Markup templating"
+		},
+		"matlab": {
+			"title": "MATLAB"
+		},
+		"mel": {
+			"title": "MEL"
+		},
+		"mizar": {
+			"title": "Mizar"
+		},
+		"monkey": {
+			"title": "Monkey"
+		},
+		"n1ql": {
+			"title": "N1QL"
+		},
+		"n4js": {
+			"title": "N4JS",
+			"alias": [
+				"n4jsd"
+			]
+		},
+		"nand2tetris-hdl": {
+			"title": "Nand To Tetris HDL"
+		},
+		"nasm": {
+			"title": "NASM"
+		},
+		"nginx": {
+			"title": "nginx"
+		},
+		"nim": {
+			"title": "Nim"
+		},
+		"nix": {
+			"title": "Nix"
+		},
+		"nsis": {
+			"title": "NSIS"
+		},
+		"objectivec": {
+			"title": "Objective-C"
+		},
+		"ocaml": {
+			"title": "OCaml"
+		},
+		"opencl": {
+			"title": "OpenCL"
+		},
+		"oz": {
+			"title": "Oz"
+		},
+		"parigp": {
+			"title": "PARI/GP"
+		},
+		"parser": {
+			"title": "Parser"
+		},
+		"pascal": {
+			"title": "Pascal",
+			"alias": [
+				"objectpascal"
+			],
+			"aliasTitles": [
+				"Object Pascal"
+			]
+		},
+		"pascaligo": {
+			"title": "Pascaligo"
+		},
+		"pcaxis": {
+			"title": "PC-Axis",
+			"alias": [
+				"px"
+			]
+		},
+		"perl": {
+			"title": "Perl"
+		},
+		"php": {
+			"title": "PHP"
+		},
+		"phpdoc": {
+			"title": "PHPDoc"
+		},
+		"php-extras": {
+			"title": "PHP Extras"
+		},
+		"plsql": {
+			"title": "PL/SQL"
+		},
+		"powershell": {
+			"title": "PowerShell"
+		},
+		"processing": {
+			"title": "Processing"
+		},
+		"prolog": {
+			"title": "Prolog"
+		},
+		"properties": {
+			"title": ".properties"
+		},
+		"protobuf": {
+			"title": "Protocol Buffers"
+		},
+		"pug": {
+			"title": "Pug"
+		},
+		"puppet": {
+			"title": "Puppet"
+		},
+		"pure": {
+			"title": "Pure"
+		},
+		"python": {
+			"title": "Python",
+			"alias": [
+				"py"
+			]
+		},
+		"q": {
+			"title": "Q (kdb+ database)"
+		},
+		"qore": {
+			"title": "Qore"
+		},
+		"r": {
+			"title": "R"
+		},
+		"jsx": {
+			"title": "React JSX"
+		},
+		"tsx": {
+			"title": "React TSX"
+		},
+		"renpy": {
+			"title": "Ren'py"
+		},
+		"reason": {
+			"title": "Reason"
+		},
+		"regex": {
+			"title": "Regex"
+		},
+		"rest": {
+			"title": "reST (reStructuredText)"
+		},
+		"rip": {
+			"title": "Rip"
+		},
+		"roboconf": {
+			"title": "Roboconf"
+		},
+		"ruby": {
+			"title": "Ruby",
+			"alias": [
+				"rb"
+			]
+		},
+		"rust": {
+			"title": "Rust"
+		},
+		"sas": {
+			"title": "SAS"
+		},
+		"sass": {
+			"title": "Sass (Sass)"
+		},
+		"scss": {
+			"title": "Sass (Scss)"
+		},
+		"scala": {
+			"title": "Scala"
+		},
+		"scheme": {
+			"title": "Scheme"
+		},
+		"shell-session": {
+			"title": "Shell session"
+		},
+		"smalltalk": {
+			"title": "Smalltalk"
+		},
+		"smarty": {
+			"title": "Smarty"
+		},
+		"soy": {
+			"title": "Soy (Closure Template)"
+		},
+		"splunk-spl": {
+			"title": "Splunk SPL"
+		},
+		"sql": {
+			"title": "SQL"
+		},
+		"stylus": {
+			"title": "Stylus"
+		},
+		"swift": {
+			"title": "Swift"
+		},
+		"tap": {
+			"title": "TAP"
+		},
+		"tcl": {
+			"title": "Tcl"
+		},
+		"textile": {
+			"title": "Textile"
+		},
+		"toml": {
+			"title": "TOML"
+		},
+		"tt2": {
+			"title": "Template Toolkit 2"
+		},
+		"twig": {
+			"title": "Twig"
+		},
+		"typescript": {
+			"title": "TypeScript",
+			"alias": [
+				"ts"
+			]
+		},
+		"t4-cs": {
+			"title": "T4 Text Templates (C#)",
+			"alias": [
+				"t4"
+			]
+		},
+		"t4-vb": {
+			"title": "T4 Text Templates (VB)"
+		},
+		"t4-templating": {
+			"title": "T4 templating"
+		},
+		"vala": {
+			"title": "Vala"
+		},
+		"vbnet": {
+			"title": "VB.Net"
+		},
+		"velocity": {
+			"title": "Velocity"
+		},
+		"verilog": {
+			"title": "Verilog"
+		},
+		"vhdl": {
+			"title": "VHDL"
+		},
+		"vim": {
+			"title": "vim"
+		},
+		"visual-basic": {
+			"title": "Visual Basic",
+			"alias": [
+				"vb"
+			]
+		},
+		"wasm": {
+			"title": "WebAssembly"
+		},
+		"wiki": {
+			"title": "Wiki markup"
+		},
+		"xeora": {
+			"title": "Xeora",
+			"alias": [
+				"xeoracube"
+			],
+			"aliasTitles": [
+				"XeoraCube"
+			]
+		},
+		"xojo": {
+			"title": "Xojo (REALbasic)"
+		},
+		"xquery": {
+			"title": "XQuery"
+		},
+		"yaml": {
+			"title": "YAML",
+			"alias": [
+				"yml"
+			]
+		}
+	}
+}

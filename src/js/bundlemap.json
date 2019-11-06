@@ -5,7 +5,34 @@
   "src/js/main/index.js": [
     "js/main.js"
   ],
+  "src/js/admin/block-editor/index.js": [
+    "js/admin/block-editor.js"
+  ],
   "src/js/admin/settings/writing/index.js": [
     "js/admin/settings/writing.js"
+  ],
+  "node_modules/current-script-polyfill/currentScript.js": [
+    "js/main.js"
+  ],
+  "node_modules/prismjs/prism.js": [
+    "js/main.js"
+  ],
+  "node_modules/prismjs/plugins/autoloader/prism-autoloader.js": [
+    "js/main.js"
+  ],
+  "node_modules/prismjs/plugins/line-numbers/prism-line-numbers.js": [
+    "js/main.js"
+  ],
+  "src/js/lib/format-library/code-settings.js": [
+    "js/admin/block-editor.js"
+  ],
+  "src/js/lib/components/code-settings-frame.js": [
+    "js/admin/block-editor.js"
+  ],
+  "src/js/lib/code-settings-modal.js": [
+    "js/admin/block-editor.js"
+  ],
+  "src/js/lib/code-settings.js": [
+    "js/admin/block-editor.js"
   ]
 }

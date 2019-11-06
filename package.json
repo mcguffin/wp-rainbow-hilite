@@ -8,8 +8,7 @@
     "build": "gulp build && npm run i18n",
     "i18n": "node src/run/json-i18n.js wp-rainbow-hilite",
     "rollback": "git reset --hard HEAD~ && git push origin +master",
-    "dashicons": "node ./src/run/dashicons.js",
-    "init": "mkdir -p json/acf && mkdir -p json/post-type && mkdir -p json/taxonomy && mkdir -p src/php"
+    "dashicons": "node ./src/run/dashicons.js"
   },
   "browserslist": [
     "last 3 versions",
@@ -122,6 +121,17 @@
   },
   "browserify-shim": {
     "jquery": "global:jQuery",
+    "Backbone": "global:Backbone",
+    "@wordpress/block-editor": "global:wp.blockEditor",
+    "@wordpress/components": "global:wp.components",
+    "@wordpress/data": "global:wp.data",
+    "@wordpress/dom": "global:wp.dom",
+    "@wordpress/editor": "global:wp.editor",
+    "@wordpress/element": "global:wp.element",
+    "@wordpress/format-library": "global:wp.formatLibrary",
+    "@wordpress/i18n": "global:wp.i18n",
+    "@wordpress/rich-text": "global:wp.richText",
+    "@wordpress/keycodes": "global:wp.keycodes",
     "backbone": "global:Backbone"
   },
   "dependencies": {

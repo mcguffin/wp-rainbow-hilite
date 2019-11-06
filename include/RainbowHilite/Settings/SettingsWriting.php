@@ -14,10 +14,10 @@ class SettingsWriting extends Settings {
 	 *	Constructor
 	 */
 	protected function __construct() {
+
 		$this->core = Core\Core::instance();
 
-		add_option( 'wprainbow_theme', 'github' , '' , False );
-		add_option( 'wprainbow_languages', array('php', 'python', 'javascript', 'go', 'c', 'r', 'coffeescript', 'haskell') , '' , False );
+		add_option( 'wprainbow_prism_theme', 'prism' , '' , False );
 
 		add_action( "load-options-{$this->optionset}.php" , array( $this, 'enqueue_assets' ) );
 
@@ -31,16 +31,16 @@ class SettingsWriting extends Settings {
 	 */
 	function enqueue_assets() {
 
-		wp_enqueue_style( 'wp-rainbow-options', $this->core->get_asset_url( '/css/admin/options.css' ) );
-
 		$this->core->enqueue_assets();
 
+		Asset\Asset::get( 'css/settings/writing.css' )->enqueue();
 
-		wp_enqueue_script( 'wp-rainbow-options', $this->core->get_asset_url( '/js/admin/options.js' ) );
+		Asset\Asset::get( 'js/admin/options.js' )
+			->deps('jquery')
+			->localize( array(
+				'theme_directory_url' => $this->core->get_asset_url( '/css/prism/themes/' )
+			), 'wprainbow_options' );
 
-		wp_localize_script('wp-rainbow-options', 'wprainbow_options' , array(
-			'theme_directory_url' => $this->core->get_asset_url( '/css/rainbow/themes/' )
-		) );
 	}
 
 
@@ -54,47 +54,22 @@ class SettingsWriting extends Settings {
 
 		$settings_section	= 'rainbow_hilite_settings';
 
-		add_settings_section( $settings_section, __( 'Code Highlighting', 'wp-rainbow-hilite' ), array( $this, 'settings_description' ), $this->optionset );
-
+		add_settings_section( $settings_section, __( 'Code Highlighting', 'wp-rainbow-hilite' ), null, $this->optionset );
 
 
 		// more settings go here ...
-		$option_name		= 'wprainbow_theme';
+		$option_name		= 'wprainbow_prism_theme';
 
 		register_setting( $this->optionset, $option_name, array( $this, 'sanitize_theme' ) );
 
 		add_settings_field(
 			$option_name,
-			__( 'Visual Theme', 'wp-rainbow-hilite' ),
+			__( 'Theme', 'wp-rainbow-hilite' ),
 			array( $this, 'select_theme' ),
 			$this->optionset,
 			$settings_section
 		);
 
-
-		$option_name		= 'wprainbow_languages';
-
-		register_setting( $this->optionset, $option_name, array( $this, 'sanitize_langs' ) );
-
-		add_settings_field(
-			$option_name,
-			__( 'Enable Languages', 'wp-rainbow-hilite' ),
-			array( $this, 'select_languages' ),
-			$this->optionset,
-			$settings_section
-		);
-
-	}
-
-	/**
-	 * Print some documentation for the optionset
-	 */
-	public function settings_description() {
-		?>
-		<div class="inside">
-			<p><?php _e( 'Select a visual theme and setup available languages.', 'wp-rainbow-hilite' ); ?></p>
-		</div>
-		<?php
 	}
 
 	/**
@@ -109,13 +84,13 @@ class SettingsWriting extends Settings {
 			<?php
 			foreach ( $this->core->get_available_themes() as $slug => $name ) {
 				?>
-					<option value="<?php echo $slug ?>" <?php selected( $theme == $slug, true ,true) ?>><?php echo $name ?></option>
+					<option value="<?php esc_attr_e( $slug ) ?>" <?php selected( $theme == $slug, true ,true) ?>><?php esc_html_e( $name ) ?></option>
 				<?php
 			}
 			?>
 		</select>
 
-		<a class="button secondary" id="wprainbow-toggle-sample-code" href="#"><?php _e('Toggle Sample Code','wp-rainbow-hilite') ?></a>
+		<a class="button secondary" id="wprainbow-toggle-sample-code" href="#"><?php esc_html_e('Toggle Sample Code','wp-rainbow-hilite') ?></a>
 
 <pre class="sample" data-language="php"><code>
 /*
