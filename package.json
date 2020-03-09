@@ -44,7 +44,6 @@
     "steps": [
       "build",
       "git",
-      "github",
       "wporg"
     ],
     "type": "plugin",
@@ -62,6 +61,7 @@
     },
     "wporg": {
       "assets": ".wporg",
+      "svn_user": "podpirate",
       "svn": "https://plugins.svn.wordpress.org/wp-rainbow-hilite/"
     }
   }
