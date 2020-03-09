@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress Rainbow Hilite plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: WordPress Rainbow Hilite 2.0.4\n"
+"Project-Id-Version: WordPress Rainbow Hilite 2.0.5\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-rainbow-hilite\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"

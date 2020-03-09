@@ -5,7 +5,7 @@ Plugin Name: WordPress Rainbow Hilite
 Plugin URI: http://wordpress.org/plugins/wp-rainbow-hilite/
 Description: <strong>NO LONGER MAINTAINED</strong> Code Syntax coloring using <a href="http://craig.is/making/rainbows">rainbow</a>.
 Author: Jörn Lund
-Version: 2.0.4
+Version: 2.0.5
 Author URI: https://github.com/mcguffin
 License: GPL3
 
