@@ -13,7 +13,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
-<div class="plugin-notice notice notice-error notice-alt">
+<div class="plugin-notice notice notice-warning notice-alt">
 
 “WordPress Rainbow Hilite” is no longer maintained. If you are interested in taking over the plugin, please leave a notice in the [github issues](https://github.com/mcguffin/wp-rainbow-hilite/issues).
 
