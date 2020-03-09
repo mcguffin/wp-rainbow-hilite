@@ -3,7 +3,7 @@
 /*
 Plugin Name: WordPress Rainbow Hilite
 Plugin URI: http://wordpress.org/plugins/wp-rainbow-hilite/
-Description: Code Syntax coloring using <a href="http://craig.is/making/rainbows">rainbow</a>.
+Description: <strong>NO LONGER MAINTAINED</strong> Code Syntax coloring using <a href="http://craig.is/making/rainbows">rainbow</a>.
 Author: Jörn Lund
 Version: 2.0.4
 Author URI: https://github.com/mcguffin
@@ -48,4 +48,30 @@ if ( is_admin() || defined( 'DOING_AJAX' ) ) {
 	Admin\Admin::instance();
 	Settings\SettingsWriting::instance();
 
+}
+
+
+
+function wp_rainbow_deprecation_notice() {
+/*
+'<tr class="plugin-update-tr%s" id="%s" data-slug="%s" data-plugin="%s">' .
+
+*/
+	?>
+	<tr class="plugin-update-tr active" >
+		<td class="plugin-update colspanchange" colspan="3" style="position:relative;top:-1px;">
+			<div class="notice notice-warning notice-alt inline">
+				<p>
+					<span class="dashicons dashicons-warning"></span>
+					<strong><?php esc_html_e('Warning:','wp-rainbow-hilite'); ?></strong>
+					<?php esc_html_e('“WordPress Rainbow Hilite” is no longer maintained.','wp-rainbow-hilite'); ?>
+				</p>
+			</div>
+		</td>
+	</tr>
+	<?php
+}
+
+if ( is_admin() ) {
+	add_action('after_plugin_row_wp-rainbow-hilite/wp-rainbow.php','RainbowHilite\wp_rainbow_deprecation_notice');
 }

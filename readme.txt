@@ -9,9 +9,17 @@ Stable tag: 2.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Code syntax highlighting with <a href="http://craig.is/making/rainbows">rainbow.js</a>.
+<strong>NO LONGER MAINTAINED</strong> Code Syntax highlighting using <a href="http://craig.is/making/rainbows">rainbow</a>
 
 == Description ==
+
+<div class="plugin-notice notice notice-error notice-alt">
+
+“WordPress Rainbow Hilite” is no longer maintained. If you are interested in taking over the plugin, please leave a notice in the [github issues](https://github.com/mcguffin/wp-rainbow-hilite/issues).
+
+If you like to use
+
+</div>
 
 Code syntax Highlighting. Documentation can be found [here](http://wpdev.podpirate.org/wordpress-rainbow-hilite).
 
@@ -87,6 +95,9 @@ Either post it on the [GitHub-repo](https://github.com/mcguffin/wp-rainbow-hilit
 4. Highlighted Code
 
 == Changelog ==
+
+= 2.0.5 =
+End-of-life notice
 
 = 2.0.4 =
 Fix PHP Fatal Error
